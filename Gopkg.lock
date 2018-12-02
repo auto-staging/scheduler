@@ -43,6 +43,7 @@
     "private/protocol/rest",
     "private/protocol/xml/xmlutil",
     "service/ec2",
+    "service/rds",
     "service/sts"
   ]
   revision = "ceab7b7ac6f535d1397f124620720b5145f1ad59"
@@ -56,6 +57,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "d9dbc73f253211c971b142313e38658b725411160aa87bb8b2716374a3ece927"
+  inputs-digest = "5661115554380f39a02f729493bec8ea8e85d977ce911500a7fcf546d400ec01"
   solver-name = "gps-cdcl"
   solver-version = 1
