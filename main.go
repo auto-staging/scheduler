@@ -23,10 +23,10 @@ func Handler(eventJson json.RawMessage) error {
 
 	svc := ec2.New(sess)
 
-	cwEvent := types.Event{
-		Action:     "start",
-		Branch:     "feat/test",
-		Repository: "auto-staging-demo-app",
+	cwEvent := types.Event{}
+	err := json.Unmarshal(eventJson, &cwEvent)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	result, err := svc.DescribeInstances(&ec2.DescribeInstancesInput{
@@ -60,7 +60,7 @@ func Handler(eventJson json.RawMessage) error {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Println(stopResult)
+		log.Printf("Changed state from %s to %s \n", *stopResult.StoppingInstances[0].PreviousState.Name, *stopResult.StoppingInstances[0].CurrentState.Name)
 	case "start":
 		log.Println("Starting EC2")
 		startResult, err := svc.StartInstances(&ec2.StartInstancesInput{
@@ -69,7 +69,7 @@ func Handler(eventJson json.RawMessage) error {
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Println(startResult)
+		log.Printf("Changed state from %s to %s \n", *startResult.StartingInstances[0].PreviousState.Name, *startResult.StartingInstances[0].CurrentState.Name)
 	}
 
 	svcRDS := rds.New(sess)
@@ -108,13 +108,12 @@ func Handler(eventJson json.RawMessage) error {
 					log.Println("Cluster must be in available state to execute stop")
 					return nil
 				}
-				stopResult, err := svcRDS.StopDBCluster(&rds.StopDBClusterInput{
+				_, err := svcRDS.StopDBCluster(&rds.StopDBClusterInput{
 					DBClusterIdentifier: clusterARN,
 				})
 				if err != nil {
 					log.Fatal(err)
 				}
-				log.Println(stopResult)
 
 			case "start":
 				if *clusterStatus != "stopped" {
@@ -122,13 +121,12 @@ func Handler(eventJson json.RawMessage) error {
 					return nil
 				}
 				log.Println("Starting RDS CLUSTER")
-				stopResult, err := svcRDS.StartDBCluster(&rds.StartDBClusterInput{
+				_, err := svcRDS.StartDBCluster(&rds.StartDBClusterInput{
 					DBClusterIdentifier: clusterARN,
 				})
 				if err != nil {
 					log.Fatal(err)
 				}
-				log.Println(stopResult)
 			}
 		}
 	}
