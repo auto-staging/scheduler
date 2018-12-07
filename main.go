@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 
+	"gitlab.com/auto-staging/scheduler/helper"
+
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
 
@@ -66,6 +68,8 @@ func Handler(eventJson json.RawMessage) error {
 				log.Fatal(err)
 			}
 			log.Printf("Changed state from %s to %s \n", *stopResult.StoppingInstances[0].PreviousState.Name, *stopResult.StoppingInstances[0].CurrentState.Name)
+			helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
+
 		case "start":
 			log.Println("Starting EC2")
 			startResult, err := svc.StartInstances(&ec2.StartInstancesInput{
@@ -75,6 +79,8 @@ func Handler(eventJson json.RawMessage) error {
 				log.Fatal(err)
 			}
 			log.Printf("Changed state from %s to %s \n", *startResult.StartingInstances[0].PreviousState.Name, *startResult.StartingInstances[0].CurrentState.Name)
+			helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+
 		}
 	} else {
 		log.Println("Found no EC2 instances for the tags")
@@ -122,6 +128,7 @@ func Handler(eventJson json.RawMessage) error {
 				if err != nil {
 					log.Fatal(err)
 				}
+				helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
 
 			case "start":
 				if *clusterStatus != "stopped" {
@@ -135,6 +142,7 @@ func Handler(eventJson json.RawMessage) error {
 				if err != nil {
 					log.Fatal(err)
 				}
+				helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
 			}
 		}
 	}
