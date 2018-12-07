@@ -18,7 +18,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 )
 
-func Handler(eventJson json.RawMessage) error {
+func Handler(eventJson json.RawMessage) (string, error) {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
@@ -28,7 +28,7 @@ func Handler(eventJson json.RawMessage) error {
 	cwEvent := types.Event{}
 	err := json.Unmarshal(eventJson, &cwEvent)
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
 
 	fmt.Println(cwEvent)
@@ -46,13 +46,16 @@ func Handler(eventJson json.RawMessage) error {
 		},
 	})
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
 
 	instanceIDs := []*string{}
 	for i := range result.Reservations {
 		fmt.Printf("Found instance with id = %s and state = %s \n", *result.Reservations[i].Instances[0].InstanceId, *result.Reservations[i].Instances[0].State.Name)
-		if *result.Reservations[i].Instances[0].State.Name != "terminated" {
+		if *result.Reservations[i].Instances[0].State.Name == "running" && cwEvent.Action == "stop" {
+			instanceIDs = append(instanceIDs, result.Reservations[i].Instances[0].InstanceId)
+		}
+		if *result.Reservations[i].Instances[0].State.Name == "stopped" && cwEvent.Action == "start" {
 			instanceIDs = append(instanceIDs, result.Reservations[i].Instances[0].InstanceId)
 		}
 	}
@@ -65,7 +68,7 @@ func Handler(eventJson json.RawMessage) error {
 				InstanceIds: instanceIDs,
 			})
 			if err != nil {
-				log.Fatal(err)
+				return "", err
 			}
 			log.Printf("Changed state from %s to %s \n", *stopResult.StoppingInstances[0].PreviousState.Name, *stopResult.StoppingInstances[0].CurrentState.Name)
 			helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
@@ -76,21 +79,21 @@ func Handler(eventJson json.RawMessage) error {
 				InstanceIds: instanceIDs,
 			})
 			if err != nil {
-				log.Fatal(err)
+				return "", err
 			}
 			log.Printf("Changed state from %s to %s \n", *startResult.StartingInstances[0].PreviousState.Name, *startResult.StartingInstances[0].CurrentState.Name)
 			helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
 
 		}
 	} else {
-		log.Println("Found no EC2 instances for the tags")
+		log.Println("EC2 - No action required")
 	}
 
 	svcRDS := rds.New(sess)
 
 	resultRDS, err := svcRDS.DescribeDBClusters(nil)
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
 
 	// Check tags for each Cluster
@@ -105,7 +108,7 @@ func Handler(eventJson json.RawMessage) error {
 			ResourceName: clusterARN,
 		})
 		if err != nil {
-			log.Fatal(err)
+			return "", err
 		}
 		tagMap := map[string]string{}
 		for a := range resultRDS.TagList {
@@ -118,36 +121,37 @@ func Handler(eventJson json.RawMessage) error {
 			switch cwEvent.Action {
 			case "stop":
 				log.Println("Stopping RDS CLUSTER")
-				if *clusterStatus != "available" {
-					log.Println("Cluster must be in available state to execute stop")
-					return nil
+				if *clusterStatus == "available" {
+					_, err := svcRDS.StopDBCluster(&rds.StopDBClusterInput{
+						DBClusterIdentifier: clusterARN,
+					})
+					if err != nil {
+						return "", err
+					}
+					helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
+				} else {
+					log.Println("RDS - No action required")
 				}
-				_, err := svcRDS.StopDBCluster(&rds.StopDBClusterInput{
-					DBClusterIdentifier: clusterARN,
-				})
-				if err != nil {
-					log.Fatal(err)
-				}
-				helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
 
 			case "start":
-				if *clusterStatus != "stopped" {
-					log.Println("Cluster must be in stopped state to execute start")
-					return nil
+				if *clusterStatus == "stopped" {
+					log.Println("Starting RDS CLUSTER")
+					_, err := svcRDS.StartDBCluster(&rds.StartDBClusterInput{
+						DBClusterIdentifier: clusterARN,
+					})
+					if err != nil {
+						return "", err
+					}
+					helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+				} else {
+					log.Println("RDS - No action required")
 				}
-				log.Println("Starting RDS CLUSTER")
-				_, err := svcRDS.StartDBCluster(&rds.StartDBClusterInput{
-					DBClusterIdentifier: clusterARN,
-				})
-				if err != nil {
-					log.Fatal(err)
-				}
-				helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+
 			}
 		}
 	}
 
-	return nil
+	return "{ \"message\": \"success\" }", nil
 }
 
 func main() {
