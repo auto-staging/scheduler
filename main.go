@@ -18,7 +18,9 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 )
 
-func Handler(eventJson json.RawMessage) (string, error) {
+// Handler is the main function called by lambda.Start, it starts / stops EC2 Instances and RDS Clusters based on the information in the eventJSON.
+// Since the Lambda function is invoked by CloudWatchEvents rules it uses json.RawMessage as parameter.
+func Handler(eventJSON json.RawMessage) (string, error) {
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
 		SharedConfigState: session.SharedConfigEnable,
 	}))
@@ -26,7 +28,7 @@ func Handler(eventJson json.RawMessage) (string, error) {
 	svc := ec2.New(sess)
 
 	cwEvent := types.Event{}
-	err := json.Unmarshal(eventJson, &cwEvent)
+	err := json.Unmarshal(eventJSON, &cwEvent)
 	if err != nil {
 		return "", err
 	}
