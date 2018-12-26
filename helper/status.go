@@ -10,6 +10,8 @@ import (
 	"gitlab.com/auto-staging/scheduler/types"
 )
 
+// SetStatusForEnvironment updates the status for the Environment given in the parameters to the status given in the parameters.
+// If an error occurs the error gets logged and the returned.
 func SetStatusForEnvironment(repository, branch, status string) error {
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String("eu-central-1")},
