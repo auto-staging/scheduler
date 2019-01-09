@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"gitlab.com/auto-staging/scheduler/helper"
+	"github.com/auto-staging/scheduler/helper"
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
@@ -13,7 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/rds"
 
-	"gitlab.com/auto-staging/scheduler/types"
+	"github.com/auto-staging/scheduler/types"
 
 	"github.com/aws/aws-sdk-go/aws/session"
 )
