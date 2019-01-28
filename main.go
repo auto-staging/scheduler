@@ -8,7 +8,6 @@ import (
 	"github.com/auto-staging/scheduler/helper"
 
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/aws/aws-sdk-go/aws"
 
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/ec2"
@@ -26,8 +25,6 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
-	svc := ec2.New(sess)
-
 	cwEvent := types.Event{}
 	err := json.Unmarshal(eventJSON, &cwEvent)
 	if err != nil {
@@ -36,31 +33,11 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 
 	fmt.Println(cwEvent)
 
-	result, err := svc.DescribeInstances(&ec2.DescribeInstancesInput{
-		Filters: []*ec2.Filter{
-			{
-				Name:   aws.String("tag:repository"),
-				Values: []*string{aws.String(cwEvent.Repository)},
-			},
-			{
-				Name:   aws.String("tag:branch_raw"),
-				Values: []*string{aws.String(cwEvent.Branch)},
-			},
-		},
-	})
+	svc := ec2.New(sess)
+
+	instanceIDs, err := helper.DescribeInstancesForTagsAndAction(svc, cwEvent.Repository, cwEvent.Branch, cwEvent.Action)
 	if err != nil {
 		return "", err
-	}
-
-	instanceIDs := []*string{}
-	for i := range result.Reservations {
-		fmt.Printf("Found instance with id = %s and state = %s \n", *result.Reservations[i].Instances[0].InstanceId, *result.Reservations[i].Instances[0].State.Name)
-		if *result.Reservations[i].Instances[0].State.Name == "running" && cwEvent.Action == "stop" {
-			instanceIDs = append(instanceIDs, result.Reservations[i].Instances[0].InstanceId)
-		}
-		if *result.Reservations[i].Instances[0].State.Name == "stopped" && cwEvent.Action == "start" {
-			instanceIDs = append(instanceIDs, result.Reservations[i].Instances[0].InstanceId)
-		}
 	}
 
 	dynamoDBSvc := dynamodb.New(sess)
