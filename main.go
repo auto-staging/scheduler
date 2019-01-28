@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
 
+	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/aws/aws-sdk-go/service/rds"
 
@@ -62,6 +63,8 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 		}
 	}
 
+	dynamoDBSvc := dynamodb.New(sess)
+
 	if len(instanceIDs) > 0 {
 		switch cwEvent.Action {
 		case "stop":
@@ -73,7 +76,7 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 				return "", err
 			}
 			log.Printf("Changed state from %s to %s \n", *stopResult.StoppingInstances[0].PreviousState.Name, *stopResult.StoppingInstances[0].CurrentState.Name)
-			helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
+			helper.SetStatusForEnvironment(dynamoDBSvc, cwEvent.Repository, cwEvent.Branch, "stopped")
 
 		case "start":
 			log.Println("Starting EC2")
@@ -84,7 +87,7 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 				return "", err
 			}
 			log.Printf("Changed state from %s to %s \n", *startResult.StartingInstances[0].PreviousState.Name, *startResult.StartingInstances[0].CurrentState.Name)
-			helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+			helper.SetStatusForEnvironment(dynamoDBSvc, cwEvent.Repository, cwEvent.Branch, "running")
 
 		}
 	} else {
@@ -130,7 +133,7 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 					if err != nil {
 						return "", err
 					}
-					helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
+					helper.SetStatusForEnvironment(dynamoDBSvc, cwEvent.Repository, cwEvent.Branch, "stopped")
 				} else {
 					log.Println("RDS - No action required")
 				}
@@ -144,7 +147,7 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 					if err != nil {
 						return "", err
 					}
-					helper.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+					helper.SetStatusForEnvironment(dynamoDBSvc, cwEvent.Repository, cwEvent.Branch, "running")
 				} else {
 					log.Println("RDS - No action required")
 				}
