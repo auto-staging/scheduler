@@ -45,26 +45,24 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 	if len(instanceIDs) > 0 {
 		switch cwEvent.Action {
 		case "stop":
-			log.Println("Stopping EC2")
-			stopResult, err := svc.StopInstances(&ec2.StopInstancesInput{
-				InstanceIds: instanceIDs,
-			})
+			err = helper.StopEC2Instances(svc, instanceIDs)
 			if err != nil {
 				return "", err
 			}
-			log.Printf("Changed state from %s to %s \n", *stopResult.StoppingInstances[0].PreviousState.Name, *stopResult.StoppingInstances[0].CurrentState.Name)
-			helper.SetStatusForEnvironment(dynamoDBSvc, cwEvent.Repository, cwEvent.Branch, "stopped")
+			err = helper.SetStatusForEnvironment(dynamoDBSvc, cwEvent.Repository, cwEvent.Branch, "stopped")
+			if err != nil {
+				return "", err
+			}
 
 		case "start":
-			log.Println("Starting EC2")
-			startResult, err := svc.StartInstances(&ec2.StartInstancesInput{
-				InstanceIds: instanceIDs,
-			})
+			err = helper.StartEC2Instances(svc, instanceIDs)
 			if err != nil {
 				return "", err
 			}
-			log.Printf("Changed state from %s to %s \n", *startResult.StartingInstances[0].PreviousState.Name, *startResult.StartingInstances[0].CurrentState.Name)
-			helper.SetStatusForEnvironment(dynamoDBSvc, cwEvent.Repository, cwEvent.Branch, "running")
+			err = helper.SetStatusForEnvironment(dynamoDBSvc, cwEvent.Repository, cwEvent.Branch, "running")
+			if err != nil {
+				return "", err
+			}
 
 		}
 	} else {

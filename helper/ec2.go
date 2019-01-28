@@ -40,3 +40,29 @@ func DescribeInstancesForTagsAndAction(svc ec2iface.EC2API, repository, branch, 
 
 	return instanceIDs, nil
 }
+
+func StartEC2Instances(svc ec2iface.EC2API, instanceIDs []*string) error {
+	log.Println("Starting EC2")
+	startResult, err := svc.StartInstances(&ec2.StartInstancesInput{
+		InstanceIds: instanceIDs,
+	})
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	log.Printf("Changed state from %s to %s \n", *startResult.StartingInstances[0].PreviousState.Name, *startResult.StartingInstances[0].CurrentState.Name)
+	return nil
+}
+
+func StopEC2Instances(svc ec2iface.EC2API, instanceIDs []*string) error {
+	log.Println("Stopping EC2")
+	stopResult, err := svc.StopInstances(&ec2.StopInstancesInput{
+		InstanceIds: instanceIDs,
+	})
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	log.Printf("Changed state from %s to %s \n", *stopResult.StoppingInstances[0].PreviousState.Name, *stopResult.StoppingInstances[0].CurrentState.Name)
+	return nil
+}

@@ -92,3 +92,63 @@ func TestDescribeInstancesError(t *testing.T) {
 	assert.Error(t, err, "Expected error")
 	assert.Len(t, result, 0, "Expected no instance")
 }
+
+func TestStartEC2Instances(t *testing.T) {
+	svc := new(mocks.EC2API)
+	svc.On("StartInstances", mock.AnythingOfType("*ec2.StartInstancesInput")).Return(&ec2.StartInstancesOutput{
+		StartingInstances: []*ec2.InstanceStateChange{
+			&ec2.InstanceStateChange{
+				CurrentState: &ec2.InstanceState{
+					Code: aws.Int64(16),
+					Name: aws.String("running"),
+				},
+				PreviousState: &ec2.InstanceState{
+					Code: aws.Int64(80),
+					Name: aws.String("stopped"),
+				},
+				InstanceId: aws.String("i-1234567890abcdef0"),
+			},
+		},
+	}, nil)
+
+	err := StartEC2Instances(svc, []*string{})
+	assert.Nil(t, err, "Expected no error")
+}
+
+func TestStartEC2InstancesError(t *testing.T) {
+	svc := new(mocks.EC2API)
+	svc.On("StartInstances", mock.AnythingOfType("*ec2.StartInstancesInput")).Return(&ec2.StartInstancesOutput{}, errors.New("Test error"))
+
+	err := StartEC2Instances(svc, []*string{})
+	assert.Error(t, err, "Expected error")
+}
+
+func TestStopEC2Instances(t *testing.T) {
+	svc := new(mocks.EC2API)
+	svc.On("StopInstances", mock.AnythingOfType("*ec2.StopInstancesInput")).Return(&ec2.StopInstancesOutput{
+		StoppingInstances: []*ec2.InstanceStateChange{
+			&ec2.InstanceStateChange{
+				CurrentState: &ec2.InstanceState{
+					Code: aws.Int64(80),
+					Name: aws.String("stopped"),
+				},
+				PreviousState: &ec2.InstanceState{
+					Code: aws.Int64(16),
+					Name: aws.String("running"),
+				},
+				InstanceId: aws.String("i-1234567890abcdef0"),
+			},
+		},
+	}, nil)
+
+	err := StopEC2Instances(svc, []*string{})
+	assert.Nil(t, err, "Expected no error")
+}
+
+func TestStopEC2InstancesError(t *testing.T) {
+	svc := new(mocks.EC2API)
+	svc.On("StopInstances", mock.AnythingOfType("*ec2.StopInstancesInput")).Return(&ec2.StopInstancesOutput{}, errors.New("Test error"))
+
+	err := StopEC2Instances(svc, []*string{})
+	assert.Error(t, err, "Expected error")
+}
