@@ -1,0 +1,33 @@
+stages:
+  - test
+
+  - name: release
+    if: branch = master AND type != pull_request
+
+jobs:
+  include:
+    - stage: test
+      language: go
+      go: 'stable'
+      before_script:
+        # Setup dependency management tool (go dep)
+        - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+        - chmod +x $GOPATH/bin/dep
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
+      script:
+        - make prepare
+        - make tests
+      after_script:
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    
+    - stage: release
+      language: node_js
+      install:
+        - . $HOME/.nvm/nvm.sh
+        - nvm install stable
+        - nvm use stable
+        - npm install @semantic-release/changelog && npm install @semantic-release/git
+      script:
+        - npx semantic-release
