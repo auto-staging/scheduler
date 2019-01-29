@@ -30,4 +30,4 @@ plugins:
 exclude_patterns:
   - "vendor/"
   - "mocks/"
-  - "*_test.go"
+  - "**/*_test.go"
