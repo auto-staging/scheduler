@@ -103,7 +103,6 @@ func (base *services) changeEC2State(cwEvent types.Event) error {
 }
 
 func (base *services) changeRDSState(cwEvent types.Event) error {
-
 	clusterARN, clusterStatus, err := base.RDSHelperAPI.GetRDSClusterForTags(cwEvent.Repository, cwEvent.Branch)
 	if err != nil {
 		return err
