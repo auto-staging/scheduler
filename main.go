@@ -119,7 +119,10 @@ func (base *services) changeRDSState(cwEvent types.Event) error {
 			return err
 		}
 		if changed {
-			base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
+			err := base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
+			if err != nil {
+				return err
+			}
 		}
 
 	case "start":
@@ -128,7 +131,10 @@ func (base *services) changeRDSState(cwEvent types.Event) error {
 			return err
 		}
 		if changed {
-			base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+			err := base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+			if err != nil {
+				return err
+			}
 		}
 	}
 
