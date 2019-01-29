@@ -3,32 +3,34 @@ package helper
 import (
 	"log"
 
+	"github.com/auto-staging/scheduler/types"
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-	"github.com/auto-staging/scheduler/types"
+	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
 )
+
+type StatusHelperAPI interface {
+	SetStatusForEnvironment(repository, branch, status string) error
+}
+
+type StatusHelper struct {
+	dynamodbiface.DynamoDBAPI
+}
+
+func NewStatusHelper(svc dynamodbiface.DynamoDBAPI) *StatusHelper {
+	return &StatusHelper{
+		DynamoDBAPI: svc,
+	}
+}
 
 // SetStatusForEnvironment updates the status for the Environment given in the parameters to the status given in the parameters.
 // If an error occurs the error gets logged and the returned.
-func SetStatusForEnvironment(repository, branch, status string) error {
-	sess, err := session.NewSession(&aws.Config{
-		Region: aws.String("eu-central-1")},
-	)
-
-	if err != nil {
-		log.Println(err)
-		return err
-	}
-
-	svc := dynamodb.New(sess)
+func (statusHelper *StatusHelper) SetStatusForEnvironment(repository, branch, status string) error {
 	updateStruct := types.StatusUpdate{
 		Status: status,
 	}
-
 	update, err := dynamodbattribute.MarshalMap(updateStruct)
-
 	if err != nil {
 		log.Println(err)
 		return err
@@ -51,8 +53,7 @@ func SetStatusForEnvironment(repository, branch, status string) error {
 		ExpressionAttributeValues: update,
 		ConditionExpression:       aws.String("attribute_exists(repository) AND attribute_exists(branch)"),
 	}
-
-	_, err = svc.UpdateItem(input)
+	_, err = statusHelper.DynamoDBAPI.UpdateItem(input)
 	if err != nil {
 		log.Println(err)
 		return err
