@@ -13,7 +13,11 @@ func TestSetStatusForEnvironment(t *testing.T) {
 	svc := new(mocks.DynamoDBAPI)
 	svc.On("UpdateItem", mock.AnythingOfType("*dynamodb.UpdateItemInput")).Return(nil, nil)
 
-	err := SetStatusForEnvironment(svc, "", "", "running")
+	statusHelper := StatusHelper{
+		DynamoDBAPI: svc,
+	}
+
+	err := statusHelper.SetStatusForEnvironment("", "", "running")
 	assert.Nil(t, err, "Expected no error")
 }
 
@@ -21,6 +25,10 @@ func TestSetStatusForEnvironmentError(t *testing.T) {
 	svc := new(mocks.DynamoDBAPI)
 	svc.On("UpdateItem", mock.AnythingOfType("*dynamodb.UpdateItemInput")).Return(nil, errors.New("Test error"))
 
-	err := SetStatusForEnvironment(svc, "", "", "running")
+	statusHelper := StatusHelper{
+		DynamoDBAPI: svc,
+	}
+
+	err := statusHelper.SetStatusForEnvironment("", "", "running")
 	assert.Error(t, err, "Expected error")
 }

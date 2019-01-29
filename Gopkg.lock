@@ -14,7 +14,7 @@
   version = "v1.7.0"
 
 [[projects]]
-  digest = "1:4e9378fecf7e11e9d271144c26e007dd84bb4d62ac3bac30d5f06626c24e9469"
+  digest = "1:9c75aa125a22cd4686a8add889394617d3bb0455daf0363849381d1441f6adf8"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -54,6 +54,7 @@
     "service/ec2",
     "service/ec2/ec2iface",
     "service/rds",
+    "service/rds/rdsiface",
     "service/sts",
   ]
   pruneopts = "UT"
@@ -116,6 +117,7 @@
     "github.com/aws/aws-sdk-go/service/ec2",
     "github.com/aws/aws-sdk-go/service/ec2/ec2iface",
     "github.com/aws/aws-sdk-go/service/rds",
+    "github.com/aws/aws-sdk-go/service/rds/rdsiface",
     "github.com/stretchr/testify/assert",
     "github.com/stretchr/testify/mock",
   ]

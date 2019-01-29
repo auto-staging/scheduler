@@ -9,8 +9,24 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
 )
 
-func DescribeInstancesForTagsAndAction(svc ec2iface.EC2API, repository, branch, action string) ([]*string, error) {
-	result, err := svc.DescribeInstances(&ec2.DescribeInstancesInput{
+type EC2HelperAPI interface {
+	DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error)
+	StartEC2Instances(instanceIDs []*string) error
+	StopEC2Instances(instanceIDs []*string) error
+}
+
+type EC2Helper struct {
+	ec2iface.EC2API
+}
+
+func NewEC2Helper(svc ec2iface.EC2API) *EC2Helper {
+	return &EC2Helper{
+		EC2API: svc,
+	}
+}
+
+func (ec2Helper *EC2Helper) DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error) {
+	result, err := ec2Helper.EC2API.DescribeInstances(&ec2.DescribeInstancesInput{
 		Filters: []*ec2.Filter{
 			{
 				Name:   aws.String("tag:repository"),
@@ -41,9 +57,9 @@ func DescribeInstancesForTagsAndAction(svc ec2iface.EC2API, repository, branch, 
 	return instanceIDs, nil
 }
 
-func StartEC2Instances(svc ec2iface.EC2API, instanceIDs []*string) error {
+func (ec2Helper *EC2Helper) StartEC2Instances(instanceIDs []*string) error {
 	log.Println("Starting EC2")
-	startResult, err := svc.StartInstances(&ec2.StartInstancesInput{
+	startResult, err := ec2Helper.EC2API.StartInstances(&ec2.StartInstancesInput{
 		InstanceIds: instanceIDs,
 	})
 	if err != nil {
@@ -54,9 +70,9 @@ func StartEC2Instances(svc ec2iface.EC2API, instanceIDs []*string) error {
 	return nil
 }
 
-func StopEC2Instances(svc ec2iface.EC2API, instanceIDs []*string) error {
+func (ec2Helper *EC2Helper) StopEC2Instances(instanceIDs []*string) error {
 	log.Println("Stopping EC2")
-	stopResult, err := svc.StopInstances(&ec2.StopInstancesInput{
+	stopResult, err := ec2Helper.EC2API.StopInstances(&ec2.StopInstancesInput{
 		InstanceIds: instanceIDs,
 	})
 	if err != nil {
