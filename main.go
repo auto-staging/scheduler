@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/ec2"
-	"github.com/aws/aws-sdk-go/service/rds/rdsiface"
 
 	"github.com/auto-staging/scheduler/helper"
 
@@ -20,7 +19,7 @@ import (
 )
 
 type services struct {
-	rdsiface.RDSAPI
+	helper.RDSHelperAPI
 	helper.StatusHelperAPI
 	helper.EC2HelperAPI
 }
@@ -45,7 +44,7 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 	svcDynamoDB := dynamodb.New(sess)
 
 	svcBase := services{
-		RDSAPI:          svcRDS,
+		RDSHelperAPI:    helper.NewRDSHelper(svcRDS),
 		EC2HelperAPI:    helper.NewEC2Helper(svcEC2),
 		StatusHelperAPI: helper.NewStatusHelper(svcDynamoDB),
 	}
@@ -104,63 +103,33 @@ func (base *services) changeEC2State(cwEvent types.Event) error {
 }
 
 func (base *services) changeRDSState(cwEvent types.Event) error {
-	resultRDS, err := base.RDSAPI.DescribeDBClusters(nil)
+
+	clusterARN, clusterStatus, err := base.RDSHelperAPI.GetRDSClusterForTags(cwEvent.Repository, cwEvent.Branch)
 	if err != nil {
 		return err
 	}
+	if *clusterARN == "" {
+		// No matching cluster found, nothing to do
+		return nil
+	}
 
-	// Check tags for each Cluster
-	for i := range resultRDS.DBClusters {
-		clusterARN := resultRDS.DBClusters[i].DBClusterArn
-		clusterStatus := resultRDS.DBClusters[i].Status
-
-		fmt.Println("Current cluster status = " + *clusterStatus)
-
-		// Get tags for resource
-		resultRDS, err := base.RDSAPI.ListTagsForResource(&rds.ListTagsForResourceInput{
-			ResourceName: clusterARN,
-		})
+	switch cwEvent.Action {
+	case "stop":
+		changed, err := base.RDSHelperAPI.StopRDSCluster(clusterARN, clusterStatus)
 		if err != nil {
 			return err
 		}
-		tagMap := map[string]string{}
-		for a := range resultRDS.TagList {
-			tagMap[*resultRDS.TagList[a].Key] = *resultRDS.TagList[a].Value
+		if changed {
+			base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
 		}
 
-		if tagMap["repository"] == cwEvent.Repository && tagMap["branch_raw"] == cwEvent.Branch {
-			// Found matching Custer
-			fmt.Printf("Found cluster %s matching the tags \n", *clusterARN)
-			switch cwEvent.Action {
-			case "stop":
-				log.Println("Stopping RDS CLUSTER")
-				if *clusterStatus == "available" {
-					_, err := base.RDSAPI.StopDBCluster(&rds.StopDBClusterInput{
-						DBClusterIdentifier: clusterARN,
-					})
-					if err != nil {
-						return err
-					}
-					base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
-				} else {
-					log.Println("RDS - No action required")
-				}
-
-			case "start":
-				if *clusterStatus == "stopped" {
-					log.Println("Starting RDS CLUSTER")
-					_, err := base.RDSAPI.StartDBCluster(&rds.StartDBClusterInput{
-						DBClusterIdentifier: clusterARN,
-					})
-					if err != nil {
-						return err
-					}
-					base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
-				} else {
-					log.Println("RDS - No action required")
-				}
-
-			}
+	case "start":
+		changed, err := base.RDSHelperAPI.StartRDSCluster(clusterARN, clusterStatus)
+		if err != nil {
+			return err
+		}
+		if changed {
+			base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
 		}
 	}
 
