@@ -28,5 +28,6 @@ plugins:
   golint:
     enabled: true
 exclude_patterns:
-  - vendor/
-  - mocks/
+  - "vendor/"
+  - "mocks/"
+  - "*_test.go"
