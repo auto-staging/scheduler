@@ -11,6 +11,15 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
+func TestNewRDSHelper(t *testing.T) {
+	svc := new(mocks.RDSAPI)
+
+	helper := NewRDSHelper(svc)
+
+	assert.NotEmpty(t, helper, "Expected not empty")
+	assert.Equal(t, svc, helper.RDSAPI, "RDS service from helper is not matching the one used as parameter")
+}
+
 func TestGetRDSClusterForTags(t *testing.T) {
 	clusterArn := aws.String("arn:aws:rds:eu-west-1:123456789012:db:mysql-db")
 	clusterStatus := aws.String("available")
@@ -128,4 +137,119 @@ func TestGetRDSClusterForTagsDescribeTagsError(t *testing.T) {
 	assert.Equal(t, errorMsg, err, "Error message didn't match the given one")
 	assert.Nil(t, resultArn, "Expected resultArn to be empty")
 	assert.Nil(t, resultStatus, "Expected resultStatus to be empty")
+}
+
+func TestStopRDSCluster(t *testing.T) {
+	clusterArn := aws.String("arn:aws:rds:eu-west-1:123456789012:db:mysql-db")
+	clusterStatus := aws.String("available")
+
+	svc := new(mocks.RDSAPI)
+	svc.On("StopDBCluster", mock.AnythingOfType("*rds.StopDBClusterInput")).Return(&rds.StopDBClusterOutput{}, nil)
+
+	rdsHelper := RDSHelper{
+		RDSAPI: svc,
+	}
+
+	changed, err := rdsHelper.StopRDSCluster(clusterArn, clusterStatus)
+
+	assert.Nil(t, err, "Expected no error")
+	svc.AssertCalled(t, "StopDBCluster", &rds.StopDBClusterInput{
+		DBClusterIdentifier: clusterArn,
+	})
+	assert.Equal(t, true, changed, "Expected changed to be true")
+}
+
+func TestStopRDSClusterWrongStatus(t *testing.T) {
+	clusterArn := aws.String("arn:aws:rds:eu-west-1:123456789012:db:mysql-db")
+	clusterStatus := aws.String("stopped")
+
+	svc := new(mocks.RDSAPI)
+
+	rdsHelper := RDSHelper{
+		RDSAPI: svc,
+	}
+
+	changed, err := rdsHelper.StopRDSCluster(clusterArn, clusterStatus)
+
+	assert.Nil(t, err, "Expected no error")
+	assert.Equal(t, false, changed, "Expected changed to be false")
+}
+
+func TestStopRDSClusterError(t *testing.T) {
+	clusterArn := aws.String("arn:aws:rds:eu-west-1:123456789012:db:mysql-db")
+	clusterStatus := aws.String("available")
+	errorMsg := errors.New("Test error")
+
+	svc := new(mocks.RDSAPI)
+	svc.On("StopDBCluster", mock.AnythingOfType("*rds.StopDBClusterInput")).Return(&rds.StopDBClusterOutput{}, errorMsg)
+
+	rdsHelper := RDSHelper{
+		RDSAPI: svc,
+	}
+
+	changed, err := rdsHelper.StopRDSCluster(clusterArn, clusterStatus)
+
+	assert.Error(t, err, "Expected error")
+	svc.AssertCalled(t, "StopDBCluster", &rds.StopDBClusterInput{
+		DBClusterIdentifier: clusterArn,
+	})
+	assert.Equal(t, errorMsg, err, "Error message didn't match the given one")
+	assert.Equal(t, false, changed, "Expected changed to be false")
+}
+
+func TestStartRDSCluster(t *testing.T) {
+	clusterArn := aws.String("arn:aws:rds:eu-west-1:123456789012:db:mysql-db")
+	clusterStatus := aws.String("stopped")
+
+	svc := new(mocks.RDSAPI)
+	svc.On("StartDBCluster", mock.AnythingOfType("*rds.StartDBClusterInput")).Return(&rds.StartDBClusterOutput{}, nil)
+
+	rdsHelper := RDSHelper{
+		RDSAPI: svc,
+	}
+
+	changed, err := rdsHelper.StartRDSCluster(clusterArn, clusterStatus)
+
+	assert.Nil(t, err, "Expected no error")
+	svc.AssertCalled(t, "StartDBCluster", &rds.StartDBClusterInput{
+		DBClusterIdentifier: clusterArn,
+	})
+	assert.Equal(t, true, changed, "Expected changed to be true")
+}
+
+func TestStartRDSClusterWrongStatus(t *testing.T) {
+	clusterArn := aws.String("arn:aws:rds:eu-west-1:123456789012:db:mysql-db")
+	clusterStatus := aws.String("available")
+
+	svc := new(mocks.RDSAPI)
+	rdsHelper := RDSHelper{
+		RDSAPI: svc,
+	}
+
+	changed, err := rdsHelper.StartRDSCluster(clusterArn, clusterStatus)
+
+	assert.Nil(t, err, "Expected no error")
+	assert.Equal(t, false, changed, "Expected changed to be false")
+}
+
+func TestStartRDSClusterError(t *testing.T) {
+	clusterArn := aws.String("arn:aws:rds:eu-west-1:123456789012:db:mysql-db")
+	clusterStatus := aws.String("stopped")
+	errorMsg := errors.New("Test error")
+
+	svc := new(mocks.RDSAPI)
+	svc.On("StartDBCluster", mock.AnythingOfType("*rds.StartDBClusterInput")).Return(&rds.StartDBClusterOutput{}, errorMsg)
+
+	rdsHelper := RDSHelper{
+		RDSAPI: svc,
+	}
+
+	changed, err := rdsHelper.StartRDSCluster(clusterArn, clusterStatus)
+
+	assert.Error(t, err, "Expected error")
+	svc.AssertCalled(t, "StartDBCluster", &rds.StartDBClusterInput{
+		DBClusterIdentifier: clusterArn,
+	})
+	assert.Equal(t, errorMsg, err, "Error message didn't match the given one")
+	assert.Equal(t, false, changed, "Expected changed to be false")
 }
