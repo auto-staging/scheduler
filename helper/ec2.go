@@ -9,22 +9,28 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
 )
 
+// EC2HelperAPI is an interface including all EC2 helper functions
 type EC2HelperAPI interface {
 	DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error)
 	StartEC2Instances(instanceIDs []*string) error
 	StopEC2Instances(instanceIDs []*string) error
 }
 
+// EC2Helper is a struct including the AWS SDK EC2 interface, all EC2 Helper functions are called on this struct and the included AWS SDK EC2 service
 type EC2Helper struct {
 	ec2iface.EC2API
 }
 
+// NewEC2Helper takes the AWS SDK EC2 Interface as parameter and returns the pointer to an EC2Helper struct, on which all EC2 Helper functions can be called
 func NewEC2Helper(svc ec2iface.EC2API) *EC2Helper {
 	return &EC2Helper{
 		EC2API: svc,
 	}
 }
 
+// DescribeInstancesForTagsAndAction takes a repository name, a branch name and an action (which can be "start" or "stop"). The function filters all EC2 Instances by
+// repository and branch_raw tag and then writes all instanceIDs of instances to the *string array, which must get adapted based on the given action.
+// If an error occurs, it gets logged and then returned
 func (ec2Helper *EC2Helper) DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error) {
 	result, err := ec2Helper.EC2API.DescribeInstances(&ec2.DescribeInstancesInput{
 		Filters: []*ec2.Filter{
@@ -57,6 +63,8 @@ func (ec2Helper *EC2Helper) DescribeInstancesForTagsAndAction(repository, branch
 	return instanceIDs, nil
 }
 
+// StartEC2Instances starts all EC2 instances given in the instanceIDs array by using the AWS SDK.
+// If an error occurs, it gets logged and then returned
 func (ec2Helper *EC2Helper) StartEC2Instances(instanceIDs []*string) error {
 	log.Println("Starting EC2")
 	startResult, err := ec2Helper.EC2API.StartInstances(&ec2.StartInstancesInput{
@@ -70,6 +78,8 @@ func (ec2Helper *EC2Helper) StartEC2Instances(instanceIDs []*string) error {
 	return nil
 }
 
+// StopEC2Instances stops all EC2 instances given in the instanceIDs array by using the AWS SDK.
+// If an error occurs, it gets logged and then returned
 func (ec2Helper *EC2Helper) StopEC2Instances(instanceIDs []*string) error {
 	log.Println("Stopping EC2")
 	stopResult, err := ec2Helper.EC2API.StopInstances(&ec2.StopInstancesInput{
