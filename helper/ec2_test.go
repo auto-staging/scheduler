@@ -12,6 +12,15 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
+func TestNewEC2Helper(t *testing.T) {
+	svc := new(mocks.EC2API)
+
+	helper := NewEC2Helper(svc)
+
+	assert.NotEmpty(t, helper, "Expected not empty")
+	assert.Equal(t, svc, helper.EC2API, "EC2 service from helper is not matching the one used as parameter")
+}
+
 func TestDescribeInstancesStopAction(t *testing.T) {
 	svc := new(mocks.EC2API)
 	svc.On("DescribeInstances", mock.AnythingOfType("*ec2.DescribeInstancesInput")).Return(&ec2.DescribeInstancesOutput{
