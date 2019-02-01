@@ -2,7 +2,7 @@
 
 package mocks
 
-import aws "github.com/aws/aws-sdk-go/aws"
+import context "context"
 import mock "github.com/stretchr/testify/mock"
 import rds "github.com/aws/aws-sdk-go/service/rds"
 
@@ -62,7 +62,7 @@ func (_m *RDSAPI) AddRoleToDBClusterRequest(_a0 *rds.AddRoleToDBClusterInput) (*
 }
 
 // AddRoleToDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) AddRoleToDBClusterWithContext(_a0 aws.Context, _a1 *rds.AddRoleToDBClusterInput, _a2 ...request.Option) (*rds.AddRoleToDBClusterOutput, error) {
+func (_m *RDSAPI) AddRoleToDBClusterWithContext(_a0 context.Context, _a1 *rds.AddRoleToDBClusterInput, _a2 ...request.Option) (*rds.AddRoleToDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -73,7 +73,7 @@ func (_m *RDSAPI) AddRoleToDBClusterWithContext(_a0 aws.Context, _a1 *rds.AddRol
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.AddRoleToDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.AddRoleToDBClusterInput, ...request.Option) *rds.AddRoleToDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.AddRoleToDBClusterInput, ...request.Option) *rds.AddRoleToDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -82,7 +82,85 @@ func (_m *RDSAPI) AddRoleToDBClusterWithContext(_a0 aws.Context, _a1 *rds.AddRol
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.AddRoleToDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.AddRoleToDBClusterInput, ...request.Option) error); ok {
+		r1 = rf(_a0, _a1, _a2...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// AddRoleToDBInstance provides a mock function with given fields: _a0
+func (_m *RDSAPI) AddRoleToDBInstance(_a0 *rds.AddRoleToDBInstanceInput) (*rds.AddRoleToDBInstanceOutput, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *rds.AddRoleToDBInstanceOutput
+	if rf, ok := ret.Get(0).(func(*rds.AddRoleToDBInstanceInput) *rds.AddRoleToDBInstanceOutput); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*rds.AddRoleToDBInstanceOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*rds.AddRoleToDBInstanceInput) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// AddRoleToDBInstanceRequest provides a mock function with given fields: _a0
+func (_m *RDSAPI) AddRoleToDBInstanceRequest(_a0 *rds.AddRoleToDBInstanceInput) (*request.Request, *rds.AddRoleToDBInstanceOutput) {
+	ret := _m.Called(_a0)
+
+	var r0 *request.Request
+	if rf, ok := ret.Get(0).(func(*rds.AddRoleToDBInstanceInput) *request.Request); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*request.Request)
+		}
+	}
+
+	var r1 *rds.AddRoleToDBInstanceOutput
+	if rf, ok := ret.Get(1).(func(*rds.AddRoleToDBInstanceInput) *rds.AddRoleToDBInstanceOutput); ok {
+		r1 = rf(_a0)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*rds.AddRoleToDBInstanceOutput)
+		}
+	}
+
+	return r0, r1
+}
+
+// AddRoleToDBInstanceWithContext provides a mock function with given fields: _a0, _a1, _a2
+func (_m *RDSAPI) AddRoleToDBInstanceWithContext(_a0 context.Context, _a1 *rds.AddRoleToDBInstanceInput, _a2 ...request.Option) (*rds.AddRoleToDBInstanceOutput, error) {
+	_va := make([]interface{}, len(_a2))
+	for _i := range _a2 {
+		_va[_i] = _a2[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *rds.AddRoleToDBInstanceOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.AddRoleToDBInstanceInput, ...request.Option) *rds.AddRoleToDBInstanceOutput); ok {
+		r0 = rf(_a0, _a1, _a2...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*rds.AddRoleToDBInstanceOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.AddRoleToDBInstanceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -140,7 +218,7 @@ func (_m *RDSAPI) AddSourceIdentifierToSubscriptionRequest(_a0 *rds.AddSourceIde
 }
 
 // AddSourceIdentifierToSubscriptionWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) AddSourceIdentifierToSubscriptionWithContext(_a0 aws.Context, _a1 *rds.AddSourceIdentifierToSubscriptionInput, _a2 ...request.Option) (*rds.AddSourceIdentifierToSubscriptionOutput, error) {
+func (_m *RDSAPI) AddSourceIdentifierToSubscriptionWithContext(_a0 context.Context, _a1 *rds.AddSourceIdentifierToSubscriptionInput, _a2 ...request.Option) (*rds.AddSourceIdentifierToSubscriptionOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -151,7 +229,7 @@ func (_m *RDSAPI) AddSourceIdentifierToSubscriptionWithContext(_a0 aws.Context, 
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.AddSourceIdentifierToSubscriptionOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.AddSourceIdentifierToSubscriptionInput, ...request.Option) *rds.AddSourceIdentifierToSubscriptionOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.AddSourceIdentifierToSubscriptionInput, ...request.Option) *rds.AddSourceIdentifierToSubscriptionOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -160,7 +238,7 @@ func (_m *RDSAPI) AddSourceIdentifierToSubscriptionWithContext(_a0 aws.Context, 
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.AddSourceIdentifierToSubscriptionInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.AddSourceIdentifierToSubscriptionInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -218,7 +296,7 @@ func (_m *RDSAPI) AddTagsToResourceRequest(_a0 *rds.AddTagsToResourceInput) (*re
 }
 
 // AddTagsToResourceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) AddTagsToResourceWithContext(_a0 aws.Context, _a1 *rds.AddTagsToResourceInput, _a2 ...request.Option) (*rds.AddTagsToResourceOutput, error) {
+func (_m *RDSAPI) AddTagsToResourceWithContext(_a0 context.Context, _a1 *rds.AddTagsToResourceInput, _a2 ...request.Option) (*rds.AddTagsToResourceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -229,7 +307,7 @@ func (_m *RDSAPI) AddTagsToResourceWithContext(_a0 aws.Context, _a1 *rds.AddTags
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.AddTagsToResourceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.AddTagsToResourceInput, ...request.Option) *rds.AddTagsToResourceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.AddTagsToResourceInput, ...request.Option) *rds.AddTagsToResourceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -238,7 +316,7 @@ func (_m *RDSAPI) AddTagsToResourceWithContext(_a0 aws.Context, _a1 *rds.AddTags
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.AddTagsToResourceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.AddTagsToResourceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -296,7 +374,7 @@ func (_m *RDSAPI) ApplyPendingMaintenanceActionRequest(_a0 *rds.ApplyPendingMain
 }
 
 // ApplyPendingMaintenanceActionWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ApplyPendingMaintenanceActionWithContext(_a0 aws.Context, _a1 *rds.ApplyPendingMaintenanceActionInput, _a2 ...request.Option) (*rds.ApplyPendingMaintenanceActionOutput, error) {
+func (_m *RDSAPI) ApplyPendingMaintenanceActionWithContext(_a0 context.Context, _a1 *rds.ApplyPendingMaintenanceActionInput, _a2 ...request.Option) (*rds.ApplyPendingMaintenanceActionOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -307,7 +385,7 @@ func (_m *RDSAPI) ApplyPendingMaintenanceActionWithContext(_a0 aws.Context, _a1 
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ApplyPendingMaintenanceActionOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ApplyPendingMaintenanceActionInput, ...request.Option) *rds.ApplyPendingMaintenanceActionOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ApplyPendingMaintenanceActionInput, ...request.Option) *rds.ApplyPendingMaintenanceActionOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -316,7 +394,7 @@ func (_m *RDSAPI) ApplyPendingMaintenanceActionWithContext(_a0 aws.Context, _a1 
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ApplyPendingMaintenanceActionInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ApplyPendingMaintenanceActionInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -374,7 +452,7 @@ func (_m *RDSAPI) AuthorizeDBSecurityGroupIngressRequest(_a0 *rds.AuthorizeDBSec
 }
 
 // AuthorizeDBSecurityGroupIngressWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) AuthorizeDBSecurityGroupIngressWithContext(_a0 aws.Context, _a1 *rds.AuthorizeDBSecurityGroupIngressInput, _a2 ...request.Option) (*rds.AuthorizeDBSecurityGroupIngressOutput, error) {
+func (_m *RDSAPI) AuthorizeDBSecurityGroupIngressWithContext(_a0 context.Context, _a1 *rds.AuthorizeDBSecurityGroupIngressInput, _a2 ...request.Option) (*rds.AuthorizeDBSecurityGroupIngressOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -385,7 +463,7 @@ func (_m *RDSAPI) AuthorizeDBSecurityGroupIngressWithContext(_a0 aws.Context, _a
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.AuthorizeDBSecurityGroupIngressOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.AuthorizeDBSecurityGroupIngressInput, ...request.Option) *rds.AuthorizeDBSecurityGroupIngressOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.AuthorizeDBSecurityGroupIngressInput, ...request.Option) *rds.AuthorizeDBSecurityGroupIngressOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -394,7 +472,7 @@ func (_m *RDSAPI) AuthorizeDBSecurityGroupIngressWithContext(_a0 aws.Context, _a
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.AuthorizeDBSecurityGroupIngressInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.AuthorizeDBSecurityGroupIngressInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -452,7 +530,7 @@ func (_m *RDSAPI) BacktrackDBClusterRequest(_a0 *rds.BacktrackDBClusterInput) (*
 }
 
 // BacktrackDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) BacktrackDBClusterWithContext(_a0 aws.Context, _a1 *rds.BacktrackDBClusterInput, _a2 ...request.Option) (*rds.BacktrackDBClusterOutput, error) {
+func (_m *RDSAPI) BacktrackDBClusterWithContext(_a0 context.Context, _a1 *rds.BacktrackDBClusterInput, _a2 ...request.Option) (*rds.BacktrackDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -463,7 +541,7 @@ func (_m *RDSAPI) BacktrackDBClusterWithContext(_a0 aws.Context, _a1 *rds.Backtr
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.BacktrackDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.BacktrackDBClusterInput, ...request.Option) *rds.BacktrackDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.BacktrackDBClusterInput, ...request.Option) *rds.BacktrackDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -472,7 +550,7 @@ func (_m *RDSAPI) BacktrackDBClusterWithContext(_a0 aws.Context, _a1 *rds.Backtr
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.BacktrackDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.BacktrackDBClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -530,7 +608,7 @@ func (_m *RDSAPI) CopyDBClusterParameterGroupRequest(_a0 *rds.CopyDBClusterParam
 }
 
 // CopyDBClusterParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CopyDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 *rds.CopyDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.CopyDBClusterParameterGroupOutput, error) {
+func (_m *RDSAPI) CopyDBClusterParameterGroupWithContext(_a0 context.Context, _a1 *rds.CopyDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.CopyDBClusterParameterGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -541,7 +619,7 @@ func (_m *RDSAPI) CopyDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 *r
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CopyDBClusterParameterGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CopyDBClusterParameterGroupInput, ...request.Option) *rds.CopyDBClusterParameterGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CopyDBClusterParameterGroupInput, ...request.Option) *rds.CopyDBClusterParameterGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -550,7 +628,7 @@ func (_m *RDSAPI) CopyDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 *r
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CopyDBClusterParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CopyDBClusterParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -608,7 +686,7 @@ func (_m *RDSAPI) CopyDBClusterSnapshotRequest(_a0 *rds.CopyDBClusterSnapshotInp
 }
 
 // CopyDBClusterSnapshotWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CopyDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.CopyDBClusterSnapshotInput, _a2 ...request.Option) (*rds.CopyDBClusterSnapshotOutput, error) {
+func (_m *RDSAPI) CopyDBClusterSnapshotWithContext(_a0 context.Context, _a1 *rds.CopyDBClusterSnapshotInput, _a2 ...request.Option) (*rds.CopyDBClusterSnapshotOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -619,7 +697,7 @@ func (_m *RDSAPI) CopyDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.Cop
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CopyDBClusterSnapshotOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CopyDBClusterSnapshotInput, ...request.Option) *rds.CopyDBClusterSnapshotOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CopyDBClusterSnapshotInput, ...request.Option) *rds.CopyDBClusterSnapshotOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -628,7 +706,7 @@ func (_m *RDSAPI) CopyDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.Cop
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CopyDBClusterSnapshotInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CopyDBClusterSnapshotInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -686,7 +764,7 @@ func (_m *RDSAPI) CopyDBParameterGroupRequest(_a0 *rds.CopyDBParameterGroupInput
 }
 
 // CopyDBParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CopyDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.CopyDBParameterGroupInput, _a2 ...request.Option) (*rds.CopyDBParameterGroupOutput, error) {
+func (_m *RDSAPI) CopyDBParameterGroupWithContext(_a0 context.Context, _a1 *rds.CopyDBParameterGroupInput, _a2 ...request.Option) (*rds.CopyDBParameterGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -697,7 +775,7 @@ func (_m *RDSAPI) CopyDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.Copy
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CopyDBParameterGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CopyDBParameterGroupInput, ...request.Option) *rds.CopyDBParameterGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CopyDBParameterGroupInput, ...request.Option) *rds.CopyDBParameterGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -706,7 +784,7 @@ func (_m *RDSAPI) CopyDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.Copy
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CopyDBParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CopyDBParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -764,7 +842,7 @@ func (_m *RDSAPI) CopyDBSnapshotRequest(_a0 *rds.CopyDBSnapshotInput) (*request.
 }
 
 // CopyDBSnapshotWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CopyDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.CopyDBSnapshotInput, _a2 ...request.Option) (*rds.CopyDBSnapshotOutput, error) {
+func (_m *RDSAPI) CopyDBSnapshotWithContext(_a0 context.Context, _a1 *rds.CopyDBSnapshotInput, _a2 ...request.Option) (*rds.CopyDBSnapshotOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -775,7 +853,7 @@ func (_m *RDSAPI) CopyDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.CopyDBSnap
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CopyDBSnapshotOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CopyDBSnapshotInput, ...request.Option) *rds.CopyDBSnapshotOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CopyDBSnapshotInput, ...request.Option) *rds.CopyDBSnapshotOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -784,7 +862,7 @@ func (_m *RDSAPI) CopyDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.CopyDBSnap
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CopyDBSnapshotInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CopyDBSnapshotInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -842,7 +920,7 @@ func (_m *RDSAPI) CopyOptionGroupRequest(_a0 *rds.CopyOptionGroupInput) (*reques
 }
 
 // CopyOptionGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CopyOptionGroupWithContext(_a0 aws.Context, _a1 *rds.CopyOptionGroupInput, _a2 ...request.Option) (*rds.CopyOptionGroupOutput, error) {
+func (_m *RDSAPI) CopyOptionGroupWithContext(_a0 context.Context, _a1 *rds.CopyOptionGroupInput, _a2 ...request.Option) (*rds.CopyOptionGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -853,7 +931,7 @@ func (_m *RDSAPI) CopyOptionGroupWithContext(_a0 aws.Context, _a1 *rds.CopyOptio
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CopyOptionGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CopyOptionGroupInput, ...request.Option) *rds.CopyOptionGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CopyOptionGroupInput, ...request.Option) *rds.CopyOptionGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -862,7 +940,7 @@ func (_m *RDSAPI) CopyOptionGroupWithContext(_a0 aws.Context, _a1 *rds.CopyOptio
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CopyOptionGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CopyOptionGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -943,7 +1021,7 @@ func (_m *RDSAPI) CreateDBClusterEndpointRequest(_a0 *rds.CreateDBClusterEndpoin
 }
 
 // CreateDBClusterEndpointWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBClusterEndpointWithContext(_a0 aws.Context, _a1 *rds.CreateDBClusterEndpointInput, _a2 ...request.Option) (*rds.CreateDBClusterEndpointOutput, error) {
+func (_m *RDSAPI) CreateDBClusterEndpointWithContext(_a0 context.Context, _a1 *rds.CreateDBClusterEndpointInput, _a2 ...request.Option) (*rds.CreateDBClusterEndpointOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -954,7 +1032,7 @@ func (_m *RDSAPI) CreateDBClusterEndpointWithContext(_a0 aws.Context, _a1 *rds.C
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBClusterEndpointOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBClusterEndpointInput, ...request.Option) *rds.CreateDBClusterEndpointOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBClusterEndpointInput, ...request.Option) *rds.CreateDBClusterEndpointOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -963,7 +1041,7 @@ func (_m *RDSAPI) CreateDBClusterEndpointWithContext(_a0 aws.Context, _a1 *rds.C
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBClusterEndpointInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBClusterEndpointInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1021,7 +1099,7 @@ func (_m *RDSAPI) CreateDBClusterParameterGroupRequest(_a0 *rds.CreateDBClusterP
 }
 
 // CreateDBClusterParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 *rds.CreateDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.CreateDBClusterParameterGroupOutput, error) {
+func (_m *RDSAPI) CreateDBClusterParameterGroupWithContext(_a0 context.Context, _a1 *rds.CreateDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.CreateDBClusterParameterGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1032,7 +1110,7 @@ func (_m *RDSAPI) CreateDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBClusterParameterGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBClusterParameterGroupInput, ...request.Option) *rds.CreateDBClusterParameterGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBClusterParameterGroupInput, ...request.Option) *rds.CreateDBClusterParameterGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1041,7 +1119,7 @@ func (_m *RDSAPI) CreateDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBClusterParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBClusterParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1124,7 +1202,7 @@ func (_m *RDSAPI) CreateDBClusterSnapshotRequest(_a0 *rds.CreateDBClusterSnapsho
 }
 
 // CreateDBClusterSnapshotWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.CreateDBClusterSnapshotInput, _a2 ...request.Option) (*rds.CreateDBClusterSnapshotOutput, error) {
+func (_m *RDSAPI) CreateDBClusterSnapshotWithContext(_a0 context.Context, _a1 *rds.CreateDBClusterSnapshotInput, _a2 ...request.Option) (*rds.CreateDBClusterSnapshotOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1135,7 +1213,7 @@ func (_m *RDSAPI) CreateDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.C
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBClusterSnapshotOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBClusterSnapshotInput, ...request.Option) *rds.CreateDBClusterSnapshotOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBClusterSnapshotInput, ...request.Option) *rds.CreateDBClusterSnapshotOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1144,7 +1222,7 @@ func (_m *RDSAPI) CreateDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.C
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBClusterSnapshotInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBClusterSnapshotInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1154,7 +1232,7 @@ func (_m *RDSAPI) CreateDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.C
 }
 
 // CreateDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBClusterWithContext(_a0 aws.Context, _a1 *rds.CreateDBClusterInput, _a2 ...request.Option) (*rds.CreateDBClusterOutput, error) {
+func (_m *RDSAPI) CreateDBClusterWithContext(_a0 context.Context, _a1 *rds.CreateDBClusterInput, _a2 ...request.Option) (*rds.CreateDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1165,7 +1243,7 @@ func (_m *RDSAPI) CreateDBClusterWithContext(_a0 aws.Context, _a1 *rds.CreateDBC
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBClusterInput, ...request.Option) *rds.CreateDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBClusterInput, ...request.Option) *rds.CreateDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1174,7 +1252,7 @@ func (_m *RDSAPI) CreateDBClusterWithContext(_a0 aws.Context, _a1 *rds.CreateDBC
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1255,7 +1333,7 @@ func (_m *RDSAPI) CreateDBInstanceReadReplicaRequest(_a0 *rds.CreateDBInstanceRe
 }
 
 // CreateDBInstanceReadReplicaWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBInstanceReadReplicaWithContext(_a0 aws.Context, _a1 *rds.CreateDBInstanceReadReplicaInput, _a2 ...request.Option) (*rds.CreateDBInstanceReadReplicaOutput, error) {
+func (_m *RDSAPI) CreateDBInstanceReadReplicaWithContext(_a0 context.Context, _a1 *rds.CreateDBInstanceReadReplicaInput, _a2 ...request.Option) (*rds.CreateDBInstanceReadReplicaOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1266,7 +1344,7 @@ func (_m *RDSAPI) CreateDBInstanceReadReplicaWithContext(_a0 aws.Context, _a1 *r
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBInstanceReadReplicaOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBInstanceReadReplicaInput, ...request.Option) *rds.CreateDBInstanceReadReplicaOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBInstanceReadReplicaInput, ...request.Option) *rds.CreateDBInstanceReadReplicaOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1275,7 +1353,7 @@ func (_m *RDSAPI) CreateDBInstanceReadReplicaWithContext(_a0 aws.Context, _a1 *r
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBInstanceReadReplicaInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBInstanceReadReplicaInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1310,7 +1388,7 @@ func (_m *RDSAPI) CreateDBInstanceRequest(_a0 *rds.CreateDBInstanceInput) (*requ
 }
 
 // CreateDBInstanceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBInstanceWithContext(_a0 aws.Context, _a1 *rds.CreateDBInstanceInput, _a2 ...request.Option) (*rds.CreateDBInstanceOutput, error) {
+func (_m *RDSAPI) CreateDBInstanceWithContext(_a0 context.Context, _a1 *rds.CreateDBInstanceInput, _a2 ...request.Option) (*rds.CreateDBInstanceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1321,7 +1399,7 @@ func (_m *RDSAPI) CreateDBInstanceWithContext(_a0 aws.Context, _a1 *rds.CreateDB
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBInstanceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBInstanceInput, ...request.Option) *rds.CreateDBInstanceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBInstanceInput, ...request.Option) *rds.CreateDBInstanceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1330,7 +1408,7 @@ func (_m *RDSAPI) CreateDBInstanceWithContext(_a0 aws.Context, _a1 *rds.CreateDB
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBInstanceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBInstanceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1388,7 +1466,7 @@ func (_m *RDSAPI) CreateDBParameterGroupRequest(_a0 *rds.CreateDBParameterGroupI
 }
 
 // CreateDBParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.CreateDBParameterGroupInput, _a2 ...request.Option) (*rds.CreateDBParameterGroupOutput, error) {
+func (_m *RDSAPI) CreateDBParameterGroupWithContext(_a0 context.Context, _a1 *rds.CreateDBParameterGroupInput, _a2 ...request.Option) (*rds.CreateDBParameterGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1399,7 +1477,7 @@ func (_m *RDSAPI) CreateDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.Cr
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBParameterGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBParameterGroupInput, ...request.Option) *rds.CreateDBParameterGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBParameterGroupInput, ...request.Option) *rds.CreateDBParameterGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1408,7 +1486,7 @@ func (_m *RDSAPI) CreateDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.Cr
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1466,7 +1544,7 @@ func (_m *RDSAPI) CreateDBSecurityGroupRequest(_a0 *rds.CreateDBSecurityGroupInp
 }
 
 // CreateDBSecurityGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBSecurityGroupWithContext(_a0 aws.Context, _a1 *rds.CreateDBSecurityGroupInput, _a2 ...request.Option) (*rds.CreateDBSecurityGroupOutput, error) {
+func (_m *RDSAPI) CreateDBSecurityGroupWithContext(_a0 context.Context, _a1 *rds.CreateDBSecurityGroupInput, _a2 ...request.Option) (*rds.CreateDBSecurityGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1477,7 +1555,7 @@ func (_m *RDSAPI) CreateDBSecurityGroupWithContext(_a0 aws.Context, _a1 *rds.Cre
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBSecurityGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBSecurityGroupInput, ...request.Option) *rds.CreateDBSecurityGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBSecurityGroupInput, ...request.Option) *rds.CreateDBSecurityGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1486,7 +1564,7 @@ func (_m *RDSAPI) CreateDBSecurityGroupWithContext(_a0 aws.Context, _a1 *rds.Cre
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBSecurityGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBSecurityGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1544,7 +1622,7 @@ func (_m *RDSAPI) CreateDBSnapshotRequest(_a0 *rds.CreateDBSnapshotInput) (*requ
 }
 
 // CreateDBSnapshotWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.CreateDBSnapshotInput, _a2 ...request.Option) (*rds.CreateDBSnapshotOutput, error) {
+func (_m *RDSAPI) CreateDBSnapshotWithContext(_a0 context.Context, _a1 *rds.CreateDBSnapshotInput, _a2 ...request.Option) (*rds.CreateDBSnapshotOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1555,7 +1633,7 @@ func (_m *RDSAPI) CreateDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.CreateDB
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBSnapshotOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBSnapshotInput, ...request.Option) *rds.CreateDBSnapshotOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBSnapshotInput, ...request.Option) *rds.CreateDBSnapshotOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1564,7 +1642,7 @@ func (_m *RDSAPI) CreateDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.CreateDB
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBSnapshotInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBSnapshotInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1622,7 +1700,7 @@ func (_m *RDSAPI) CreateDBSubnetGroupRequest(_a0 *rds.CreateDBSubnetGroupInput) 
 }
 
 // CreateDBSubnetGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateDBSubnetGroupWithContext(_a0 aws.Context, _a1 *rds.CreateDBSubnetGroupInput, _a2 ...request.Option) (*rds.CreateDBSubnetGroupOutput, error) {
+func (_m *RDSAPI) CreateDBSubnetGroupWithContext(_a0 context.Context, _a1 *rds.CreateDBSubnetGroupInput, _a2 ...request.Option) (*rds.CreateDBSubnetGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1633,7 +1711,7 @@ func (_m *RDSAPI) CreateDBSubnetGroupWithContext(_a0 aws.Context, _a1 *rds.Creat
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateDBSubnetGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateDBSubnetGroupInput, ...request.Option) *rds.CreateDBSubnetGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateDBSubnetGroupInput, ...request.Option) *rds.CreateDBSubnetGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1642,7 +1720,7 @@ func (_m *RDSAPI) CreateDBSubnetGroupWithContext(_a0 aws.Context, _a1 *rds.Creat
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateDBSubnetGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateDBSubnetGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1700,7 +1778,7 @@ func (_m *RDSAPI) CreateEventSubscriptionRequest(_a0 *rds.CreateEventSubscriptio
 }
 
 // CreateEventSubscriptionWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateEventSubscriptionWithContext(_a0 aws.Context, _a1 *rds.CreateEventSubscriptionInput, _a2 ...request.Option) (*rds.CreateEventSubscriptionOutput, error) {
+func (_m *RDSAPI) CreateEventSubscriptionWithContext(_a0 context.Context, _a1 *rds.CreateEventSubscriptionInput, _a2 ...request.Option) (*rds.CreateEventSubscriptionOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1711,7 +1789,7 @@ func (_m *RDSAPI) CreateEventSubscriptionWithContext(_a0 aws.Context, _a1 *rds.C
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateEventSubscriptionOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateEventSubscriptionInput, ...request.Option) *rds.CreateEventSubscriptionOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateEventSubscriptionInput, ...request.Option) *rds.CreateEventSubscriptionOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1720,7 +1798,7 @@ func (_m *RDSAPI) CreateEventSubscriptionWithContext(_a0 aws.Context, _a1 *rds.C
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateEventSubscriptionInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateEventSubscriptionInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1778,7 +1856,7 @@ func (_m *RDSAPI) CreateGlobalClusterRequest(_a0 *rds.CreateGlobalClusterInput) 
 }
 
 // CreateGlobalClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.CreateGlobalClusterInput, _a2 ...request.Option) (*rds.CreateGlobalClusterOutput, error) {
+func (_m *RDSAPI) CreateGlobalClusterWithContext(_a0 context.Context, _a1 *rds.CreateGlobalClusterInput, _a2 ...request.Option) (*rds.CreateGlobalClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1789,7 +1867,7 @@ func (_m *RDSAPI) CreateGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.Creat
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateGlobalClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateGlobalClusterInput, ...request.Option) *rds.CreateGlobalClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateGlobalClusterInput, ...request.Option) *rds.CreateGlobalClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1798,7 +1876,7 @@ func (_m *RDSAPI) CreateGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.Creat
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateGlobalClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateGlobalClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1856,7 +1934,7 @@ func (_m *RDSAPI) CreateOptionGroupRequest(_a0 *rds.CreateOptionGroupInput) (*re
 }
 
 // CreateOptionGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) CreateOptionGroupWithContext(_a0 aws.Context, _a1 *rds.CreateOptionGroupInput, _a2 ...request.Option) (*rds.CreateOptionGroupOutput, error) {
+func (_m *RDSAPI) CreateOptionGroupWithContext(_a0 context.Context, _a1 *rds.CreateOptionGroupInput, _a2 ...request.Option) (*rds.CreateOptionGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1867,7 +1945,7 @@ func (_m *RDSAPI) CreateOptionGroupWithContext(_a0 aws.Context, _a1 *rds.CreateO
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.CreateOptionGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.CreateOptionGroupInput, ...request.Option) *rds.CreateOptionGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.CreateOptionGroupInput, ...request.Option) *rds.CreateOptionGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1876,7 +1954,7 @@ func (_m *RDSAPI) CreateOptionGroupWithContext(_a0 aws.Context, _a1 *rds.CreateO
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.CreateOptionGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.CreateOptionGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1957,7 +2035,7 @@ func (_m *RDSAPI) DeleteDBClusterEndpointRequest(_a0 *rds.DeleteDBClusterEndpoin
 }
 
 // DeleteDBClusterEndpointWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBClusterEndpointWithContext(_a0 aws.Context, _a1 *rds.DeleteDBClusterEndpointInput, _a2 ...request.Option) (*rds.DeleteDBClusterEndpointOutput, error) {
+func (_m *RDSAPI) DeleteDBClusterEndpointWithContext(_a0 context.Context, _a1 *rds.DeleteDBClusterEndpointInput, _a2 ...request.Option) (*rds.DeleteDBClusterEndpointOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1968,7 +2046,7 @@ func (_m *RDSAPI) DeleteDBClusterEndpointWithContext(_a0 aws.Context, _a1 *rds.D
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBClusterEndpointOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBClusterEndpointInput, ...request.Option) *rds.DeleteDBClusterEndpointOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBClusterEndpointInput, ...request.Option) *rds.DeleteDBClusterEndpointOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1977,7 +2055,7 @@ func (_m *RDSAPI) DeleteDBClusterEndpointWithContext(_a0 aws.Context, _a1 *rds.D
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBClusterEndpointInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBClusterEndpointInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2035,7 +2113,7 @@ func (_m *RDSAPI) DeleteDBClusterParameterGroupRequest(_a0 *rds.DeleteDBClusterP
 }
 
 // DeleteDBClusterParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 *rds.DeleteDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.DeleteDBClusterParameterGroupOutput, error) {
+func (_m *RDSAPI) DeleteDBClusterParameterGroupWithContext(_a0 context.Context, _a1 *rds.DeleteDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.DeleteDBClusterParameterGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2046,7 +2124,7 @@ func (_m *RDSAPI) DeleteDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBClusterParameterGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBClusterParameterGroupInput, ...request.Option) *rds.DeleteDBClusterParameterGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBClusterParameterGroupInput, ...request.Option) *rds.DeleteDBClusterParameterGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2055,7 +2133,7 @@ func (_m *RDSAPI) DeleteDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBClusterParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBClusterParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2138,7 +2216,7 @@ func (_m *RDSAPI) DeleteDBClusterSnapshotRequest(_a0 *rds.DeleteDBClusterSnapsho
 }
 
 // DeleteDBClusterSnapshotWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.DeleteDBClusterSnapshotInput, _a2 ...request.Option) (*rds.DeleteDBClusterSnapshotOutput, error) {
+func (_m *RDSAPI) DeleteDBClusterSnapshotWithContext(_a0 context.Context, _a1 *rds.DeleteDBClusterSnapshotInput, _a2 ...request.Option) (*rds.DeleteDBClusterSnapshotOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2149,7 +2227,7 @@ func (_m *RDSAPI) DeleteDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.D
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBClusterSnapshotOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBClusterSnapshotInput, ...request.Option) *rds.DeleteDBClusterSnapshotOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBClusterSnapshotInput, ...request.Option) *rds.DeleteDBClusterSnapshotOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2158,7 +2236,7 @@ func (_m *RDSAPI) DeleteDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.D
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBClusterSnapshotInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBClusterSnapshotInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2168,7 +2246,7 @@ func (_m *RDSAPI) DeleteDBClusterSnapshotWithContext(_a0 aws.Context, _a1 *rds.D
 }
 
 // DeleteDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBClusterWithContext(_a0 aws.Context, _a1 *rds.DeleteDBClusterInput, _a2 ...request.Option) (*rds.DeleteDBClusterOutput, error) {
+func (_m *RDSAPI) DeleteDBClusterWithContext(_a0 context.Context, _a1 *rds.DeleteDBClusterInput, _a2 ...request.Option) (*rds.DeleteDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2179,7 +2257,7 @@ func (_m *RDSAPI) DeleteDBClusterWithContext(_a0 aws.Context, _a1 *rds.DeleteDBC
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBClusterInput, ...request.Option) *rds.DeleteDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBClusterInput, ...request.Option) *rds.DeleteDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2188,7 +2266,7 @@ func (_m *RDSAPI) DeleteDBClusterWithContext(_a0 aws.Context, _a1 *rds.DeleteDBC
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2269,7 +2347,7 @@ func (_m *RDSAPI) DeleteDBInstanceAutomatedBackupRequest(_a0 *rds.DeleteDBInstan
 }
 
 // DeleteDBInstanceAutomatedBackupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBInstanceAutomatedBackupWithContext(_a0 aws.Context, _a1 *rds.DeleteDBInstanceAutomatedBackupInput, _a2 ...request.Option) (*rds.DeleteDBInstanceAutomatedBackupOutput, error) {
+func (_m *RDSAPI) DeleteDBInstanceAutomatedBackupWithContext(_a0 context.Context, _a1 *rds.DeleteDBInstanceAutomatedBackupInput, _a2 ...request.Option) (*rds.DeleteDBInstanceAutomatedBackupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2280,7 +2358,7 @@ func (_m *RDSAPI) DeleteDBInstanceAutomatedBackupWithContext(_a0 aws.Context, _a
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBInstanceAutomatedBackupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBInstanceAutomatedBackupInput, ...request.Option) *rds.DeleteDBInstanceAutomatedBackupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBInstanceAutomatedBackupInput, ...request.Option) *rds.DeleteDBInstanceAutomatedBackupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2289,7 +2367,7 @@ func (_m *RDSAPI) DeleteDBInstanceAutomatedBackupWithContext(_a0 aws.Context, _a
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBInstanceAutomatedBackupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBInstanceAutomatedBackupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2324,7 +2402,7 @@ func (_m *RDSAPI) DeleteDBInstanceRequest(_a0 *rds.DeleteDBInstanceInput) (*requ
 }
 
 // DeleteDBInstanceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBInstanceWithContext(_a0 aws.Context, _a1 *rds.DeleteDBInstanceInput, _a2 ...request.Option) (*rds.DeleteDBInstanceOutput, error) {
+func (_m *RDSAPI) DeleteDBInstanceWithContext(_a0 context.Context, _a1 *rds.DeleteDBInstanceInput, _a2 ...request.Option) (*rds.DeleteDBInstanceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2335,7 +2413,7 @@ func (_m *RDSAPI) DeleteDBInstanceWithContext(_a0 aws.Context, _a1 *rds.DeleteDB
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBInstanceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBInstanceInput, ...request.Option) *rds.DeleteDBInstanceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBInstanceInput, ...request.Option) *rds.DeleteDBInstanceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2344,7 +2422,7 @@ func (_m *RDSAPI) DeleteDBInstanceWithContext(_a0 aws.Context, _a1 *rds.DeleteDB
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBInstanceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBInstanceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2402,7 +2480,7 @@ func (_m *RDSAPI) DeleteDBParameterGroupRequest(_a0 *rds.DeleteDBParameterGroupI
 }
 
 // DeleteDBParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.DeleteDBParameterGroupInput, _a2 ...request.Option) (*rds.DeleteDBParameterGroupOutput, error) {
+func (_m *RDSAPI) DeleteDBParameterGroupWithContext(_a0 context.Context, _a1 *rds.DeleteDBParameterGroupInput, _a2 ...request.Option) (*rds.DeleteDBParameterGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2413,7 +2491,7 @@ func (_m *RDSAPI) DeleteDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.De
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBParameterGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBParameterGroupInput, ...request.Option) *rds.DeleteDBParameterGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBParameterGroupInput, ...request.Option) *rds.DeleteDBParameterGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2422,7 +2500,7 @@ func (_m *RDSAPI) DeleteDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.De
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2480,7 +2558,7 @@ func (_m *RDSAPI) DeleteDBSecurityGroupRequest(_a0 *rds.DeleteDBSecurityGroupInp
 }
 
 // DeleteDBSecurityGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBSecurityGroupWithContext(_a0 aws.Context, _a1 *rds.DeleteDBSecurityGroupInput, _a2 ...request.Option) (*rds.DeleteDBSecurityGroupOutput, error) {
+func (_m *RDSAPI) DeleteDBSecurityGroupWithContext(_a0 context.Context, _a1 *rds.DeleteDBSecurityGroupInput, _a2 ...request.Option) (*rds.DeleteDBSecurityGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2491,7 +2569,7 @@ func (_m *RDSAPI) DeleteDBSecurityGroupWithContext(_a0 aws.Context, _a1 *rds.Del
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBSecurityGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBSecurityGroupInput, ...request.Option) *rds.DeleteDBSecurityGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBSecurityGroupInput, ...request.Option) *rds.DeleteDBSecurityGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2500,7 +2578,7 @@ func (_m *RDSAPI) DeleteDBSecurityGroupWithContext(_a0 aws.Context, _a1 *rds.Del
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBSecurityGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBSecurityGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2558,7 +2636,7 @@ func (_m *RDSAPI) DeleteDBSnapshotRequest(_a0 *rds.DeleteDBSnapshotInput) (*requ
 }
 
 // DeleteDBSnapshotWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.DeleteDBSnapshotInput, _a2 ...request.Option) (*rds.DeleteDBSnapshotOutput, error) {
+func (_m *RDSAPI) DeleteDBSnapshotWithContext(_a0 context.Context, _a1 *rds.DeleteDBSnapshotInput, _a2 ...request.Option) (*rds.DeleteDBSnapshotOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2569,7 +2647,7 @@ func (_m *RDSAPI) DeleteDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.DeleteDB
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBSnapshotOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBSnapshotInput, ...request.Option) *rds.DeleteDBSnapshotOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBSnapshotInput, ...request.Option) *rds.DeleteDBSnapshotOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2578,7 +2656,7 @@ func (_m *RDSAPI) DeleteDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.DeleteDB
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBSnapshotInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBSnapshotInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2636,7 +2714,7 @@ func (_m *RDSAPI) DeleteDBSubnetGroupRequest(_a0 *rds.DeleteDBSubnetGroupInput) 
 }
 
 // DeleteDBSubnetGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteDBSubnetGroupWithContext(_a0 aws.Context, _a1 *rds.DeleteDBSubnetGroupInput, _a2 ...request.Option) (*rds.DeleteDBSubnetGroupOutput, error) {
+func (_m *RDSAPI) DeleteDBSubnetGroupWithContext(_a0 context.Context, _a1 *rds.DeleteDBSubnetGroupInput, _a2 ...request.Option) (*rds.DeleteDBSubnetGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2647,7 +2725,7 @@ func (_m *RDSAPI) DeleteDBSubnetGroupWithContext(_a0 aws.Context, _a1 *rds.Delet
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteDBSubnetGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteDBSubnetGroupInput, ...request.Option) *rds.DeleteDBSubnetGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteDBSubnetGroupInput, ...request.Option) *rds.DeleteDBSubnetGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2656,7 +2734,7 @@ func (_m *RDSAPI) DeleteDBSubnetGroupWithContext(_a0 aws.Context, _a1 *rds.Delet
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteDBSubnetGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteDBSubnetGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2714,7 +2792,7 @@ func (_m *RDSAPI) DeleteEventSubscriptionRequest(_a0 *rds.DeleteEventSubscriptio
 }
 
 // DeleteEventSubscriptionWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteEventSubscriptionWithContext(_a0 aws.Context, _a1 *rds.DeleteEventSubscriptionInput, _a2 ...request.Option) (*rds.DeleteEventSubscriptionOutput, error) {
+func (_m *RDSAPI) DeleteEventSubscriptionWithContext(_a0 context.Context, _a1 *rds.DeleteEventSubscriptionInput, _a2 ...request.Option) (*rds.DeleteEventSubscriptionOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2725,7 +2803,7 @@ func (_m *RDSAPI) DeleteEventSubscriptionWithContext(_a0 aws.Context, _a1 *rds.D
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteEventSubscriptionOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteEventSubscriptionInput, ...request.Option) *rds.DeleteEventSubscriptionOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteEventSubscriptionInput, ...request.Option) *rds.DeleteEventSubscriptionOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2734,7 +2812,7 @@ func (_m *RDSAPI) DeleteEventSubscriptionWithContext(_a0 aws.Context, _a1 *rds.D
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteEventSubscriptionInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteEventSubscriptionInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2792,7 +2870,7 @@ func (_m *RDSAPI) DeleteGlobalClusterRequest(_a0 *rds.DeleteGlobalClusterInput) 
 }
 
 // DeleteGlobalClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.DeleteGlobalClusterInput, _a2 ...request.Option) (*rds.DeleteGlobalClusterOutput, error) {
+func (_m *RDSAPI) DeleteGlobalClusterWithContext(_a0 context.Context, _a1 *rds.DeleteGlobalClusterInput, _a2 ...request.Option) (*rds.DeleteGlobalClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2803,7 +2881,7 @@ func (_m *RDSAPI) DeleteGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.Delet
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteGlobalClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteGlobalClusterInput, ...request.Option) *rds.DeleteGlobalClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteGlobalClusterInput, ...request.Option) *rds.DeleteGlobalClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2812,7 +2890,7 @@ func (_m *RDSAPI) DeleteGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.Delet
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteGlobalClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteGlobalClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2870,7 +2948,7 @@ func (_m *RDSAPI) DeleteOptionGroupRequest(_a0 *rds.DeleteOptionGroupInput) (*re
 }
 
 // DeleteOptionGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DeleteOptionGroupWithContext(_a0 aws.Context, _a1 *rds.DeleteOptionGroupInput, _a2 ...request.Option) (*rds.DeleteOptionGroupOutput, error) {
+func (_m *RDSAPI) DeleteOptionGroupWithContext(_a0 context.Context, _a1 *rds.DeleteOptionGroupInput, _a2 ...request.Option) (*rds.DeleteOptionGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2881,7 +2959,7 @@ func (_m *RDSAPI) DeleteOptionGroupWithContext(_a0 aws.Context, _a1 *rds.DeleteO
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DeleteOptionGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DeleteOptionGroupInput, ...request.Option) *rds.DeleteOptionGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DeleteOptionGroupInput, ...request.Option) *rds.DeleteOptionGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2890,7 +2968,7 @@ func (_m *RDSAPI) DeleteOptionGroupWithContext(_a0 aws.Context, _a1 *rds.DeleteO
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DeleteOptionGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DeleteOptionGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2948,7 +3026,7 @@ func (_m *RDSAPI) DescribeAccountAttributesRequest(_a0 *rds.DescribeAccountAttri
 }
 
 // DescribeAccountAttributesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeAccountAttributesWithContext(_a0 aws.Context, _a1 *rds.DescribeAccountAttributesInput, _a2 ...request.Option) (*rds.DescribeAccountAttributesOutput, error) {
+func (_m *RDSAPI) DescribeAccountAttributesWithContext(_a0 context.Context, _a1 *rds.DescribeAccountAttributesInput, _a2 ...request.Option) (*rds.DescribeAccountAttributesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2959,7 +3037,7 @@ func (_m *RDSAPI) DescribeAccountAttributesWithContext(_a0 aws.Context, _a1 *rds
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeAccountAttributesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeAccountAttributesInput, ...request.Option) *rds.DescribeAccountAttributesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeAccountAttributesInput, ...request.Option) *rds.DescribeAccountAttributesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2968,7 +3046,7 @@ func (_m *RDSAPI) DescribeAccountAttributesWithContext(_a0 aws.Context, _a1 *rds
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeAccountAttributesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeAccountAttributesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3026,7 +3104,7 @@ func (_m *RDSAPI) DescribeCertificatesRequest(_a0 *rds.DescribeCertificatesInput
 }
 
 // DescribeCertificatesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeCertificatesWithContext(_a0 aws.Context, _a1 *rds.DescribeCertificatesInput, _a2 ...request.Option) (*rds.DescribeCertificatesOutput, error) {
+func (_m *RDSAPI) DescribeCertificatesWithContext(_a0 context.Context, _a1 *rds.DescribeCertificatesInput, _a2 ...request.Option) (*rds.DescribeCertificatesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3037,7 +3115,7 @@ func (_m *RDSAPI) DescribeCertificatesWithContext(_a0 aws.Context, _a1 *rds.Desc
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeCertificatesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeCertificatesInput, ...request.Option) *rds.DescribeCertificatesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeCertificatesInput, ...request.Option) *rds.DescribeCertificatesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3046,7 +3124,7 @@ func (_m *RDSAPI) DescribeCertificatesWithContext(_a0 aws.Context, _a1 *rds.Desc
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeCertificatesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeCertificatesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3104,7 +3182,7 @@ func (_m *RDSAPI) DescribeDBClusterBacktracksRequest(_a0 *rds.DescribeDBClusterB
 }
 
 // DescribeDBClusterBacktracksWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBClusterBacktracksWithContext(_a0 aws.Context, _a1 *rds.DescribeDBClusterBacktracksInput, _a2 ...request.Option) (*rds.DescribeDBClusterBacktracksOutput, error) {
+func (_m *RDSAPI) DescribeDBClusterBacktracksWithContext(_a0 context.Context, _a1 *rds.DescribeDBClusterBacktracksInput, _a2 ...request.Option) (*rds.DescribeDBClusterBacktracksOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3115,7 +3193,7 @@ func (_m *RDSAPI) DescribeDBClusterBacktracksWithContext(_a0 aws.Context, _a1 *r
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBClusterBacktracksOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBClusterBacktracksInput, ...request.Option) *rds.DescribeDBClusterBacktracksOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBClusterBacktracksInput, ...request.Option) *rds.DescribeDBClusterBacktracksOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3124,7 +3202,7 @@ func (_m *RDSAPI) DescribeDBClusterBacktracksWithContext(_a0 aws.Context, _a1 *r
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBClusterBacktracksInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBClusterBacktracksInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3182,7 +3260,7 @@ func (_m *RDSAPI) DescribeDBClusterEndpointsRequest(_a0 *rds.DescribeDBClusterEn
 }
 
 // DescribeDBClusterEndpointsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBClusterEndpointsWithContext(_a0 aws.Context, _a1 *rds.DescribeDBClusterEndpointsInput, _a2 ...request.Option) (*rds.DescribeDBClusterEndpointsOutput, error) {
+func (_m *RDSAPI) DescribeDBClusterEndpointsWithContext(_a0 context.Context, _a1 *rds.DescribeDBClusterEndpointsInput, _a2 ...request.Option) (*rds.DescribeDBClusterEndpointsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3193,7 +3271,7 @@ func (_m *RDSAPI) DescribeDBClusterEndpointsWithContext(_a0 aws.Context, _a1 *rd
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBClusterEndpointsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBClusterEndpointsInput, ...request.Option) *rds.DescribeDBClusterEndpointsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBClusterEndpointsInput, ...request.Option) *rds.DescribeDBClusterEndpointsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3202,7 +3280,7 @@ func (_m *RDSAPI) DescribeDBClusterEndpointsWithContext(_a0 aws.Context, _a1 *rd
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBClusterEndpointsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBClusterEndpointsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3260,7 +3338,7 @@ func (_m *RDSAPI) DescribeDBClusterParameterGroupsRequest(_a0 *rds.DescribeDBClu
 }
 
 // DescribeDBClusterParameterGroupsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBClusterParameterGroupsWithContext(_a0 aws.Context, _a1 *rds.DescribeDBClusterParameterGroupsInput, _a2 ...request.Option) (*rds.DescribeDBClusterParameterGroupsOutput, error) {
+func (_m *RDSAPI) DescribeDBClusterParameterGroupsWithContext(_a0 context.Context, _a1 *rds.DescribeDBClusterParameterGroupsInput, _a2 ...request.Option) (*rds.DescribeDBClusterParameterGroupsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3271,7 +3349,7 @@ func (_m *RDSAPI) DescribeDBClusterParameterGroupsWithContext(_a0 aws.Context, _
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBClusterParameterGroupsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBClusterParameterGroupsInput, ...request.Option) *rds.DescribeDBClusterParameterGroupsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBClusterParameterGroupsInput, ...request.Option) *rds.DescribeDBClusterParameterGroupsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3280,7 +3358,7 @@ func (_m *RDSAPI) DescribeDBClusterParameterGroupsWithContext(_a0 aws.Context, _
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBClusterParameterGroupsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBClusterParameterGroupsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3338,7 +3416,7 @@ func (_m *RDSAPI) DescribeDBClusterParametersRequest(_a0 *rds.DescribeDBClusterP
 }
 
 // DescribeDBClusterParametersWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBClusterParametersWithContext(_a0 aws.Context, _a1 *rds.DescribeDBClusterParametersInput, _a2 ...request.Option) (*rds.DescribeDBClusterParametersOutput, error) {
+func (_m *RDSAPI) DescribeDBClusterParametersWithContext(_a0 context.Context, _a1 *rds.DescribeDBClusterParametersInput, _a2 ...request.Option) (*rds.DescribeDBClusterParametersOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3349,7 +3427,7 @@ func (_m *RDSAPI) DescribeDBClusterParametersWithContext(_a0 aws.Context, _a1 *r
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBClusterParametersOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBClusterParametersInput, ...request.Option) *rds.DescribeDBClusterParametersOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBClusterParametersInput, ...request.Option) *rds.DescribeDBClusterParametersOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3358,7 +3436,7 @@ func (_m *RDSAPI) DescribeDBClusterParametersWithContext(_a0 aws.Context, _a1 *r
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBClusterParametersInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBClusterParametersInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3416,7 +3494,7 @@ func (_m *RDSAPI) DescribeDBClusterSnapshotAttributesRequest(_a0 *rds.DescribeDB
 }
 
 // DescribeDBClusterSnapshotAttributesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBClusterSnapshotAttributesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBClusterSnapshotAttributesInput, _a2 ...request.Option) (*rds.DescribeDBClusterSnapshotAttributesOutput, error) {
+func (_m *RDSAPI) DescribeDBClusterSnapshotAttributesWithContext(_a0 context.Context, _a1 *rds.DescribeDBClusterSnapshotAttributesInput, _a2 ...request.Option) (*rds.DescribeDBClusterSnapshotAttributesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3427,7 +3505,7 @@ func (_m *RDSAPI) DescribeDBClusterSnapshotAttributesWithContext(_a0 aws.Context
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBClusterSnapshotAttributesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBClusterSnapshotAttributesInput, ...request.Option) *rds.DescribeDBClusterSnapshotAttributesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBClusterSnapshotAttributesInput, ...request.Option) *rds.DescribeDBClusterSnapshotAttributesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3436,7 +3514,7 @@ func (_m *RDSAPI) DescribeDBClusterSnapshotAttributesWithContext(_a0 aws.Context
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBClusterSnapshotAttributesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBClusterSnapshotAttributesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3494,7 +3572,7 @@ func (_m *RDSAPI) DescribeDBClusterSnapshotsRequest(_a0 *rds.DescribeDBClusterSn
 }
 
 // DescribeDBClusterSnapshotsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBClusterSnapshotsWithContext(_a0 aws.Context, _a1 *rds.DescribeDBClusterSnapshotsInput, _a2 ...request.Option) (*rds.DescribeDBClusterSnapshotsOutput, error) {
+func (_m *RDSAPI) DescribeDBClusterSnapshotsWithContext(_a0 context.Context, _a1 *rds.DescribeDBClusterSnapshotsInput, _a2 ...request.Option) (*rds.DescribeDBClusterSnapshotsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3505,7 +3583,7 @@ func (_m *RDSAPI) DescribeDBClusterSnapshotsWithContext(_a0 aws.Context, _a1 *rd
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBClusterSnapshotsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBClusterSnapshotsInput, ...request.Option) *rds.DescribeDBClusterSnapshotsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBClusterSnapshotsInput, ...request.Option) *rds.DescribeDBClusterSnapshotsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3514,7 +3592,7 @@ func (_m *RDSAPI) DescribeDBClusterSnapshotsWithContext(_a0 aws.Context, _a1 *rd
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBClusterSnapshotsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBClusterSnapshotsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3561,7 +3639,7 @@ func (_m *RDSAPI) DescribeDBClustersPages(_a0 *rds.DescribeDBClustersInput, _a1 
 }
 
 // DescribeDBClustersPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBClustersPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBClustersInput, _a2 func(*rds.DescribeDBClustersOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBClustersPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBClustersInput, _a2 func(*rds.DescribeDBClustersOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -3572,7 +3650,7 @@ func (_m *RDSAPI) DescribeDBClustersPagesWithContext(_a0 aws.Context, _a1 *rds.D
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBClustersInput, func(*rds.DescribeDBClustersOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBClustersInput, func(*rds.DescribeDBClustersOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -3607,7 +3685,7 @@ func (_m *RDSAPI) DescribeDBClustersRequest(_a0 *rds.DescribeDBClustersInput) (*
 }
 
 // DescribeDBClustersWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBClustersWithContext(_a0 aws.Context, _a1 *rds.DescribeDBClustersInput, _a2 ...request.Option) (*rds.DescribeDBClustersOutput, error) {
+func (_m *RDSAPI) DescribeDBClustersWithContext(_a0 context.Context, _a1 *rds.DescribeDBClustersInput, _a2 ...request.Option) (*rds.DescribeDBClustersOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3618,7 +3696,7 @@ func (_m *RDSAPI) DescribeDBClustersWithContext(_a0 aws.Context, _a1 *rds.Descri
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBClustersOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBClustersInput, ...request.Option) *rds.DescribeDBClustersOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBClustersInput, ...request.Option) *rds.DescribeDBClustersOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3627,7 +3705,7 @@ func (_m *RDSAPI) DescribeDBClustersWithContext(_a0 aws.Context, _a1 *rds.Descri
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBClustersInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBClustersInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3674,7 +3752,7 @@ func (_m *RDSAPI) DescribeDBEngineVersionsPages(_a0 *rds.DescribeDBEngineVersion
 }
 
 // DescribeDBEngineVersionsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBEngineVersionsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBEngineVersionsInput, _a2 func(*rds.DescribeDBEngineVersionsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBEngineVersionsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBEngineVersionsInput, _a2 func(*rds.DescribeDBEngineVersionsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -3685,7 +3763,7 @@ func (_m *RDSAPI) DescribeDBEngineVersionsPagesWithContext(_a0 aws.Context, _a1 
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBEngineVersionsInput, func(*rds.DescribeDBEngineVersionsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBEngineVersionsInput, func(*rds.DescribeDBEngineVersionsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -3720,7 +3798,7 @@ func (_m *RDSAPI) DescribeDBEngineVersionsRequest(_a0 *rds.DescribeDBEngineVersi
 }
 
 // DescribeDBEngineVersionsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBEngineVersionsWithContext(_a0 aws.Context, _a1 *rds.DescribeDBEngineVersionsInput, _a2 ...request.Option) (*rds.DescribeDBEngineVersionsOutput, error) {
+func (_m *RDSAPI) DescribeDBEngineVersionsWithContext(_a0 context.Context, _a1 *rds.DescribeDBEngineVersionsInput, _a2 ...request.Option) (*rds.DescribeDBEngineVersionsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3731,7 +3809,7 @@ func (_m *RDSAPI) DescribeDBEngineVersionsWithContext(_a0 aws.Context, _a1 *rds.
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBEngineVersionsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBEngineVersionsInput, ...request.Option) *rds.DescribeDBEngineVersionsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBEngineVersionsInput, ...request.Option) *rds.DescribeDBEngineVersionsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3740,7 +3818,7 @@ func (_m *RDSAPI) DescribeDBEngineVersionsWithContext(_a0 aws.Context, _a1 *rds.
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBEngineVersionsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBEngineVersionsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3787,7 +3865,7 @@ func (_m *RDSAPI) DescribeDBInstanceAutomatedBackupsPages(_a0 *rds.DescribeDBIns
 }
 
 // DescribeDBInstanceAutomatedBackupsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBInstanceAutomatedBackupsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBInstanceAutomatedBackupsInput, _a2 func(*rds.DescribeDBInstanceAutomatedBackupsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBInstanceAutomatedBackupsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBInstanceAutomatedBackupsInput, _a2 func(*rds.DescribeDBInstanceAutomatedBackupsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -3798,7 +3876,7 @@ func (_m *RDSAPI) DescribeDBInstanceAutomatedBackupsPagesWithContext(_a0 aws.Con
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBInstanceAutomatedBackupsInput, func(*rds.DescribeDBInstanceAutomatedBackupsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBInstanceAutomatedBackupsInput, func(*rds.DescribeDBInstanceAutomatedBackupsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -3833,7 +3911,7 @@ func (_m *RDSAPI) DescribeDBInstanceAutomatedBackupsRequest(_a0 *rds.DescribeDBI
 }
 
 // DescribeDBInstanceAutomatedBackupsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBInstanceAutomatedBackupsWithContext(_a0 aws.Context, _a1 *rds.DescribeDBInstanceAutomatedBackupsInput, _a2 ...request.Option) (*rds.DescribeDBInstanceAutomatedBackupsOutput, error) {
+func (_m *RDSAPI) DescribeDBInstanceAutomatedBackupsWithContext(_a0 context.Context, _a1 *rds.DescribeDBInstanceAutomatedBackupsInput, _a2 ...request.Option) (*rds.DescribeDBInstanceAutomatedBackupsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3844,7 +3922,7 @@ func (_m *RDSAPI) DescribeDBInstanceAutomatedBackupsWithContext(_a0 aws.Context,
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBInstanceAutomatedBackupsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBInstanceAutomatedBackupsInput, ...request.Option) *rds.DescribeDBInstanceAutomatedBackupsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBInstanceAutomatedBackupsInput, ...request.Option) *rds.DescribeDBInstanceAutomatedBackupsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3853,7 +3931,7 @@ func (_m *RDSAPI) DescribeDBInstanceAutomatedBackupsWithContext(_a0 aws.Context,
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBInstanceAutomatedBackupsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBInstanceAutomatedBackupsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -3900,7 +3978,7 @@ func (_m *RDSAPI) DescribeDBInstancesPages(_a0 *rds.DescribeDBInstancesInput, _a
 }
 
 // DescribeDBInstancesPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBInstancesPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBInstancesInput, _a2 func(*rds.DescribeDBInstancesOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBInstancesPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBInstancesInput, _a2 func(*rds.DescribeDBInstancesOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -3911,7 +3989,7 @@ func (_m *RDSAPI) DescribeDBInstancesPagesWithContext(_a0 aws.Context, _a1 *rds.
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBInstancesInput, func(*rds.DescribeDBInstancesOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBInstancesInput, func(*rds.DescribeDBInstancesOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -3946,7 +4024,7 @@ func (_m *RDSAPI) DescribeDBInstancesRequest(_a0 *rds.DescribeDBInstancesInput) 
 }
 
 // DescribeDBInstancesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBInstancesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBInstancesInput, _a2 ...request.Option) (*rds.DescribeDBInstancesOutput, error) {
+func (_m *RDSAPI) DescribeDBInstancesWithContext(_a0 context.Context, _a1 *rds.DescribeDBInstancesInput, _a2 ...request.Option) (*rds.DescribeDBInstancesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3957,7 +4035,7 @@ func (_m *RDSAPI) DescribeDBInstancesWithContext(_a0 aws.Context, _a1 *rds.Descr
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBInstancesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBInstancesInput, ...request.Option) *rds.DescribeDBInstancesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBInstancesInput, ...request.Option) *rds.DescribeDBInstancesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -3966,7 +4044,7 @@ func (_m *RDSAPI) DescribeDBInstancesWithContext(_a0 aws.Context, _a1 *rds.Descr
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBInstancesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBInstancesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4013,7 +4091,7 @@ func (_m *RDSAPI) DescribeDBLogFilesPages(_a0 *rds.DescribeDBLogFilesInput, _a1 
 }
 
 // DescribeDBLogFilesPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBLogFilesPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBLogFilesInput, _a2 func(*rds.DescribeDBLogFilesOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBLogFilesPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBLogFilesInput, _a2 func(*rds.DescribeDBLogFilesOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -4024,7 +4102,7 @@ func (_m *RDSAPI) DescribeDBLogFilesPagesWithContext(_a0 aws.Context, _a1 *rds.D
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBLogFilesInput, func(*rds.DescribeDBLogFilesOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBLogFilesInput, func(*rds.DescribeDBLogFilesOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -4059,7 +4137,7 @@ func (_m *RDSAPI) DescribeDBLogFilesRequest(_a0 *rds.DescribeDBLogFilesInput) (*
 }
 
 // DescribeDBLogFilesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBLogFilesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBLogFilesInput, _a2 ...request.Option) (*rds.DescribeDBLogFilesOutput, error) {
+func (_m *RDSAPI) DescribeDBLogFilesWithContext(_a0 context.Context, _a1 *rds.DescribeDBLogFilesInput, _a2 ...request.Option) (*rds.DescribeDBLogFilesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4070,7 +4148,7 @@ func (_m *RDSAPI) DescribeDBLogFilesWithContext(_a0 aws.Context, _a1 *rds.Descri
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBLogFilesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBLogFilesInput, ...request.Option) *rds.DescribeDBLogFilesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBLogFilesInput, ...request.Option) *rds.DescribeDBLogFilesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4079,7 +4157,7 @@ func (_m *RDSAPI) DescribeDBLogFilesWithContext(_a0 aws.Context, _a1 *rds.Descri
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBLogFilesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBLogFilesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4126,7 +4204,7 @@ func (_m *RDSAPI) DescribeDBParameterGroupsPages(_a0 *rds.DescribeDBParameterGro
 }
 
 // DescribeDBParameterGroupsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBParameterGroupsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBParameterGroupsInput, _a2 func(*rds.DescribeDBParameterGroupsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBParameterGroupsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBParameterGroupsInput, _a2 func(*rds.DescribeDBParameterGroupsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -4137,7 +4215,7 @@ func (_m *RDSAPI) DescribeDBParameterGroupsPagesWithContext(_a0 aws.Context, _a1
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBParameterGroupsInput, func(*rds.DescribeDBParameterGroupsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBParameterGroupsInput, func(*rds.DescribeDBParameterGroupsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -4172,7 +4250,7 @@ func (_m *RDSAPI) DescribeDBParameterGroupsRequest(_a0 *rds.DescribeDBParameterG
 }
 
 // DescribeDBParameterGroupsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBParameterGroupsWithContext(_a0 aws.Context, _a1 *rds.DescribeDBParameterGroupsInput, _a2 ...request.Option) (*rds.DescribeDBParameterGroupsOutput, error) {
+func (_m *RDSAPI) DescribeDBParameterGroupsWithContext(_a0 context.Context, _a1 *rds.DescribeDBParameterGroupsInput, _a2 ...request.Option) (*rds.DescribeDBParameterGroupsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4183,7 +4261,7 @@ func (_m *RDSAPI) DescribeDBParameterGroupsWithContext(_a0 aws.Context, _a1 *rds
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBParameterGroupsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBParameterGroupsInput, ...request.Option) *rds.DescribeDBParameterGroupsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBParameterGroupsInput, ...request.Option) *rds.DescribeDBParameterGroupsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4192,7 +4270,7 @@ func (_m *RDSAPI) DescribeDBParameterGroupsWithContext(_a0 aws.Context, _a1 *rds
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBParameterGroupsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBParameterGroupsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4239,7 +4317,7 @@ func (_m *RDSAPI) DescribeDBParametersPages(_a0 *rds.DescribeDBParametersInput, 
 }
 
 // DescribeDBParametersPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBParametersPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBParametersInput, _a2 func(*rds.DescribeDBParametersOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBParametersPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBParametersInput, _a2 func(*rds.DescribeDBParametersOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -4250,7 +4328,7 @@ func (_m *RDSAPI) DescribeDBParametersPagesWithContext(_a0 aws.Context, _a1 *rds
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBParametersInput, func(*rds.DescribeDBParametersOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBParametersInput, func(*rds.DescribeDBParametersOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -4285,7 +4363,7 @@ func (_m *RDSAPI) DescribeDBParametersRequest(_a0 *rds.DescribeDBParametersInput
 }
 
 // DescribeDBParametersWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBParametersWithContext(_a0 aws.Context, _a1 *rds.DescribeDBParametersInput, _a2 ...request.Option) (*rds.DescribeDBParametersOutput, error) {
+func (_m *RDSAPI) DescribeDBParametersWithContext(_a0 context.Context, _a1 *rds.DescribeDBParametersInput, _a2 ...request.Option) (*rds.DescribeDBParametersOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4296,7 +4374,7 @@ func (_m *RDSAPI) DescribeDBParametersWithContext(_a0 aws.Context, _a1 *rds.Desc
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBParametersOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBParametersInput, ...request.Option) *rds.DescribeDBParametersOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBParametersInput, ...request.Option) *rds.DescribeDBParametersOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4305,7 +4383,7 @@ func (_m *RDSAPI) DescribeDBParametersWithContext(_a0 aws.Context, _a1 *rds.Desc
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBParametersInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBParametersInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4352,7 +4430,7 @@ func (_m *RDSAPI) DescribeDBSecurityGroupsPages(_a0 *rds.DescribeDBSecurityGroup
 }
 
 // DescribeDBSecurityGroupsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBSecurityGroupsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBSecurityGroupsInput, _a2 func(*rds.DescribeDBSecurityGroupsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBSecurityGroupsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBSecurityGroupsInput, _a2 func(*rds.DescribeDBSecurityGroupsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -4363,7 +4441,7 @@ func (_m *RDSAPI) DescribeDBSecurityGroupsPagesWithContext(_a0 aws.Context, _a1 
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBSecurityGroupsInput, func(*rds.DescribeDBSecurityGroupsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBSecurityGroupsInput, func(*rds.DescribeDBSecurityGroupsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -4398,7 +4476,7 @@ func (_m *RDSAPI) DescribeDBSecurityGroupsRequest(_a0 *rds.DescribeDBSecurityGro
 }
 
 // DescribeDBSecurityGroupsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBSecurityGroupsWithContext(_a0 aws.Context, _a1 *rds.DescribeDBSecurityGroupsInput, _a2 ...request.Option) (*rds.DescribeDBSecurityGroupsOutput, error) {
+func (_m *RDSAPI) DescribeDBSecurityGroupsWithContext(_a0 context.Context, _a1 *rds.DescribeDBSecurityGroupsInput, _a2 ...request.Option) (*rds.DescribeDBSecurityGroupsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4409,7 +4487,7 @@ func (_m *RDSAPI) DescribeDBSecurityGroupsWithContext(_a0 aws.Context, _a1 *rds.
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBSecurityGroupsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBSecurityGroupsInput, ...request.Option) *rds.DescribeDBSecurityGroupsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBSecurityGroupsInput, ...request.Option) *rds.DescribeDBSecurityGroupsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4418,7 +4496,7 @@ func (_m *RDSAPI) DescribeDBSecurityGroupsWithContext(_a0 aws.Context, _a1 *rds.
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBSecurityGroupsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBSecurityGroupsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4476,7 +4554,7 @@ func (_m *RDSAPI) DescribeDBSnapshotAttributesRequest(_a0 *rds.DescribeDBSnapsho
 }
 
 // DescribeDBSnapshotAttributesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBSnapshotAttributesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBSnapshotAttributesInput, _a2 ...request.Option) (*rds.DescribeDBSnapshotAttributesOutput, error) {
+func (_m *RDSAPI) DescribeDBSnapshotAttributesWithContext(_a0 context.Context, _a1 *rds.DescribeDBSnapshotAttributesInput, _a2 ...request.Option) (*rds.DescribeDBSnapshotAttributesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4487,7 +4565,7 @@ func (_m *RDSAPI) DescribeDBSnapshotAttributesWithContext(_a0 aws.Context, _a1 *
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBSnapshotAttributesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBSnapshotAttributesInput, ...request.Option) *rds.DescribeDBSnapshotAttributesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBSnapshotAttributesInput, ...request.Option) *rds.DescribeDBSnapshotAttributesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4496,7 +4574,7 @@ func (_m *RDSAPI) DescribeDBSnapshotAttributesWithContext(_a0 aws.Context, _a1 *
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBSnapshotAttributesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBSnapshotAttributesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4543,7 +4621,7 @@ func (_m *RDSAPI) DescribeDBSnapshotsPages(_a0 *rds.DescribeDBSnapshotsInput, _a
 }
 
 // DescribeDBSnapshotsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBSnapshotsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBSnapshotsInput, _a2 func(*rds.DescribeDBSnapshotsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBSnapshotsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBSnapshotsInput, _a2 func(*rds.DescribeDBSnapshotsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -4554,7 +4632,7 @@ func (_m *RDSAPI) DescribeDBSnapshotsPagesWithContext(_a0 aws.Context, _a1 *rds.
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBSnapshotsInput, func(*rds.DescribeDBSnapshotsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBSnapshotsInput, func(*rds.DescribeDBSnapshotsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -4589,7 +4667,7 @@ func (_m *RDSAPI) DescribeDBSnapshotsRequest(_a0 *rds.DescribeDBSnapshotsInput) 
 }
 
 // DescribeDBSnapshotsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBSnapshotsWithContext(_a0 aws.Context, _a1 *rds.DescribeDBSnapshotsInput, _a2 ...request.Option) (*rds.DescribeDBSnapshotsOutput, error) {
+func (_m *RDSAPI) DescribeDBSnapshotsWithContext(_a0 context.Context, _a1 *rds.DescribeDBSnapshotsInput, _a2 ...request.Option) (*rds.DescribeDBSnapshotsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4600,7 +4678,7 @@ func (_m *RDSAPI) DescribeDBSnapshotsWithContext(_a0 aws.Context, _a1 *rds.Descr
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBSnapshotsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBSnapshotsInput, ...request.Option) *rds.DescribeDBSnapshotsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBSnapshotsInput, ...request.Option) *rds.DescribeDBSnapshotsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4609,7 +4687,7 @@ func (_m *RDSAPI) DescribeDBSnapshotsWithContext(_a0 aws.Context, _a1 *rds.Descr
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBSnapshotsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBSnapshotsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4656,7 +4734,7 @@ func (_m *RDSAPI) DescribeDBSubnetGroupsPages(_a0 *rds.DescribeDBSubnetGroupsInp
 }
 
 // DescribeDBSubnetGroupsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeDBSubnetGroupsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeDBSubnetGroupsInput, _a2 func(*rds.DescribeDBSubnetGroupsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeDBSubnetGroupsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeDBSubnetGroupsInput, _a2 func(*rds.DescribeDBSubnetGroupsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -4667,7 +4745,7 @@ func (_m *RDSAPI) DescribeDBSubnetGroupsPagesWithContext(_a0 aws.Context, _a1 *r
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBSubnetGroupsInput, func(*rds.DescribeDBSubnetGroupsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBSubnetGroupsInput, func(*rds.DescribeDBSubnetGroupsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -4702,7 +4780,7 @@ func (_m *RDSAPI) DescribeDBSubnetGroupsRequest(_a0 *rds.DescribeDBSubnetGroupsI
 }
 
 // DescribeDBSubnetGroupsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeDBSubnetGroupsWithContext(_a0 aws.Context, _a1 *rds.DescribeDBSubnetGroupsInput, _a2 ...request.Option) (*rds.DescribeDBSubnetGroupsOutput, error) {
+func (_m *RDSAPI) DescribeDBSubnetGroupsWithContext(_a0 context.Context, _a1 *rds.DescribeDBSubnetGroupsInput, _a2 ...request.Option) (*rds.DescribeDBSubnetGroupsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4713,7 +4791,7 @@ func (_m *RDSAPI) DescribeDBSubnetGroupsWithContext(_a0 aws.Context, _a1 *rds.De
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeDBSubnetGroupsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBSubnetGroupsInput, ...request.Option) *rds.DescribeDBSubnetGroupsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBSubnetGroupsInput, ...request.Option) *rds.DescribeDBSubnetGroupsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4722,7 +4800,7 @@ func (_m *RDSAPI) DescribeDBSubnetGroupsWithContext(_a0 aws.Context, _a1 *rds.De
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeDBSubnetGroupsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeDBSubnetGroupsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4780,7 +4858,7 @@ func (_m *RDSAPI) DescribeEngineDefaultClusterParametersRequest(_a0 *rds.Describ
 }
 
 // DescribeEngineDefaultClusterParametersWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeEngineDefaultClusterParametersWithContext(_a0 aws.Context, _a1 *rds.DescribeEngineDefaultClusterParametersInput, _a2 ...request.Option) (*rds.DescribeEngineDefaultClusterParametersOutput, error) {
+func (_m *RDSAPI) DescribeEngineDefaultClusterParametersWithContext(_a0 context.Context, _a1 *rds.DescribeEngineDefaultClusterParametersInput, _a2 ...request.Option) (*rds.DescribeEngineDefaultClusterParametersOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4791,7 +4869,7 @@ func (_m *RDSAPI) DescribeEngineDefaultClusterParametersWithContext(_a0 aws.Cont
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeEngineDefaultClusterParametersOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeEngineDefaultClusterParametersInput, ...request.Option) *rds.DescribeEngineDefaultClusterParametersOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeEngineDefaultClusterParametersInput, ...request.Option) *rds.DescribeEngineDefaultClusterParametersOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4800,7 +4878,7 @@ func (_m *RDSAPI) DescribeEngineDefaultClusterParametersWithContext(_a0 aws.Cont
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeEngineDefaultClusterParametersInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeEngineDefaultClusterParametersInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4847,7 +4925,7 @@ func (_m *RDSAPI) DescribeEngineDefaultParametersPages(_a0 *rds.DescribeEngineDe
 }
 
 // DescribeEngineDefaultParametersPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeEngineDefaultParametersPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeEngineDefaultParametersInput, _a2 func(*rds.DescribeEngineDefaultParametersOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeEngineDefaultParametersPagesWithContext(_a0 context.Context, _a1 *rds.DescribeEngineDefaultParametersInput, _a2 func(*rds.DescribeEngineDefaultParametersOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -4858,7 +4936,7 @@ func (_m *RDSAPI) DescribeEngineDefaultParametersPagesWithContext(_a0 aws.Contex
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeEngineDefaultParametersInput, func(*rds.DescribeEngineDefaultParametersOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeEngineDefaultParametersInput, func(*rds.DescribeEngineDefaultParametersOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -4893,7 +4971,7 @@ func (_m *RDSAPI) DescribeEngineDefaultParametersRequest(_a0 *rds.DescribeEngine
 }
 
 // DescribeEngineDefaultParametersWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeEngineDefaultParametersWithContext(_a0 aws.Context, _a1 *rds.DescribeEngineDefaultParametersInput, _a2 ...request.Option) (*rds.DescribeEngineDefaultParametersOutput, error) {
+func (_m *RDSAPI) DescribeEngineDefaultParametersWithContext(_a0 context.Context, _a1 *rds.DescribeEngineDefaultParametersInput, _a2 ...request.Option) (*rds.DescribeEngineDefaultParametersOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4904,7 +4982,7 @@ func (_m *RDSAPI) DescribeEngineDefaultParametersWithContext(_a0 aws.Context, _a
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeEngineDefaultParametersOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeEngineDefaultParametersInput, ...request.Option) *rds.DescribeEngineDefaultParametersOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeEngineDefaultParametersInput, ...request.Option) *rds.DescribeEngineDefaultParametersOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4913,7 +4991,7 @@ func (_m *RDSAPI) DescribeEngineDefaultParametersWithContext(_a0 aws.Context, _a
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeEngineDefaultParametersInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeEngineDefaultParametersInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -4971,7 +5049,7 @@ func (_m *RDSAPI) DescribeEventCategoriesRequest(_a0 *rds.DescribeEventCategorie
 }
 
 // DescribeEventCategoriesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeEventCategoriesWithContext(_a0 aws.Context, _a1 *rds.DescribeEventCategoriesInput, _a2 ...request.Option) (*rds.DescribeEventCategoriesOutput, error) {
+func (_m *RDSAPI) DescribeEventCategoriesWithContext(_a0 context.Context, _a1 *rds.DescribeEventCategoriesInput, _a2 ...request.Option) (*rds.DescribeEventCategoriesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -4982,7 +5060,7 @@ func (_m *RDSAPI) DescribeEventCategoriesWithContext(_a0 aws.Context, _a1 *rds.D
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeEventCategoriesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeEventCategoriesInput, ...request.Option) *rds.DescribeEventCategoriesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeEventCategoriesInput, ...request.Option) *rds.DescribeEventCategoriesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -4991,7 +5069,7 @@ func (_m *RDSAPI) DescribeEventCategoriesWithContext(_a0 aws.Context, _a1 *rds.D
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeEventCategoriesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeEventCategoriesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -5038,7 +5116,7 @@ func (_m *RDSAPI) DescribeEventSubscriptionsPages(_a0 *rds.DescribeEventSubscrip
 }
 
 // DescribeEventSubscriptionsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeEventSubscriptionsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeEventSubscriptionsInput, _a2 func(*rds.DescribeEventSubscriptionsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeEventSubscriptionsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeEventSubscriptionsInput, _a2 func(*rds.DescribeEventSubscriptionsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -5049,7 +5127,7 @@ func (_m *RDSAPI) DescribeEventSubscriptionsPagesWithContext(_a0 aws.Context, _a
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeEventSubscriptionsInput, func(*rds.DescribeEventSubscriptionsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeEventSubscriptionsInput, func(*rds.DescribeEventSubscriptionsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -5084,7 +5162,7 @@ func (_m *RDSAPI) DescribeEventSubscriptionsRequest(_a0 *rds.DescribeEventSubscr
 }
 
 // DescribeEventSubscriptionsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeEventSubscriptionsWithContext(_a0 aws.Context, _a1 *rds.DescribeEventSubscriptionsInput, _a2 ...request.Option) (*rds.DescribeEventSubscriptionsOutput, error) {
+func (_m *RDSAPI) DescribeEventSubscriptionsWithContext(_a0 context.Context, _a1 *rds.DescribeEventSubscriptionsInput, _a2 ...request.Option) (*rds.DescribeEventSubscriptionsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -5095,7 +5173,7 @@ func (_m *RDSAPI) DescribeEventSubscriptionsWithContext(_a0 aws.Context, _a1 *rd
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeEventSubscriptionsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeEventSubscriptionsInput, ...request.Option) *rds.DescribeEventSubscriptionsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeEventSubscriptionsInput, ...request.Option) *rds.DescribeEventSubscriptionsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -5104,7 +5182,7 @@ func (_m *RDSAPI) DescribeEventSubscriptionsWithContext(_a0 aws.Context, _a1 *rd
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeEventSubscriptionsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeEventSubscriptionsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -5151,7 +5229,7 @@ func (_m *RDSAPI) DescribeEventsPages(_a0 *rds.DescribeEventsInput, _a1 func(*rd
 }
 
 // DescribeEventsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeEventsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeEventsInput, _a2 func(*rds.DescribeEventsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeEventsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeEventsInput, _a2 func(*rds.DescribeEventsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -5162,7 +5240,7 @@ func (_m *RDSAPI) DescribeEventsPagesWithContext(_a0 aws.Context, _a1 *rds.Descr
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeEventsInput, func(*rds.DescribeEventsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeEventsInput, func(*rds.DescribeEventsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -5197,7 +5275,7 @@ func (_m *RDSAPI) DescribeEventsRequest(_a0 *rds.DescribeEventsInput) (*request.
 }
 
 // DescribeEventsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeEventsWithContext(_a0 aws.Context, _a1 *rds.DescribeEventsInput, _a2 ...request.Option) (*rds.DescribeEventsOutput, error) {
+func (_m *RDSAPI) DescribeEventsWithContext(_a0 context.Context, _a1 *rds.DescribeEventsInput, _a2 ...request.Option) (*rds.DescribeEventsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -5208,7 +5286,7 @@ func (_m *RDSAPI) DescribeEventsWithContext(_a0 aws.Context, _a1 *rds.DescribeEv
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeEventsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeEventsInput, ...request.Option) *rds.DescribeEventsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeEventsInput, ...request.Option) *rds.DescribeEventsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -5217,7 +5295,7 @@ func (_m *RDSAPI) DescribeEventsWithContext(_a0 aws.Context, _a1 *rds.DescribeEv
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeEventsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeEventsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -5264,7 +5342,7 @@ func (_m *RDSAPI) DescribeGlobalClustersPages(_a0 *rds.DescribeGlobalClustersInp
 }
 
 // DescribeGlobalClustersPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeGlobalClustersPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeGlobalClustersInput, _a2 func(*rds.DescribeGlobalClustersOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeGlobalClustersPagesWithContext(_a0 context.Context, _a1 *rds.DescribeGlobalClustersInput, _a2 func(*rds.DescribeGlobalClustersOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -5275,7 +5353,7 @@ func (_m *RDSAPI) DescribeGlobalClustersPagesWithContext(_a0 aws.Context, _a1 *r
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeGlobalClustersInput, func(*rds.DescribeGlobalClustersOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeGlobalClustersInput, func(*rds.DescribeGlobalClustersOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -5310,7 +5388,7 @@ func (_m *RDSAPI) DescribeGlobalClustersRequest(_a0 *rds.DescribeGlobalClustersI
 }
 
 // DescribeGlobalClustersWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeGlobalClustersWithContext(_a0 aws.Context, _a1 *rds.DescribeGlobalClustersInput, _a2 ...request.Option) (*rds.DescribeGlobalClustersOutput, error) {
+func (_m *RDSAPI) DescribeGlobalClustersWithContext(_a0 context.Context, _a1 *rds.DescribeGlobalClustersInput, _a2 ...request.Option) (*rds.DescribeGlobalClustersOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -5321,7 +5399,7 @@ func (_m *RDSAPI) DescribeGlobalClustersWithContext(_a0 aws.Context, _a1 *rds.De
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeGlobalClustersOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeGlobalClustersInput, ...request.Option) *rds.DescribeGlobalClustersOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeGlobalClustersInput, ...request.Option) *rds.DescribeGlobalClustersOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -5330,7 +5408,7 @@ func (_m *RDSAPI) DescribeGlobalClustersWithContext(_a0 aws.Context, _a1 *rds.De
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeGlobalClustersInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeGlobalClustersInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -5377,7 +5455,7 @@ func (_m *RDSAPI) DescribeOptionGroupOptionsPages(_a0 *rds.DescribeOptionGroupOp
 }
 
 // DescribeOptionGroupOptionsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeOptionGroupOptionsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeOptionGroupOptionsInput, _a2 func(*rds.DescribeOptionGroupOptionsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeOptionGroupOptionsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeOptionGroupOptionsInput, _a2 func(*rds.DescribeOptionGroupOptionsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -5388,7 +5466,7 @@ func (_m *RDSAPI) DescribeOptionGroupOptionsPagesWithContext(_a0 aws.Context, _a
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeOptionGroupOptionsInput, func(*rds.DescribeOptionGroupOptionsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeOptionGroupOptionsInput, func(*rds.DescribeOptionGroupOptionsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -5423,7 +5501,7 @@ func (_m *RDSAPI) DescribeOptionGroupOptionsRequest(_a0 *rds.DescribeOptionGroup
 }
 
 // DescribeOptionGroupOptionsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeOptionGroupOptionsWithContext(_a0 aws.Context, _a1 *rds.DescribeOptionGroupOptionsInput, _a2 ...request.Option) (*rds.DescribeOptionGroupOptionsOutput, error) {
+func (_m *RDSAPI) DescribeOptionGroupOptionsWithContext(_a0 context.Context, _a1 *rds.DescribeOptionGroupOptionsInput, _a2 ...request.Option) (*rds.DescribeOptionGroupOptionsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -5434,7 +5512,7 @@ func (_m *RDSAPI) DescribeOptionGroupOptionsWithContext(_a0 aws.Context, _a1 *rd
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeOptionGroupOptionsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeOptionGroupOptionsInput, ...request.Option) *rds.DescribeOptionGroupOptionsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeOptionGroupOptionsInput, ...request.Option) *rds.DescribeOptionGroupOptionsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -5443,7 +5521,7 @@ func (_m *RDSAPI) DescribeOptionGroupOptionsWithContext(_a0 aws.Context, _a1 *rd
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeOptionGroupOptionsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeOptionGroupOptionsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -5490,7 +5568,7 @@ func (_m *RDSAPI) DescribeOptionGroupsPages(_a0 *rds.DescribeOptionGroupsInput, 
 }
 
 // DescribeOptionGroupsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeOptionGroupsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeOptionGroupsInput, _a2 func(*rds.DescribeOptionGroupsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeOptionGroupsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeOptionGroupsInput, _a2 func(*rds.DescribeOptionGroupsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -5501,7 +5579,7 @@ func (_m *RDSAPI) DescribeOptionGroupsPagesWithContext(_a0 aws.Context, _a1 *rds
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeOptionGroupsInput, func(*rds.DescribeOptionGroupsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeOptionGroupsInput, func(*rds.DescribeOptionGroupsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -5536,7 +5614,7 @@ func (_m *RDSAPI) DescribeOptionGroupsRequest(_a0 *rds.DescribeOptionGroupsInput
 }
 
 // DescribeOptionGroupsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeOptionGroupsWithContext(_a0 aws.Context, _a1 *rds.DescribeOptionGroupsInput, _a2 ...request.Option) (*rds.DescribeOptionGroupsOutput, error) {
+func (_m *RDSAPI) DescribeOptionGroupsWithContext(_a0 context.Context, _a1 *rds.DescribeOptionGroupsInput, _a2 ...request.Option) (*rds.DescribeOptionGroupsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -5547,7 +5625,7 @@ func (_m *RDSAPI) DescribeOptionGroupsWithContext(_a0 aws.Context, _a1 *rds.Desc
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeOptionGroupsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeOptionGroupsInput, ...request.Option) *rds.DescribeOptionGroupsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeOptionGroupsInput, ...request.Option) *rds.DescribeOptionGroupsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -5556,7 +5634,7 @@ func (_m *RDSAPI) DescribeOptionGroupsWithContext(_a0 aws.Context, _a1 *rds.Desc
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeOptionGroupsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeOptionGroupsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -5603,7 +5681,7 @@ func (_m *RDSAPI) DescribeOrderableDBInstanceOptionsPages(_a0 *rds.DescribeOrder
 }
 
 // DescribeOrderableDBInstanceOptionsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeOrderableDBInstanceOptionsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeOrderableDBInstanceOptionsInput, _a2 func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeOrderableDBInstanceOptionsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeOrderableDBInstanceOptionsInput, _a2 func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -5614,7 +5692,7 @@ func (_m *RDSAPI) DescribeOrderableDBInstanceOptionsPagesWithContext(_a0 aws.Con
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeOrderableDBInstanceOptionsInput, func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeOrderableDBInstanceOptionsInput, func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -5649,7 +5727,7 @@ func (_m *RDSAPI) DescribeOrderableDBInstanceOptionsRequest(_a0 *rds.DescribeOrd
 }
 
 // DescribeOrderableDBInstanceOptionsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeOrderableDBInstanceOptionsWithContext(_a0 aws.Context, _a1 *rds.DescribeOrderableDBInstanceOptionsInput, _a2 ...request.Option) (*rds.DescribeOrderableDBInstanceOptionsOutput, error) {
+func (_m *RDSAPI) DescribeOrderableDBInstanceOptionsWithContext(_a0 context.Context, _a1 *rds.DescribeOrderableDBInstanceOptionsInput, _a2 ...request.Option) (*rds.DescribeOrderableDBInstanceOptionsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -5660,7 +5738,7 @@ func (_m *RDSAPI) DescribeOrderableDBInstanceOptionsWithContext(_a0 aws.Context,
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeOrderableDBInstanceOptionsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeOrderableDBInstanceOptionsInput, ...request.Option) *rds.DescribeOrderableDBInstanceOptionsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeOrderableDBInstanceOptionsInput, ...request.Option) *rds.DescribeOrderableDBInstanceOptionsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -5669,7 +5747,7 @@ func (_m *RDSAPI) DescribeOrderableDBInstanceOptionsWithContext(_a0 aws.Context,
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeOrderableDBInstanceOptionsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeOrderableDBInstanceOptionsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -5727,7 +5805,7 @@ func (_m *RDSAPI) DescribePendingMaintenanceActionsRequest(_a0 *rds.DescribePend
 }
 
 // DescribePendingMaintenanceActionsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribePendingMaintenanceActionsWithContext(_a0 aws.Context, _a1 *rds.DescribePendingMaintenanceActionsInput, _a2 ...request.Option) (*rds.DescribePendingMaintenanceActionsOutput, error) {
+func (_m *RDSAPI) DescribePendingMaintenanceActionsWithContext(_a0 context.Context, _a1 *rds.DescribePendingMaintenanceActionsInput, _a2 ...request.Option) (*rds.DescribePendingMaintenanceActionsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -5738,7 +5816,7 @@ func (_m *RDSAPI) DescribePendingMaintenanceActionsWithContext(_a0 aws.Context, 
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribePendingMaintenanceActionsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribePendingMaintenanceActionsInput, ...request.Option) *rds.DescribePendingMaintenanceActionsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribePendingMaintenanceActionsInput, ...request.Option) *rds.DescribePendingMaintenanceActionsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -5747,7 +5825,7 @@ func (_m *RDSAPI) DescribePendingMaintenanceActionsWithContext(_a0 aws.Context, 
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribePendingMaintenanceActionsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribePendingMaintenanceActionsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -5817,7 +5895,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesOfferingsPages(_a0 *rds.DescribeRes
 }
 
 // DescribeReservedDBInstancesOfferingsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeReservedDBInstancesOfferingsPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeReservedDBInstancesOfferingsInput, _a2 func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeReservedDBInstancesOfferingsPagesWithContext(_a0 context.Context, _a1 *rds.DescribeReservedDBInstancesOfferingsInput, _a2 func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -5828,7 +5906,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesOfferingsPagesWithContext(_a0 aws.C
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeReservedDBInstancesOfferingsInput, func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeReservedDBInstancesOfferingsInput, func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -5863,7 +5941,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesOfferingsRequest(_a0 *rds.DescribeR
 }
 
 // DescribeReservedDBInstancesOfferingsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeReservedDBInstancesOfferingsWithContext(_a0 aws.Context, _a1 *rds.DescribeReservedDBInstancesOfferingsInput, _a2 ...request.Option) (*rds.DescribeReservedDBInstancesOfferingsOutput, error) {
+func (_m *RDSAPI) DescribeReservedDBInstancesOfferingsWithContext(_a0 context.Context, _a1 *rds.DescribeReservedDBInstancesOfferingsInput, _a2 ...request.Option) (*rds.DescribeReservedDBInstancesOfferingsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -5874,7 +5952,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesOfferingsWithContext(_a0 aws.Contex
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeReservedDBInstancesOfferingsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeReservedDBInstancesOfferingsInput, ...request.Option) *rds.DescribeReservedDBInstancesOfferingsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeReservedDBInstancesOfferingsInput, ...request.Option) *rds.DescribeReservedDBInstancesOfferingsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -5883,7 +5961,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesOfferingsWithContext(_a0 aws.Contex
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeReservedDBInstancesOfferingsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeReservedDBInstancesOfferingsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -5907,7 +5985,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesPages(_a0 *rds.DescribeReservedDBIn
 }
 
 // DescribeReservedDBInstancesPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DescribeReservedDBInstancesPagesWithContext(_a0 aws.Context, _a1 *rds.DescribeReservedDBInstancesInput, _a2 func(*rds.DescribeReservedDBInstancesOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DescribeReservedDBInstancesPagesWithContext(_a0 context.Context, _a1 *rds.DescribeReservedDBInstancesInput, _a2 func(*rds.DescribeReservedDBInstancesOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -5918,7 +5996,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesPagesWithContext(_a0 aws.Context, _
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeReservedDBInstancesInput, func(*rds.DescribeReservedDBInstancesOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeReservedDBInstancesInput, func(*rds.DescribeReservedDBInstancesOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -5953,7 +6031,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesRequest(_a0 *rds.DescribeReservedDB
 }
 
 // DescribeReservedDBInstancesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeReservedDBInstancesWithContext(_a0 aws.Context, _a1 *rds.DescribeReservedDBInstancesInput, _a2 ...request.Option) (*rds.DescribeReservedDBInstancesOutput, error) {
+func (_m *RDSAPI) DescribeReservedDBInstancesWithContext(_a0 context.Context, _a1 *rds.DescribeReservedDBInstancesInput, _a2 ...request.Option) (*rds.DescribeReservedDBInstancesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -5964,7 +6042,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesWithContext(_a0 aws.Context, _a1 *r
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeReservedDBInstancesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeReservedDBInstancesInput, ...request.Option) *rds.DescribeReservedDBInstancesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeReservedDBInstancesInput, ...request.Option) *rds.DescribeReservedDBInstancesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -5973,7 +6051,7 @@ func (_m *RDSAPI) DescribeReservedDBInstancesWithContext(_a0 aws.Context, _a1 *r
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeReservedDBInstancesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeReservedDBInstancesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6031,7 +6109,7 @@ func (_m *RDSAPI) DescribeSourceRegionsRequest(_a0 *rds.DescribeSourceRegionsInp
 }
 
 // DescribeSourceRegionsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeSourceRegionsWithContext(_a0 aws.Context, _a1 *rds.DescribeSourceRegionsInput, _a2 ...request.Option) (*rds.DescribeSourceRegionsOutput, error) {
+func (_m *RDSAPI) DescribeSourceRegionsWithContext(_a0 context.Context, _a1 *rds.DescribeSourceRegionsInput, _a2 ...request.Option) (*rds.DescribeSourceRegionsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6042,7 +6120,7 @@ func (_m *RDSAPI) DescribeSourceRegionsWithContext(_a0 aws.Context, _a1 *rds.Des
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeSourceRegionsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeSourceRegionsInput, ...request.Option) *rds.DescribeSourceRegionsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeSourceRegionsInput, ...request.Option) *rds.DescribeSourceRegionsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6051,7 +6129,7 @@ func (_m *RDSAPI) DescribeSourceRegionsWithContext(_a0 aws.Context, _a1 *rds.Des
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeSourceRegionsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeSourceRegionsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6109,7 +6187,7 @@ func (_m *RDSAPI) DescribeValidDBInstanceModificationsRequest(_a0 *rds.DescribeV
 }
 
 // DescribeValidDBInstanceModificationsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DescribeValidDBInstanceModificationsWithContext(_a0 aws.Context, _a1 *rds.DescribeValidDBInstanceModificationsInput, _a2 ...request.Option) (*rds.DescribeValidDBInstanceModificationsOutput, error) {
+func (_m *RDSAPI) DescribeValidDBInstanceModificationsWithContext(_a0 context.Context, _a1 *rds.DescribeValidDBInstanceModificationsInput, _a2 ...request.Option) (*rds.DescribeValidDBInstanceModificationsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6120,7 +6198,7 @@ func (_m *RDSAPI) DescribeValidDBInstanceModificationsWithContext(_a0 aws.Contex
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DescribeValidDBInstanceModificationsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeValidDBInstanceModificationsInput, ...request.Option) *rds.DescribeValidDBInstanceModificationsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeValidDBInstanceModificationsInput, ...request.Option) *rds.DescribeValidDBInstanceModificationsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6129,7 +6207,7 @@ func (_m *RDSAPI) DescribeValidDBInstanceModificationsWithContext(_a0 aws.Contex
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DescribeValidDBInstanceModificationsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DescribeValidDBInstanceModificationsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6176,7 +6254,7 @@ func (_m *RDSAPI) DownloadDBLogFilePortionPages(_a0 *rds.DownloadDBLogFilePortio
 }
 
 // DownloadDBLogFilePortionPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *RDSAPI) DownloadDBLogFilePortionPagesWithContext(_a0 aws.Context, _a1 *rds.DownloadDBLogFilePortionInput, _a2 func(*rds.DownloadDBLogFilePortionOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *RDSAPI) DownloadDBLogFilePortionPagesWithContext(_a0 context.Context, _a1 *rds.DownloadDBLogFilePortionInput, _a2 func(*rds.DownloadDBLogFilePortionOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -6187,7 +6265,7 @@ func (_m *RDSAPI) DownloadDBLogFilePortionPagesWithContext(_a0 aws.Context, _a1 
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DownloadDBLogFilePortionInput, func(*rds.DownloadDBLogFilePortionOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DownloadDBLogFilePortionInput, func(*rds.DownloadDBLogFilePortionOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -6222,7 +6300,7 @@ func (_m *RDSAPI) DownloadDBLogFilePortionRequest(_a0 *rds.DownloadDBLogFilePort
 }
 
 // DownloadDBLogFilePortionWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) DownloadDBLogFilePortionWithContext(_a0 aws.Context, _a1 *rds.DownloadDBLogFilePortionInput, _a2 ...request.Option) (*rds.DownloadDBLogFilePortionOutput, error) {
+func (_m *RDSAPI) DownloadDBLogFilePortionWithContext(_a0 context.Context, _a1 *rds.DownloadDBLogFilePortionInput, _a2 ...request.Option) (*rds.DownloadDBLogFilePortionOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6233,7 +6311,7 @@ func (_m *RDSAPI) DownloadDBLogFilePortionWithContext(_a0 aws.Context, _a1 *rds.
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DownloadDBLogFilePortionOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DownloadDBLogFilePortionInput, ...request.Option) *rds.DownloadDBLogFilePortionOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DownloadDBLogFilePortionInput, ...request.Option) *rds.DownloadDBLogFilePortionOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6242,7 +6320,7 @@ func (_m *RDSAPI) DownloadDBLogFilePortionWithContext(_a0 aws.Context, _a1 *rds.
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.DownloadDBLogFilePortionInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.DownloadDBLogFilePortionInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6300,7 +6378,7 @@ func (_m *RDSAPI) FailoverDBClusterRequest(_a0 *rds.FailoverDBClusterInput) (*re
 }
 
 // FailoverDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) FailoverDBClusterWithContext(_a0 aws.Context, _a1 *rds.FailoverDBClusterInput, _a2 ...request.Option) (*rds.FailoverDBClusterOutput, error) {
+func (_m *RDSAPI) FailoverDBClusterWithContext(_a0 context.Context, _a1 *rds.FailoverDBClusterInput, _a2 ...request.Option) (*rds.FailoverDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6311,7 +6389,7 @@ func (_m *RDSAPI) FailoverDBClusterWithContext(_a0 aws.Context, _a1 *rds.Failove
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.FailoverDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.FailoverDBClusterInput, ...request.Option) *rds.FailoverDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.FailoverDBClusterInput, ...request.Option) *rds.FailoverDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6320,7 +6398,7 @@ func (_m *RDSAPI) FailoverDBClusterWithContext(_a0 aws.Context, _a1 *rds.Failove
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.FailoverDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.FailoverDBClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6378,7 +6456,7 @@ func (_m *RDSAPI) ListTagsForResourceRequest(_a0 *rds.ListTagsForResourceInput) 
 }
 
 // ListTagsForResourceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ListTagsForResourceWithContext(_a0 aws.Context, _a1 *rds.ListTagsForResourceInput, _a2 ...request.Option) (*rds.ListTagsForResourceOutput, error) {
+func (_m *RDSAPI) ListTagsForResourceWithContext(_a0 context.Context, _a1 *rds.ListTagsForResourceInput, _a2 ...request.Option) (*rds.ListTagsForResourceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6389,7 +6467,7 @@ func (_m *RDSAPI) ListTagsForResourceWithContext(_a0 aws.Context, _a1 *rds.ListT
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ListTagsForResourceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ListTagsForResourceInput, ...request.Option) *rds.ListTagsForResourceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ListTagsForResourceInput, ...request.Option) *rds.ListTagsForResourceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6398,7 +6476,7 @@ func (_m *RDSAPI) ListTagsForResourceWithContext(_a0 aws.Context, _a1 *rds.ListT
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ListTagsForResourceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ListTagsForResourceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6456,7 +6534,7 @@ func (_m *RDSAPI) ModifyCurrentDBClusterCapacityRequest(_a0 *rds.ModifyCurrentDB
 }
 
 // ModifyCurrentDBClusterCapacityWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyCurrentDBClusterCapacityWithContext(_a0 aws.Context, _a1 *rds.ModifyCurrentDBClusterCapacityInput, _a2 ...request.Option) (*rds.ModifyCurrentDBClusterCapacityOutput, error) {
+func (_m *RDSAPI) ModifyCurrentDBClusterCapacityWithContext(_a0 context.Context, _a1 *rds.ModifyCurrentDBClusterCapacityInput, _a2 ...request.Option) (*rds.ModifyCurrentDBClusterCapacityOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6467,7 +6545,7 @@ func (_m *RDSAPI) ModifyCurrentDBClusterCapacityWithContext(_a0 aws.Context, _a1
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyCurrentDBClusterCapacityOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyCurrentDBClusterCapacityInput, ...request.Option) *rds.ModifyCurrentDBClusterCapacityOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyCurrentDBClusterCapacityInput, ...request.Option) *rds.ModifyCurrentDBClusterCapacityOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6476,7 +6554,7 @@ func (_m *RDSAPI) ModifyCurrentDBClusterCapacityWithContext(_a0 aws.Context, _a1
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyCurrentDBClusterCapacityInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyCurrentDBClusterCapacityInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6557,7 +6635,7 @@ func (_m *RDSAPI) ModifyDBClusterEndpointRequest(_a0 *rds.ModifyDBClusterEndpoin
 }
 
 // ModifyDBClusterEndpointWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyDBClusterEndpointWithContext(_a0 aws.Context, _a1 *rds.ModifyDBClusterEndpointInput, _a2 ...request.Option) (*rds.ModifyDBClusterEndpointOutput, error) {
+func (_m *RDSAPI) ModifyDBClusterEndpointWithContext(_a0 context.Context, _a1 *rds.ModifyDBClusterEndpointInput, _a2 ...request.Option) (*rds.ModifyDBClusterEndpointOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6568,7 +6646,7 @@ func (_m *RDSAPI) ModifyDBClusterEndpointWithContext(_a0 aws.Context, _a1 *rds.M
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyDBClusterEndpointOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyDBClusterEndpointInput, ...request.Option) *rds.ModifyDBClusterEndpointOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyDBClusterEndpointInput, ...request.Option) *rds.ModifyDBClusterEndpointOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6577,7 +6655,7 @@ func (_m *RDSAPI) ModifyDBClusterEndpointWithContext(_a0 aws.Context, _a1 *rds.M
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyDBClusterEndpointInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyDBClusterEndpointInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6635,7 +6713,7 @@ func (_m *RDSAPI) ModifyDBClusterParameterGroupRequest(_a0 *rds.ModifyDBClusterP
 }
 
 // ModifyDBClusterParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 *rds.ModifyDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.DBClusterParameterGroupNameMessage, error) {
+func (_m *RDSAPI) ModifyDBClusterParameterGroupWithContext(_a0 context.Context, _a1 *rds.ModifyDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.DBClusterParameterGroupNameMessage, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6646,7 +6724,7 @@ func (_m *RDSAPI) ModifyDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DBClusterParameterGroupNameMessage
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyDBClusterParameterGroupInput, ...request.Option) *rds.DBClusterParameterGroupNameMessage); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyDBClusterParameterGroupInput, ...request.Option) *rds.DBClusterParameterGroupNameMessage); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6655,7 +6733,7 @@ func (_m *RDSAPI) ModifyDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyDBClusterParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyDBClusterParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6738,7 +6816,7 @@ func (_m *RDSAPI) ModifyDBClusterSnapshotAttributeRequest(_a0 *rds.ModifyDBClust
 }
 
 // ModifyDBClusterSnapshotAttributeWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyDBClusterSnapshotAttributeWithContext(_a0 aws.Context, _a1 *rds.ModifyDBClusterSnapshotAttributeInput, _a2 ...request.Option) (*rds.ModifyDBClusterSnapshotAttributeOutput, error) {
+func (_m *RDSAPI) ModifyDBClusterSnapshotAttributeWithContext(_a0 context.Context, _a1 *rds.ModifyDBClusterSnapshotAttributeInput, _a2 ...request.Option) (*rds.ModifyDBClusterSnapshotAttributeOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6749,7 +6827,7 @@ func (_m *RDSAPI) ModifyDBClusterSnapshotAttributeWithContext(_a0 aws.Context, _
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyDBClusterSnapshotAttributeOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyDBClusterSnapshotAttributeInput, ...request.Option) *rds.ModifyDBClusterSnapshotAttributeOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyDBClusterSnapshotAttributeInput, ...request.Option) *rds.ModifyDBClusterSnapshotAttributeOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6758,7 +6836,7 @@ func (_m *RDSAPI) ModifyDBClusterSnapshotAttributeWithContext(_a0 aws.Context, _
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyDBClusterSnapshotAttributeInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyDBClusterSnapshotAttributeInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6768,7 +6846,7 @@ func (_m *RDSAPI) ModifyDBClusterSnapshotAttributeWithContext(_a0 aws.Context, _
 }
 
 // ModifyDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyDBClusterWithContext(_a0 aws.Context, _a1 *rds.ModifyDBClusterInput, _a2 ...request.Option) (*rds.ModifyDBClusterOutput, error) {
+func (_m *RDSAPI) ModifyDBClusterWithContext(_a0 context.Context, _a1 *rds.ModifyDBClusterInput, _a2 ...request.Option) (*rds.ModifyDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6779,7 +6857,7 @@ func (_m *RDSAPI) ModifyDBClusterWithContext(_a0 aws.Context, _a1 *rds.ModifyDBC
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyDBClusterInput, ...request.Option) *rds.ModifyDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyDBClusterInput, ...request.Option) *rds.ModifyDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6788,7 +6866,7 @@ func (_m *RDSAPI) ModifyDBClusterWithContext(_a0 aws.Context, _a1 *rds.ModifyDBC
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyDBClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6846,7 +6924,7 @@ func (_m *RDSAPI) ModifyDBInstanceRequest(_a0 *rds.ModifyDBInstanceInput) (*requ
 }
 
 // ModifyDBInstanceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyDBInstanceWithContext(_a0 aws.Context, _a1 *rds.ModifyDBInstanceInput, _a2 ...request.Option) (*rds.ModifyDBInstanceOutput, error) {
+func (_m *RDSAPI) ModifyDBInstanceWithContext(_a0 context.Context, _a1 *rds.ModifyDBInstanceInput, _a2 ...request.Option) (*rds.ModifyDBInstanceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6857,7 +6935,7 @@ func (_m *RDSAPI) ModifyDBInstanceWithContext(_a0 aws.Context, _a1 *rds.ModifyDB
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyDBInstanceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyDBInstanceInput, ...request.Option) *rds.ModifyDBInstanceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyDBInstanceInput, ...request.Option) *rds.ModifyDBInstanceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6866,7 +6944,7 @@ func (_m *RDSAPI) ModifyDBInstanceWithContext(_a0 aws.Context, _a1 *rds.ModifyDB
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyDBInstanceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyDBInstanceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -6924,7 +7002,7 @@ func (_m *RDSAPI) ModifyDBParameterGroupRequest(_a0 *rds.ModifyDBParameterGroupI
 }
 
 // ModifyDBParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.ModifyDBParameterGroupInput, _a2 ...request.Option) (*rds.DBParameterGroupNameMessage, error) {
+func (_m *RDSAPI) ModifyDBParameterGroupWithContext(_a0 context.Context, _a1 *rds.ModifyDBParameterGroupInput, _a2 ...request.Option) (*rds.DBParameterGroupNameMessage, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -6935,7 +7013,7 @@ func (_m *RDSAPI) ModifyDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.Mo
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DBParameterGroupNameMessage
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyDBParameterGroupInput, ...request.Option) *rds.DBParameterGroupNameMessage); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyDBParameterGroupInput, ...request.Option) *rds.DBParameterGroupNameMessage); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -6944,7 +7022,7 @@ func (_m *RDSAPI) ModifyDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.Mo
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyDBParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyDBParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7025,7 +7103,7 @@ func (_m *RDSAPI) ModifyDBSnapshotAttributeRequest(_a0 *rds.ModifyDBSnapshotAttr
 }
 
 // ModifyDBSnapshotAttributeWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyDBSnapshotAttributeWithContext(_a0 aws.Context, _a1 *rds.ModifyDBSnapshotAttributeInput, _a2 ...request.Option) (*rds.ModifyDBSnapshotAttributeOutput, error) {
+func (_m *RDSAPI) ModifyDBSnapshotAttributeWithContext(_a0 context.Context, _a1 *rds.ModifyDBSnapshotAttributeInput, _a2 ...request.Option) (*rds.ModifyDBSnapshotAttributeOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7036,7 +7114,7 @@ func (_m *RDSAPI) ModifyDBSnapshotAttributeWithContext(_a0 aws.Context, _a1 *rds
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyDBSnapshotAttributeOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyDBSnapshotAttributeInput, ...request.Option) *rds.ModifyDBSnapshotAttributeOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyDBSnapshotAttributeInput, ...request.Option) *rds.ModifyDBSnapshotAttributeOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7045,7 +7123,7 @@ func (_m *RDSAPI) ModifyDBSnapshotAttributeWithContext(_a0 aws.Context, _a1 *rds
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyDBSnapshotAttributeInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyDBSnapshotAttributeInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7080,7 +7158,7 @@ func (_m *RDSAPI) ModifyDBSnapshotRequest(_a0 *rds.ModifyDBSnapshotInput) (*requ
 }
 
 // ModifyDBSnapshotWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.ModifyDBSnapshotInput, _a2 ...request.Option) (*rds.ModifyDBSnapshotOutput, error) {
+func (_m *RDSAPI) ModifyDBSnapshotWithContext(_a0 context.Context, _a1 *rds.ModifyDBSnapshotInput, _a2 ...request.Option) (*rds.ModifyDBSnapshotOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7091,7 +7169,7 @@ func (_m *RDSAPI) ModifyDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.ModifyDB
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyDBSnapshotOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyDBSnapshotInput, ...request.Option) *rds.ModifyDBSnapshotOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyDBSnapshotInput, ...request.Option) *rds.ModifyDBSnapshotOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7100,7 +7178,7 @@ func (_m *RDSAPI) ModifyDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.ModifyDB
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyDBSnapshotInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyDBSnapshotInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7158,7 +7236,7 @@ func (_m *RDSAPI) ModifyDBSubnetGroupRequest(_a0 *rds.ModifyDBSubnetGroupInput) 
 }
 
 // ModifyDBSubnetGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyDBSubnetGroupWithContext(_a0 aws.Context, _a1 *rds.ModifyDBSubnetGroupInput, _a2 ...request.Option) (*rds.ModifyDBSubnetGroupOutput, error) {
+func (_m *RDSAPI) ModifyDBSubnetGroupWithContext(_a0 context.Context, _a1 *rds.ModifyDBSubnetGroupInput, _a2 ...request.Option) (*rds.ModifyDBSubnetGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7169,7 +7247,7 @@ func (_m *RDSAPI) ModifyDBSubnetGroupWithContext(_a0 aws.Context, _a1 *rds.Modif
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyDBSubnetGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyDBSubnetGroupInput, ...request.Option) *rds.ModifyDBSubnetGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyDBSubnetGroupInput, ...request.Option) *rds.ModifyDBSubnetGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7178,7 +7256,7 @@ func (_m *RDSAPI) ModifyDBSubnetGroupWithContext(_a0 aws.Context, _a1 *rds.Modif
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyDBSubnetGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyDBSubnetGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7236,7 +7314,7 @@ func (_m *RDSAPI) ModifyEventSubscriptionRequest(_a0 *rds.ModifyEventSubscriptio
 }
 
 // ModifyEventSubscriptionWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyEventSubscriptionWithContext(_a0 aws.Context, _a1 *rds.ModifyEventSubscriptionInput, _a2 ...request.Option) (*rds.ModifyEventSubscriptionOutput, error) {
+func (_m *RDSAPI) ModifyEventSubscriptionWithContext(_a0 context.Context, _a1 *rds.ModifyEventSubscriptionInput, _a2 ...request.Option) (*rds.ModifyEventSubscriptionOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7247,7 +7325,7 @@ func (_m *RDSAPI) ModifyEventSubscriptionWithContext(_a0 aws.Context, _a1 *rds.M
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyEventSubscriptionOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyEventSubscriptionInput, ...request.Option) *rds.ModifyEventSubscriptionOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyEventSubscriptionInput, ...request.Option) *rds.ModifyEventSubscriptionOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7256,7 +7334,7 @@ func (_m *RDSAPI) ModifyEventSubscriptionWithContext(_a0 aws.Context, _a1 *rds.M
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyEventSubscriptionInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyEventSubscriptionInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7314,7 +7392,7 @@ func (_m *RDSAPI) ModifyGlobalClusterRequest(_a0 *rds.ModifyGlobalClusterInput) 
 }
 
 // ModifyGlobalClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.ModifyGlobalClusterInput, _a2 ...request.Option) (*rds.ModifyGlobalClusterOutput, error) {
+func (_m *RDSAPI) ModifyGlobalClusterWithContext(_a0 context.Context, _a1 *rds.ModifyGlobalClusterInput, _a2 ...request.Option) (*rds.ModifyGlobalClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7325,7 +7403,7 @@ func (_m *RDSAPI) ModifyGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.Modif
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyGlobalClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyGlobalClusterInput, ...request.Option) *rds.ModifyGlobalClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyGlobalClusterInput, ...request.Option) *rds.ModifyGlobalClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7334,7 +7412,7 @@ func (_m *RDSAPI) ModifyGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.Modif
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyGlobalClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyGlobalClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7392,7 +7470,7 @@ func (_m *RDSAPI) ModifyOptionGroupRequest(_a0 *rds.ModifyOptionGroupInput) (*re
 }
 
 // ModifyOptionGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ModifyOptionGroupWithContext(_a0 aws.Context, _a1 *rds.ModifyOptionGroupInput, _a2 ...request.Option) (*rds.ModifyOptionGroupOutput, error) {
+func (_m *RDSAPI) ModifyOptionGroupWithContext(_a0 context.Context, _a1 *rds.ModifyOptionGroupInput, _a2 ...request.Option) (*rds.ModifyOptionGroupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7403,7 +7481,7 @@ func (_m *RDSAPI) ModifyOptionGroupWithContext(_a0 aws.Context, _a1 *rds.ModifyO
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.ModifyOptionGroupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ModifyOptionGroupInput, ...request.Option) *rds.ModifyOptionGroupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ModifyOptionGroupInput, ...request.Option) *rds.ModifyOptionGroupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7412,7 +7490,7 @@ func (_m *RDSAPI) ModifyOptionGroupWithContext(_a0 aws.Context, _a1 *rds.ModifyO
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ModifyOptionGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ModifyOptionGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7493,7 +7571,7 @@ func (_m *RDSAPI) PromoteReadReplicaDBClusterRequest(_a0 *rds.PromoteReadReplica
 }
 
 // PromoteReadReplicaDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) PromoteReadReplicaDBClusterWithContext(_a0 aws.Context, _a1 *rds.PromoteReadReplicaDBClusterInput, _a2 ...request.Option) (*rds.PromoteReadReplicaDBClusterOutput, error) {
+func (_m *RDSAPI) PromoteReadReplicaDBClusterWithContext(_a0 context.Context, _a1 *rds.PromoteReadReplicaDBClusterInput, _a2 ...request.Option) (*rds.PromoteReadReplicaDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7504,7 +7582,7 @@ func (_m *RDSAPI) PromoteReadReplicaDBClusterWithContext(_a0 aws.Context, _a1 *r
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.PromoteReadReplicaDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.PromoteReadReplicaDBClusterInput, ...request.Option) *rds.PromoteReadReplicaDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.PromoteReadReplicaDBClusterInput, ...request.Option) *rds.PromoteReadReplicaDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7513,7 +7591,7 @@ func (_m *RDSAPI) PromoteReadReplicaDBClusterWithContext(_a0 aws.Context, _a1 *r
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.PromoteReadReplicaDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.PromoteReadReplicaDBClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7548,7 +7626,7 @@ func (_m *RDSAPI) PromoteReadReplicaRequest(_a0 *rds.PromoteReadReplicaInput) (*
 }
 
 // PromoteReadReplicaWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) PromoteReadReplicaWithContext(_a0 aws.Context, _a1 *rds.PromoteReadReplicaInput, _a2 ...request.Option) (*rds.PromoteReadReplicaOutput, error) {
+func (_m *RDSAPI) PromoteReadReplicaWithContext(_a0 context.Context, _a1 *rds.PromoteReadReplicaInput, _a2 ...request.Option) (*rds.PromoteReadReplicaOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7559,7 +7637,7 @@ func (_m *RDSAPI) PromoteReadReplicaWithContext(_a0 aws.Context, _a1 *rds.Promot
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.PromoteReadReplicaOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.PromoteReadReplicaInput, ...request.Option) *rds.PromoteReadReplicaOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.PromoteReadReplicaInput, ...request.Option) *rds.PromoteReadReplicaOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7568,7 +7646,7 @@ func (_m *RDSAPI) PromoteReadReplicaWithContext(_a0 aws.Context, _a1 *rds.Promot
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.PromoteReadReplicaInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.PromoteReadReplicaInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7626,7 +7704,7 @@ func (_m *RDSAPI) PurchaseReservedDBInstancesOfferingRequest(_a0 *rds.PurchaseRe
 }
 
 // PurchaseReservedDBInstancesOfferingWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) PurchaseReservedDBInstancesOfferingWithContext(_a0 aws.Context, _a1 *rds.PurchaseReservedDBInstancesOfferingInput, _a2 ...request.Option) (*rds.PurchaseReservedDBInstancesOfferingOutput, error) {
+func (_m *RDSAPI) PurchaseReservedDBInstancesOfferingWithContext(_a0 context.Context, _a1 *rds.PurchaseReservedDBInstancesOfferingInput, _a2 ...request.Option) (*rds.PurchaseReservedDBInstancesOfferingOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7637,7 +7715,7 @@ func (_m *RDSAPI) PurchaseReservedDBInstancesOfferingWithContext(_a0 aws.Context
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.PurchaseReservedDBInstancesOfferingOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.PurchaseReservedDBInstancesOfferingInput, ...request.Option) *rds.PurchaseReservedDBInstancesOfferingOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.PurchaseReservedDBInstancesOfferingInput, ...request.Option) *rds.PurchaseReservedDBInstancesOfferingOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7646,7 +7724,7 @@ func (_m *RDSAPI) PurchaseReservedDBInstancesOfferingWithContext(_a0 aws.Context
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.PurchaseReservedDBInstancesOfferingInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.PurchaseReservedDBInstancesOfferingInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7704,7 +7782,7 @@ func (_m *RDSAPI) RebootDBInstanceRequest(_a0 *rds.RebootDBInstanceInput) (*requ
 }
 
 // RebootDBInstanceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RebootDBInstanceWithContext(_a0 aws.Context, _a1 *rds.RebootDBInstanceInput, _a2 ...request.Option) (*rds.RebootDBInstanceOutput, error) {
+func (_m *RDSAPI) RebootDBInstanceWithContext(_a0 context.Context, _a1 *rds.RebootDBInstanceInput, _a2 ...request.Option) (*rds.RebootDBInstanceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7715,7 +7793,7 @@ func (_m *RDSAPI) RebootDBInstanceWithContext(_a0 aws.Context, _a1 *rds.RebootDB
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RebootDBInstanceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RebootDBInstanceInput, ...request.Option) *rds.RebootDBInstanceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RebootDBInstanceInput, ...request.Option) *rds.RebootDBInstanceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7724,7 +7802,7 @@ func (_m *RDSAPI) RebootDBInstanceWithContext(_a0 aws.Context, _a1 *rds.RebootDB
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RebootDBInstanceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RebootDBInstanceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7782,7 +7860,7 @@ func (_m *RDSAPI) RemoveFromGlobalClusterRequest(_a0 *rds.RemoveFromGlobalCluste
 }
 
 // RemoveFromGlobalClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RemoveFromGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.RemoveFromGlobalClusterInput, _a2 ...request.Option) (*rds.RemoveFromGlobalClusterOutput, error) {
+func (_m *RDSAPI) RemoveFromGlobalClusterWithContext(_a0 context.Context, _a1 *rds.RemoveFromGlobalClusterInput, _a2 ...request.Option) (*rds.RemoveFromGlobalClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7793,7 +7871,7 @@ func (_m *RDSAPI) RemoveFromGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.R
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RemoveFromGlobalClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RemoveFromGlobalClusterInput, ...request.Option) *rds.RemoveFromGlobalClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RemoveFromGlobalClusterInput, ...request.Option) *rds.RemoveFromGlobalClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7802,7 +7880,7 @@ func (_m *RDSAPI) RemoveFromGlobalClusterWithContext(_a0 aws.Context, _a1 *rds.R
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RemoveFromGlobalClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RemoveFromGlobalClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7860,7 +7938,7 @@ func (_m *RDSAPI) RemoveRoleFromDBClusterRequest(_a0 *rds.RemoveRoleFromDBCluste
 }
 
 // RemoveRoleFromDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RemoveRoleFromDBClusterWithContext(_a0 aws.Context, _a1 *rds.RemoveRoleFromDBClusterInput, _a2 ...request.Option) (*rds.RemoveRoleFromDBClusterOutput, error) {
+func (_m *RDSAPI) RemoveRoleFromDBClusterWithContext(_a0 context.Context, _a1 *rds.RemoveRoleFromDBClusterInput, _a2 ...request.Option) (*rds.RemoveRoleFromDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7871,7 +7949,7 @@ func (_m *RDSAPI) RemoveRoleFromDBClusterWithContext(_a0 aws.Context, _a1 *rds.R
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RemoveRoleFromDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RemoveRoleFromDBClusterInput, ...request.Option) *rds.RemoveRoleFromDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RemoveRoleFromDBClusterInput, ...request.Option) *rds.RemoveRoleFromDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7880,7 +7958,85 @@ func (_m *RDSAPI) RemoveRoleFromDBClusterWithContext(_a0 aws.Context, _a1 *rds.R
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RemoveRoleFromDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RemoveRoleFromDBClusterInput, ...request.Option) error); ok {
+		r1 = rf(_a0, _a1, _a2...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// RemoveRoleFromDBInstance provides a mock function with given fields: _a0
+func (_m *RDSAPI) RemoveRoleFromDBInstance(_a0 *rds.RemoveRoleFromDBInstanceInput) (*rds.RemoveRoleFromDBInstanceOutput, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *rds.RemoveRoleFromDBInstanceOutput
+	if rf, ok := ret.Get(0).(func(*rds.RemoveRoleFromDBInstanceInput) *rds.RemoveRoleFromDBInstanceOutput); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*rds.RemoveRoleFromDBInstanceOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*rds.RemoveRoleFromDBInstanceInput) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// RemoveRoleFromDBInstanceRequest provides a mock function with given fields: _a0
+func (_m *RDSAPI) RemoveRoleFromDBInstanceRequest(_a0 *rds.RemoveRoleFromDBInstanceInput) (*request.Request, *rds.RemoveRoleFromDBInstanceOutput) {
+	ret := _m.Called(_a0)
+
+	var r0 *request.Request
+	if rf, ok := ret.Get(0).(func(*rds.RemoveRoleFromDBInstanceInput) *request.Request); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*request.Request)
+		}
+	}
+
+	var r1 *rds.RemoveRoleFromDBInstanceOutput
+	if rf, ok := ret.Get(1).(func(*rds.RemoveRoleFromDBInstanceInput) *rds.RemoveRoleFromDBInstanceOutput); ok {
+		r1 = rf(_a0)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*rds.RemoveRoleFromDBInstanceOutput)
+		}
+	}
+
+	return r0, r1
+}
+
+// RemoveRoleFromDBInstanceWithContext provides a mock function with given fields: _a0, _a1, _a2
+func (_m *RDSAPI) RemoveRoleFromDBInstanceWithContext(_a0 context.Context, _a1 *rds.RemoveRoleFromDBInstanceInput, _a2 ...request.Option) (*rds.RemoveRoleFromDBInstanceOutput, error) {
+	_va := make([]interface{}, len(_a2))
+	for _i := range _a2 {
+		_va[_i] = _a2[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *rds.RemoveRoleFromDBInstanceOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RemoveRoleFromDBInstanceInput, ...request.Option) *rds.RemoveRoleFromDBInstanceOutput); ok {
+		r0 = rf(_a0, _a1, _a2...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*rds.RemoveRoleFromDBInstanceOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RemoveRoleFromDBInstanceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -7938,7 +8094,7 @@ func (_m *RDSAPI) RemoveSourceIdentifierFromSubscriptionRequest(_a0 *rds.RemoveS
 }
 
 // RemoveSourceIdentifierFromSubscriptionWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RemoveSourceIdentifierFromSubscriptionWithContext(_a0 aws.Context, _a1 *rds.RemoveSourceIdentifierFromSubscriptionInput, _a2 ...request.Option) (*rds.RemoveSourceIdentifierFromSubscriptionOutput, error) {
+func (_m *RDSAPI) RemoveSourceIdentifierFromSubscriptionWithContext(_a0 context.Context, _a1 *rds.RemoveSourceIdentifierFromSubscriptionInput, _a2 ...request.Option) (*rds.RemoveSourceIdentifierFromSubscriptionOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -7949,7 +8105,7 @@ func (_m *RDSAPI) RemoveSourceIdentifierFromSubscriptionWithContext(_a0 aws.Cont
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RemoveSourceIdentifierFromSubscriptionOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RemoveSourceIdentifierFromSubscriptionInput, ...request.Option) *rds.RemoveSourceIdentifierFromSubscriptionOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RemoveSourceIdentifierFromSubscriptionInput, ...request.Option) *rds.RemoveSourceIdentifierFromSubscriptionOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -7958,7 +8114,7 @@ func (_m *RDSAPI) RemoveSourceIdentifierFromSubscriptionWithContext(_a0 aws.Cont
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RemoveSourceIdentifierFromSubscriptionInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RemoveSourceIdentifierFromSubscriptionInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8016,7 +8172,7 @@ func (_m *RDSAPI) RemoveTagsFromResourceRequest(_a0 *rds.RemoveTagsFromResourceI
 }
 
 // RemoveTagsFromResourceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RemoveTagsFromResourceWithContext(_a0 aws.Context, _a1 *rds.RemoveTagsFromResourceInput, _a2 ...request.Option) (*rds.RemoveTagsFromResourceOutput, error) {
+func (_m *RDSAPI) RemoveTagsFromResourceWithContext(_a0 context.Context, _a1 *rds.RemoveTagsFromResourceInput, _a2 ...request.Option) (*rds.RemoveTagsFromResourceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8027,7 +8183,7 @@ func (_m *RDSAPI) RemoveTagsFromResourceWithContext(_a0 aws.Context, _a1 *rds.Re
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RemoveTagsFromResourceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RemoveTagsFromResourceInput, ...request.Option) *rds.RemoveTagsFromResourceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RemoveTagsFromResourceInput, ...request.Option) *rds.RemoveTagsFromResourceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8036,7 +8192,7 @@ func (_m *RDSAPI) RemoveTagsFromResourceWithContext(_a0 aws.Context, _a1 *rds.Re
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RemoveTagsFromResourceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RemoveTagsFromResourceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8094,7 +8250,7 @@ func (_m *RDSAPI) ResetDBClusterParameterGroupRequest(_a0 *rds.ResetDBClusterPar
 }
 
 // ResetDBClusterParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ResetDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 *rds.ResetDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.DBClusterParameterGroupNameMessage, error) {
+func (_m *RDSAPI) ResetDBClusterParameterGroupWithContext(_a0 context.Context, _a1 *rds.ResetDBClusterParameterGroupInput, _a2 ...request.Option) (*rds.DBClusterParameterGroupNameMessage, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8105,7 +8261,7 @@ func (_m *RDSAPI) ResetDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 *
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DBClusterParameterGroupNameMessage
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ResetDBClusterParameterGroupInput, ...request.Option) *rds.DBClusterParameterGroupNameMessage); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ResetDBClusterParameterGroupInput, ...request.Option) *rds.DBClusterParameterGroupNameMessage); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8114,7 +8270,7 @@ func (_m *RDSAPI) ResetDBClusterParameterGroupWithContext(_a0 aws.Context, _a1 *
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ResetDBClusterParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ResetDBClusterParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8172,7 +8328,7 @@ func (_m *RDSAPI) ResetDBParameterGroupRequest(_a0 *rds.ResetDBParameterGroupInp
 }
 
 // ResetDBParameterGroupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) ResetDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.ResetDBParameterGroupInput, _a2 ...request.Option) (*rds.DBParameterGroupNameMessage, error) {
+func (_m *RDSAPI) ResetDBParameterGroupWithContext(_a0 context.Context, _a1 *rds.ResetDBParameterGroupInput, _a2 ...request.Option) (*rds.DBParameterGroupNameMessage, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8183,7 +8339,7 @@ func (_m *RDSAPI) ResetDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.Res
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.DBParameterGroupNameMessage
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.ResetDBParameterGroupInput, ...request.Option) *rds.DBParameterGroupNameMessage); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.ResetDBParameterGroupInput, ...request.Option) *rds.DBParameterGroupNameMessage); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8192,7 +8348,7 @@ func (_m *RDSAPI) ResetDBParameterGroupWithContext(_a0 aws.Context, _a1 *rds.Res
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.ResetDBParameterGroupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.ResetDBParameterGroupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8250,7 +8406,7 @@ func (_m *RDSAPI) RestoreDBClusterFromS3Request(_a0 *rds.RestoreDBClusterFromS3I
 }
 
 // RestoreDBClusterFromS3WithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RestoreDBClusterFromS3WithContext(_a0 aws.Context, _a1 *rds.RestoreDBClusterFromS3Input, _a2 ...request.Option) (*rds.RestoreDBClusterFromS3Output, error) {
+func (_m *RDSAPI) RestoreDBClusterFromS3WithContext(_a0 context.Context, _a1 *rds.RestoreDBClusterFromS3Input, _a2 ...request.Option) (*rds.RestoreDBClusterFromS3Output, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8261,7 +8417,7 @@ func (_m *RDSAPI) RestoreDBClusterFromS3WithContext(_a0 aws.Context, _a1 *rds.Re
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RestoreDBClusterFromS3Output
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RestoreDBClusterFromS3Input, ...request.Option) *rds.RestoreDBClusterFromS3Output); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RestoreDBClusterFromS3Input, ...request.Option) *rds.RestoreDBClusterFromS3Output); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8270,7 +8426,7 @@ func (_m *RDSAPI) RestoreDBClusterFromS3WithContext(_a0 aws.Context, _a1 *rds.Re
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RestoreDBClusterFromS3Input, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RestoreDBClusterFromS3Input, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8328,7 +8484,7 @@ func (_m *RDSAPI) RestoreDBClusterFromSnapshotRequest(_a0 *rds.RestoreDBClusterF
 }
 
 // RestoreDBClusterFromSnapshotWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RestoreDBClusterFromSnapshotWithContext(_a0 aws.Context, _a1 *rds.RestoreDBClusterFromSnapshotInput, _a2 ...request.Option) (*rds.RestoreDBClusterFromSnapshotOutput, error) {
+func (_m *RDSAPI) RestoreDBClusterFromSnapshotWithContext(_a0 context.Context, _a1 *rds.RestoreDBClusterFromSnapshotInput, _a2 ...request.Option) (*rds.RestoreDBClusterFromSnapshotOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8339,7 +8495,7 @@ func (_m *RDSAPI) RestoreDBClusterFromSnapshotWithContext(_a0 aws.Context, _a1 *
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RestoreDBClusterFromSnapshotOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RestoreDBClusterFromSnapshotInput, ...request.Option) *rds.RestoreDBClusterFromSnapshotOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RestoreDBClusterFromSnapshotInput, ...request.Option) *rds.RestoreDBClusterFromSnapshotOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8348,7 +8504,7 @@ func (_m *RDSAPI) RestoreDBClusterFromSnapshotWithContext(_a0 aws.Context, _a1 *
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RestoreDBClusterFromSnapshotInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RestoreDBClusterFromSnapshotInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8406,7 +8562,7 @@ func (_m *RDSAPI) RestoreDBClusterToPointInTimeRequest(_a0 *rds.RestoreDBCluster
 }
 
 // RestoreDBClusterToPointInTimeWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RestoreDBClusterToPointInTimeWithContext(_a0 aws.Context, _a1 *rds.RestoreDBClusterToPointInTimeInput, _a2 ...request.Option) (*rds.RestoreDBClusterToPointInTimeOutput, error) {
+func (_m *RDSAPI) RestoreDBClusterToPointInTimeWithContext(_a0 context.Context, _a1 *rds.RestoreDBClusterToPointInTimeInput, _a2 ...request.Option) (*rds.RestoreDBClusterToPointInTimeOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8417,7 +8573,7 @@ func (_m *RDSAPI) RestoreDBClusterToPointInTimeWithContext(_a0 aws.Context, _a1 
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RestoreDBClusterToPointInTimeOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RestoreDBClusterToPointInTimeInput, ...request.Option) *rds.RestoreDBClusterToPointInTimeOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RestoreDBClusterToPointInTimeInput, ...request.Option) *rds.RestoreDBClusterToPointInTimeOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8426,7 +8582,7 @@ func (_m *RDSAPI) RestoreDBClusterToPointInTimeWithContext(_a0 aws.Context, _a1 
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RestoreDBClusterToPointInTimeInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RestoreDBClusterToPointInTimeInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8484,7 +8640,7 @@ func (_m *RDSAPI) RestoreDBInstanceFromDBSnapshotRequest(_a0 *rds.RestoreDBInsta
 }
 
 // RestoreDBInstanceFromDBSnapshotWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RestoreDBInstanceFromDBSnapshotWithContext(_a0 aws.Context, _a1 *rds.RestoreDBInstanceFromDBSnapshotInput, _a2 ...request.Option) (*rds.RestoreDBInstanceFromDBSnapshotOutput, error) {
+func (_m *RDSAPI) RestoreDBInstanceFromDBSnapshotWithContext(_a0 context.Context, _a1 *rds.RestoreDBInstanceFromDBSnapshotInput, _a2 ...request.Option) (*rds.RestoreDBInstanceFromDBSnapshotOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8495,7 +8651,7 @@ func (_m *RDSAPI) RestoreDBInstanceFromDBSnapshotWithContext(_a0 aws.Context, _a
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RestoreDBInstanceFromDBSnapshotOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RestoreDBInstanceFromDBSnapshotInput, ...request.Option) *rds.RestoreDBInstanceFromDBSnapshotOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RestoreDBInstanceFromDBSnapshotInput, ...request.Option) *rds.RestoreDBInstanceFromDBSnapshotOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8504,7 +8660,7 @@ func (_m *RDSAPI) RestoreDBInstanceFromDBSnapshotWithContext(_a0 aws.Context, _a
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RestoreDBInstanceFromDBSnapshotInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RestoreDBInstanceFromDBSnapshotInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8562,7 +8718,7 @@ func (_m *RDSAPI) RestoreDBInstanceFromS3Request(_a0 *rds.RestoreDBInstanceFromS
 }
 
 // RestoreDBInstanceFromS3WithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RestoreDBInstanceFromS3WithContext(_a0 aws.Context, _a1 *rds.RestoreDBInstanceFromS3Input, _a2 ...request.Option) (*rds.RestoreDBInstanceFromS3Output, error) {
+func (_m *RDSAPI) RestoreDBInstanceFromS3WithContext(_a0 context.Context, _a1 *rds.RestoreDBInstanceFromS3Input, _a2 ...request.Option) (*rds.RestoreDBInstanceFromS3Output, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8573,7 +8729,7 @@ func (_m *RDSAPI) RestoreDBInstanceFromS3WithContext(_a0 aws.Context, _a1 *rds.R
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RestoreDBInstanceFromS3Output
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RestoreDBInstanceFromS3Input, ...request.Option) *rds.RestoreDBInstanceFromS3Output); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RestoreDBInstanceFromS3Input, ...request.Option) *rds.RestoreDBInstanceFromS3Output); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8582,7 +8738,7 @@ func (_m *RDSAPI) RestoreDBInstanceFromS3WithContext(_a0 aws.Context, _a1 *rds.R
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RestoreDBInstanceFromS3Input, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RestoreDBInstanceFromS3Input, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8640,7 +8796,7 @@ func (_m *RDSAPI) RestoreDBInstanceToPointInTimeRequest(_a0 *rds.RestoreDBInstan
 }
 
 // RestoreDBInstanceToPointInTimeWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RestoreDBInstanceToPointInTimeWithContext(_a0 aws.Context, _a1 *rds.RestoreDBInstanceToPointInTimeInput, _a2 ...request.Option) (*rds.RestoreDBInstanceToPointInTimeOutput, error) {
+func (_m *RDSAPI) RestoreDBInstanceToPointInTimeWithContext(_a0 context.Context, _a1 *rds.RestoreDBInstanceToPointInTimeInput, _a2 ...request.Option) (*rds.RestoreDBInstanceToPointInTimeOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8651,7 +8807,7 @@ func (_m *RDSAPI) RestoreDBInstanceToPointInTimeWithContext(_a0 aws.Context, _a1
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RestoreDBInstanceToPointInTimeOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RestoreDBInstanceToPointInTimeInput, ...request.Option) *rds.RestoreDBInstanceToPointInTimeOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RestoreDBInstanceToPointInTimeInput, ...request.Option) *rds.RestoreDBInstanceToPointInTimeOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8660,7 +8816,7 @@ func (_m *RDSAPI) RestoreDBInstanceToPointInTimeWithContext(_a0 aws.Context, _a1
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RestoreDBInstanceToPointInTimeInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RestoreDBInstanceToPointInTimeInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8718,7 +8874,7 @@ func (_m *RDSAPI) RevokeDBSecurityGroupIngressRequest(_a0 *rds.RevokeDBSecurityG
 }
 
 // RevokeDBSecurityGroupIngressWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) RevokeDBSecurityGroupIngressWithContext(_a0 aws.Context, _a1 *rds.RevokeDBSecurityGroupIngressInput, _a2 ...request.Option) (*rds.RevokeDBSecurityGroupIngressOutput, error) {
+func (_m *RDSAPI) RevokeDBSecurityGroupIngressWithContext(_a0 context.Context, _a1 *rds.RevokeDBSecurityGroupIngressInput, _a2 ...request.Option) (*rds.RevokeDBSecurityGroupIngressOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8729,7 +8885,7 @@ func (_m *RDSAPI) RevokeDBSecurityGroupIngressWithContext(_a0 aws.Context, _a1 *
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.RevokeDBSecurityGroupIngressOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.RevokeDBSecurityGroupIngressInput, ...request.Option) *rds.RevokeDBSecurityGroupIngressOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.RevokeDBSecurityGroupIngressInput, ...request.Option) *rds.RevokeDBSecurityGroupIngressOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8738,7 +8894,7 @@ func (_m *RDSAPI) RevokeDBSecurityGroupIngressWithContext(_a0 aws.Context, _a1 *
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.RevokeDBSecurityGroupIngressInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.RevokeDBSecurityGroupIngressInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8796,7 +8952,7 @@ func (_m *RDSAPI) StartDBClusterRequest(_a0 *rds.StartDBClusterInput) (*request.
 }
 
 // StartDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) StartDBClusterWithContext(_a0 aws.Context, _a1 *rds.StartDBClusterInput, _a2 ...request.Option) (*rds.StartDBClusterOutput, error) {
+func (_m *RDSAPI) StartDBClusterWithContext(_a0 context.Context, _a1 *rds.StartDBClusterInput, _a2 ...request.Option) (*rds.StartDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8807,7 +8963,7 @@ func (_m *RDSAPI) StartDBClusterWithContext(_a0 aws.Context, _a1 *rds.StartDBClu
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.StartDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.StartDBClusterInput, ...request.Option) *rds.StartDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.StartDBClusterInput, ...request.Option) *rds.StartDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8816,7 +8972,7 @@ func (_m *RDSAPI) StartDBClusterWithContext(_a0 aws.Context, _a1 *rds.StartDBClu
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.StartDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.StartDBClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8874,7 +9030,7 @@ func (_m *RDSAPI) StartDBInstanceRequest(_a0 *rds.StartDBInstanceInput) (*reques
 }
 
 // StartDBInstanceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) StartDBInstanceWithContext(_a0 aws.Context, _a1 *rds.StartDBInstanceInput, _a2 ...request.Option) (*rds.StartDBInstanceOutput, error) {
+func (_m *RDSAPI) StartDBInstanceWithContext(_a0 context.Context, _a1 *rds.StartDBInstanceInput, _a2 ...request.Option) (*rds.StartDBInstanceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8885,7 +9041,7 @@ func (_m *RDSAPI) StartDBInstanceWithContext(_a0 aws.Context, _a1 *rds.StartDBIn
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.StartDBInstanceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.StartDBInstanceInput, ...request.Option) *rds.StartDBInstanceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.StartDBInstanceInput, ...request.Option) *rds.StartDBInstanceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8894,7 +9050,7 @@ func (_m *RDSAPI) StartDBInstanceWithContext(_a0 aws.Context, _a1 *rds.StartDBIn
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.StartDBInstanceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.StartDBInstanceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -8952,7 +9108,7 @@ func (_m *RDSAPI) StopDBClusterRequest(_a0 *rds.StopDBClusterInput) (*request.Re
 }
 
 // StopDBClusterWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) StopDBClusterWithContext(_a0 aws.Context, _a1 *rds.StopDBClusterInput, _a2 ...request.Option) (*rds.StopDBClusterOutput, error) {
+func (_m *RDSAPI) StopDBClusterWithContext(_a0 context.Context, _a1 *rds.StopDBClusterInput, _a2 ...request.Option) (*rds.StopDBClusterOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -8963,7 +9119,7 @@ func (_m *RDSAPI) StopDBClusterWithContext(_a0 aws.Context, _a1 *rds.StopDBClust
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.StopDBClusterOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.StopDBClusterInput, ...request.Option) *rds.StopDBClusterOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.StopDBClusterInput, ...request.Option) *rds.StopDBClusterOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -8972,7 +9128,7 @@ func (_m *RDSAPI) StopDBClusterWithContext(_a0 aws.Context, _a1 *rds.StopDBClust
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.StopDBClusterInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.StopDBClusterInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -9030,7 +9186,7 @@ func (_m *RDSAPI) StopDBInstanceRequest(_a0 *rds.StopDBInstanceInput) (*request.
 }
 
 // StopDBInstanceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) StopDBInstanceWithContext(_a0 aws.Context, _a1 *rds.StopDBInstanceInput, _a2 ...request.Option) (*rds.StopDBInstanceOutput, error) {
+func (_m *RDSAPI) StopDBInstanceWithContext(_a0 context.Context, _a1 *rds.StopDBInstanceInput, _a2 ...request.Option) (*rds.StopDBInstanceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -9041,7 +9197,7 @@ func (_m *RDSAPI) StopDBInstanceWithContext(_a0 aws.Context, _a1 *rds.StopDBInst
 	ret := _m.Called(_ca...)
 
 	var r0 *rds.StopDBInstanceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.StopDBInstanceInput, ...request.Option) *rds.StopDBInstanceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.StopDBInstanceInput, ...request.Option) *rds.StopDBInstanceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -9050,7 +9206,7 @@ func (_m *RDSAPI) StopDBInstanceWithContext(_a0 aws.Context, _a1 *rds.StopDBInst
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *rds.StopDBInstanceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.StopDBInstanceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -9074,7 +9230,7 @@ func (_m *RDSAPI) WaitUntilDBInstanceAvailable(_a0 *rds.DescribeDBInstancesInput
 }
 
 // WaitUntilDBInstanceAvailableWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) WaitUntilDBInstanceAvailableWithContext(_a0 aws.Context, _a1 *rds.DescribeDBInstancesInput, _a2 ...request.WaiterOption) error {
+func (_m *RDSAPI) WaitUntilDBInstanceAvailableWithContext(_a0 context.Context, _a1 *rds.DescribeDBInstancesInput, _a2 ...request.WaiterOption) error {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -9085,7 +9241,7 @@ func (_m *RDSAPI) WaitUntilDBInstanceAvailableWithContext(_a0 aws.Context, _a1 *
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBInstancesInput, ...request.WaiterOption) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBInstancesInput, ...request.WaiterOption) error); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		r0 = ret.Error(0)
@@ -9109,7 +9265,7 @@ func (_m *RDSAPI) WaitUntilDBInstanceDeleted(_a0 *rds.DescribeDBInstancesInput) 
 }
 
 // WaitUntilDBInstanceDeletedWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) WaitUntilDBInstanceDeletedWithContext(_a0 aws.Context, _a1 *rds.DescribeDBInstancesInput, _a2 ...request.WaiterOption) error {
+func (_m *RDSAPI) WaitUntilDBInstanceDeletedWithContext(_a0 context.Context, _a1 *rds.DescribeDBInstancesInput, _a2 ...request.WaiterOption) error {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -9120,7 +9276,7 @@ func (_m *RDSAPI) WaitUntilDBInstanceDeletedWithContext(_a0 aws.Context, _a1 *rd
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBInstancesInput, ...request.WaiterOption) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBInstancesInput, ...request.WaiterOption) error); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		r0 = ret.Error(0)
@@ -9144,7 +9300,7 @@ func (_m *RDSAPI) WaitUntilDBSnapshotAvailable(_a0 *rds.DescribeDBSnapshotsInput
 }
 
 // WaitUntilDBSnapshotAvailableWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) WaitUntilDBSnapshotAvailableWithContext(_a0 aws.Context, _a1 *rds.DescribeDBSnapshotsInput, _a2 ...request.WaiterOption) error {
+func (_m *RDSAPI) WaitUntilDBSnapshotAvailableWithContext(_a0 context.Context, _a1 *rds.DescribeDBSnapshotsInput, _a2 ...request.WaiterOption) error {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -9155,7 +9311,7 @@ func (_m *RDSAPI) WaitUntilDBSnapshotAvailableWithContext(_a0 aws.Context, _a1 *
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBSnapshotsInput, ...request.WaiterOption) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBSnapshotsInput, ...request.WaiterOption) error); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		r0 = ret.Error(0)
@@ -9179,7 +9335,7 @@ func (_m *RDSAPI) WaitUntilDBSnapshotDeleted(_a0 *rds.DescribeDBSnapshotsInput) 
 }
 
 // WaitUntilDBSnapshotDeletedWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *RDSAPI) WaitUntilDBSnapshotDeletedWithContext(_a0 aws.Context, _a1 *rds.DescribeDBSnapshotsInput, _a2 ...request.WaiterOption) error {
+func (_m *RDSAPI) WaitUntilDBSnapshotDeletedWithContext(_a0 context.Context, _a1 *rds.DescribeDBSnapshotsInput, _a2 ...request.WaiterOption) error {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -9190,7 +9346,7 @@ func (_m *RDSAPI) WaitUntilDBSnapshotDeletedWithContext(_a0 aws.Context, _a1 *rd
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *rds.DescribeDBSnapshotsInput, ...request.WaiterOption) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.DescribeDBSnapshotsInput, ...request.WaiterOption) error); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		r0 = ret.Error(0)
