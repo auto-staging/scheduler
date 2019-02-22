@@ -9,19 +9,18 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/ec2"
 
-	"github.com/auto-staging/scheduler/helper"
-
 	"github.com/aws/aws-lambda-go/lambda"
 
 	"github.com/aws/aws-sdk-go/service/rds"
 
+	"github.com/auto-staging/scheduler/model"
 	"github.com/auto-staging/scheduler/types"
 )
 
 type services struct {
-	helper.RDSHelperAPI
-	helper.StatusHelperAPI
-	helper.EC2HelperAPI
+	model.RDSModelAPI
+	model.StatusModelAPI
+	model.EC2ModelAPI
 }
 
 // Handler is the main function called by lambda.Start, it starts / stops EC2 Instances and RDS Clusters based on the information in the eventJSON.
@@ -44,9 +43,9 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 	svcDynamoDB := dynamodb.New(sess)
 
 	svcBase := services{
-		RDSHelperAPI:    helper.NewRDSHelper(svcRDS),
-		EC2HelperAPI:    helper.NewEC2Helper(svcEC2),
-		StatusHelperAPI: helper.NewStatusHelper(svcDynamoDB),
+		RDSModelAPI:    model.NewRDSModel(svcRDS),
+		EC2ModelAPI:    model.NewEC2Model(svcEC2),
+		StatusModelAPI: model.NewStatusModel(svcDynamoDB),
 	}
 
 	err = svcBase.changeEC2State(cwEvent)
@@ -67,7 +66,7 @@ func main() {
 }
 
 func (base *services) changeEC2State(cwEvent types.Event) error {
-	instanceIDs, err := base.EC2HelperAPI.DescribeInstancesForTagsAndAction(cwEvent.Repository, cwEvent.Branch, cwEvent.Action)
+	instanceIDs, err := base.EC2ModelAPI.DescribeInstancesForTagsAndAction(cwEvent.Repository, cwEvent.Branch, cwEvent.Action)
 	if err != nil {
 		return err
 	}
@@ -75,21 +74,21 @@ func (base *services) changeEC2State(cwEvent types.Event) error {
 	if len(instanceIDs) > 0 {
 		switch cwEvent.Action {
 		case "stop":
-			err = base.EC2HelperAPI.StopEC2Instances(instanceIDs)
+			err = base.EC2ModelAPI.StopEC2Instances(instanceIDs)
 			if err != nil {
 				return err
 			}
-			err = base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
+			err = base.StatusModelAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
 			if err != nil {
 				return err
 			}
 
 		case "start":
-			err = base.EC2HelperAPI.StartEC2Instances(instanceIDs)
+			err = base.EC2ModelAPI.StartEC2Instances(instanceIDs)
 			if err != nil {
 				return err
 			}
-			err = base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+			err = base.StatusModelAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
 			if err != nil {
 				return err
 			}
@@ -103,7 +102,7 @@ func (base *services) changeEC2State(cwEvent types.Event) error {
 }
 
 func (base *services) changeRDSState(cwEvent types.Event) error {
-	clusterARN, clusterStatus, err := base.RDSHelperAPI.GetRDSClusterForTags(cwEvent.Repository, cwEvent.Branch)
+	clusterARN, clusterStatus, err := base.RDSModelAPI.GetRDSClusterForTags(cwEvent.Repository, cwEvent.Branch)
 	if err != nil {
 		return err
 	}
@@ -114,24 +113,24 @@ func (base *services) changeRDSState(cwEvent types.Event) error {
 
 	switch cwEvent.Action {
 	case "stop":
-		changed, err := base.RDSHelperAPI.StopRDSCluster(clusterARN, clusterStatus)
+		changed, err := base.RDSModelAPI.StopRDSCluster(clusterARN, clusterStatus)
 		if err != nil {
 			return err
 		}
 		if changed {
-			err := base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
+			err := base.StatusModelAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
 			if err != nil {
 				return err
 			}
 		}
 
 	case "start":
-		changed, err := base.RDSHelperAPI.StartRDSCluster(clusterARN, clusterStatus)
+		changed, err := base.RDSModelAPI.StartRDSCluster(clusterARN, clusterStatus)
 		if err != nil {
 			return err
 		}
 		if changed {
-			err := base.StatusHelperAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+			err := base.StatusModelAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
 			if err != nil {
 				return err
 			}

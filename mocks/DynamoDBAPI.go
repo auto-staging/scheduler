@@ -2,7 +2,7 @@
 
 package mocks
 
-import aws "github.com/aws/aws-sdk-go/aws"
+import context "context"
 import dynamodb "github.com/aws/aws-sdk-go/service/dynamodb"
 
 import mock "github.com/stretchr/testify/mock"
@@ -51,7 +51,7 @@ func (_m *DynamoDBAPI) BatchGetItemPages(_a0 *dynamodb.BatchGetItemInput, _a1 fu
 }
 
 // BatchGetItemPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *DynamoDBAPI) BatchGetItemPagesWithContext(_a0 aws.Context, _a1 *dynamodb.BatchGetItemInput, _a2 func(*dynamodb.BatchGetItemOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *DynamoDBAPI) BatchGetItemPagesWithContext(_a0 context.Context, _a1 *dynamodb.BatchGetItemInput, _a2 func(*dynamodb.BatchGetItemOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -62,7 +62,7 @@ func (_m *DynamoDBAPI) BatchGetItemPagesWithContext(_a0 aws.Context, _a1 *dynamo
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.BatchGetItemInput, func(*dynamodb.BatchGetItemOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.BatchGetItemInput, func(*dynamodb.BatchGetItemOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -97,7 +97,7 @@ func (_m *DynamoDBAPI) BatchGetItemRequest(_a0 *dynamodb.BatchGetItemInput) (*re
 }
 
 // BatchGetItemWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) BatchGetItemWithContext(_a0 aws.Context, _a1 *dynamodb.BatchGetItemInput, _a2 ...request.Option) (*dynamodb.BatchGetItemOutput, error) {
+func (_m *DynamoDBAPI) BatchGetItemWithContext(_a0 context.Context, _a1 *dynamodb.BatchGetItemInput, _a2 ...request.Option) (*dynamodb.BatchGetItemOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -108,7 +108,7 @@ func (_m *DynamoDBAPI) BatchGetItemWithContext(_a0 aws.Context, _a1 *dynamodb.Ba
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.BatchGetItemOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.BatchGetItemInput, ...request.Option) *dynamodb.BatchGetItemOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.BatchGetItemInput, ...request.Option) *dynamodb.BatchGetItemOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -117,7 +117,7 @@ func (_m *DynamoDBAPI) BatchGetItemWithContext(_a0 aws.Context, _a1 *dynamodb.Ba
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.BatchGetItemInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.BatchGetItemInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -175,7 +175,7 @@ func (_m *DynamoDBAPI) BatchWriteItemRequest(_a0 *dynamodb.BatchWriteItemInput) 
 }
 
 // BatchWriteItemWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) BatchWriteItemWithContext(_a0 aws.Context, _a1 *dynamodb.BatchWriteItemInput, _a2 ...request.Option) (*dynamodb.BatchWriteItemOutput, error) {
+func (_m *DynamoDBAPI) BatchWriteItemWithContext(_a0 context.Context, _a1 *dynamodb.BatchWriteItemInput, _a2 ...request.Option) (*dynamodb.BatchWriteItemOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -186,7 +186,7 @@ func (_m *DynamoDBAPI) BatchWriteItemWithContext(_a0 aws.Context, _a1 *dynamodb.
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.BatchWriteItemOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.BatchWriteItemInput, ...request.Option) *dynamodb.BatchWriteItemOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.BatchWriteItemInput, ...request.Option) *dynamodb.BatchWriteItemOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -195,7 +195,7 @@ func (_m *DynamoDBAPI) BatchWriteItemWithContext(_a0 aws.Context, _a1 *dynamodb.
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.BatchWriteItemInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.BatchWriteItemInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -253,7 +253,7 @@ func (_m *DynamoDBAPI) CreateBackupRequest(_a0 *dynamodb.CreateBackupInput) (*re
 }
 
 // CreateBackupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) CreateBackupWithContext(_a0 aws.Context, _a1 *dynamodb.CreateBackupInput, _a2 ...request.Option) (*dynamodb.CreateBackupOutput, error) {
+func (_m *DynamoDBAPI) CreateBackupWithContext(_a0 context.Context, _a1 *dynamodb.CreateBackupInput, _a2 ...request.Option) (*dynamodb.CreateBackupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -264,7 +264,7 @@ func (_m *DynamoDBAPI) CreateBackupWithContext(_a0 aws.Context, _a1 *dynamodb.Cr
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.CreateBackupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.CreateBackupInput, ...request.Option) *dynamodb.CreateBackupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.CreateBackupInput, ...request.Option) *dynamodb.CreateBackupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -273,7 +273,7 @@ func (_m *DynamoDBAPI) CreateBackupWithContext(_a0 aws.Context, _a1 *dynamodb.Cr
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.CreateBackupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.CreateBackupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -331,7 +331,7 @@ func (_m *DynamoDBAPI) CreateGlobalTableRequest(_a0 *dynamodb.CreateGlobalTableI
 }
 
 // CreateGlobalTableWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) CreateGlobalTableWithContext(_a0 aws.Context, _a1 *dynamodb.CreateGlobalTableInput, _a2 ...request.Option) (*dynamodb.CreateGlobalTableOutput, error) {
+func (_m *DynamoDBAPI) CreateGlobalTableWithContext(_a0 context.Context, _a1 *dynamodb.CreateGlobalTableInput, _a2 ...request.Option) (*dynamodb.CreateGlobalTableOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -342,7 +342,7 @@ func (_m *DynamoDBAPI) CreateGlobalTableWithContext(_a0 aws.Context, _a1 *dynamo
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.CreateGlobalTableOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.CreateGlobalTableInput, ...request.Option) *dynamodb.CreateGlobalTableOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.CreateGlobalTableInput, ...request.Option) *dynamodb.CreateGlobalTableOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -351,7 +351,7 @@ func (_m *DynamoDBAPI) CreateGlobalTableWithContext(_a0 aws.Context, _a1 *dynamo
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.CreateGlobalTableInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.CreateGlobalTableInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -409,7 +409,7 @@ func (_m *DynamoDBAPI) CreateTableRequest(_a0 *dynamodb.CreateTableInput) (*requ
 }
 
 // CreateTableWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) CreateTableWithContext(_a0 aws.Context, _a1 *dynamodb.CreateTableInput, _a2 ...request.Option) (*dynamodb.CreateTableOutput, error) {
+func (_m *DynamoDBAPI) CreateTableWithContext(_a0 context.Context, _a1 *dynamodb.CreateTableInput, _a2 ...request.Option) (*dynamodb.CreateTableOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -420,7 +420,7 @@ func (_m *DynamoDBAPI) CreateTableWithContext(_a0 aws.Context, _a1 *dynamodb.Cre
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.CreateTableOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.CreateTableInput, ...request.Option) *dynamodb.CreateTableOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.CreateTableInput, ...request.Option) *dynamodb.CreateTableOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -429,7 +429,7 @@ func (_m *DynamoDBAPI) CreateTableWithContext(_a0 aws.Context, _a1 *dynamodb.Cre
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.CreateTableInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.CreateTableInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -487,7 +487,7 @@ func (_m *DynamoDBAPI) DeleteBackupRequest(_a0 *dynamodb.DeleteBackupInput) (*re
 }
 
 // DeleteBackupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DeleteBackupWithContext(_a0 aws.Context, _a1 *dynamodb.DeleteBackupInput, _a2 ...request.Option) (*dynamodb.DeleteBackupOutput, error) {
+func (_m *DynamoDBAPI) DeleteBackupWithContext(_a0 context.Context, _a1 *dynamodb.DeleteBackupInput, _a2 ...request.Option) (*dynamodb.DeleteBackupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -498,7 +498,7 @@ func (_m *DynamoDBAPI) DeleteBackupWithContext(_a0 aws.Context, _a1 *dynamodb.De
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DeleteBackupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DeleteBackupInput, ...request.Option) *dynamodb.DeleteBackupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DeleteBackupInput, ...request.Option) *dynamodb.DeleteBackupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -507,7 +507,7 @@ func (_m *DynamoDBAPI) DeleteBackupWithContext(_a0 aws.Context, _a1 *dynamodb.De
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DeleteBackupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DeleteBackupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -565,7 +565,7 @@ func (_m *DynamoDBAPI) DeleteItemRequest(_a0 *dynamodb.DeleteItemInput) (*reques
 }
 
 // DeleteItemWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DeleteItemWithContext(_a0 aws.Context, _a1 *dynamodb.DeleteItemInput, _a2 ...request.Option) (*dynamodb.DeleteItemOutput, error) {
+func (_m *DynamoDBAPI) DeleteItemWithContext(_a0 context.Context, _a1 *dynamodb.DeleteItemInput, _a2 ...request.Option) (*dynamodb.DeleteItemOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -576,7 +576,7 @@ func (_m *DynamoDBAPI) DeleteItemWithContext(_a0 aws.Context, _a1 *dynamodb.Dele
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DeleteItemOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DeleteItemInput, ...request.Option) *dynamodb.DeleteItemOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DeleteItemInput, ...request.Option) *dynamodb.DeleteItemOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -585,7 +585,7 @@ func (_m *DynamoDBAPI) DeleteItemWithContext(_a0 aws.Context, _a1 *dynamodb.Dele
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DeleteItemInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DeleteItemInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -643,7 +643,7 @@ func (_m *DynamoDBAPI) DeleteTableRequest(_a0 *dynamodb.DeleteTableInput) (*requ
 }
 
 // DeleteTableWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DeleteTableWithContext(_a0 aws.Context, _a1 *dynamodb.DeleteTableInput, _a2 ...request.Option) (*dynamodb.DeleteTableOutput, error) {
+func (_m *DynamoDBAPI) DeleteTableWithContext(_a0 context.Context, _a1 *dynamodb.DeleteTableInput, _a2 ...request.Option) (*dynamodb.DeleteTableOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -654,7 +654,7 @@ func (_m *DynamoDBAPI) DeleteTableWithContext(_a0 aws.Context, _a1 *dynamodb.Del
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DeleteTableOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DeleteTableInput, ...request.Option) *dynamodb.DeleteTableOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DeleteTableInput, ...request.Option) *dynamodb.DeleteTableOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -663,7 +663,7 @@ func (_m *DynamoDBAPI) DeleteTableWithContext(_a0 aws.Context, _a1 *dynamodb.Del
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DeleteTableInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DeleteTableInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -721,7 +721,7 @@ func (_m *DynamoDBAPI) DescribeBackupRequest(_a0 *dynamodb.DescribeBackupInput) 
 }
 
 // DescribeBackupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DescribeBackupWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeBackupInput, _a2 ...request.Option) (*dynamodb.DescribeBackupOutput, error) {
+func (_m *DynamoDBAPI) DescribeBackupWithContext(_a0 context.Context, _a1 *dynamodb.DescribeBackupInput, _a2 ...request.Option) (*dynamodb.DescribeBackupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -732,7 +732,7 @@ func (_m *DynamoDBAPI) DescribeBackupWithContext(_a0 aws.Context, _a1 *dynamodb.
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DescribeBackupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeBackupInput, ...request.Option) *dynamodb.DescribeBackupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeBackupInput, ...request.Option) *dynamodb.DescribeBackupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -741,7 +741,7 @@ func (_m *DynamoDBAPI) DescribeBackupWithContext(_a0 aws.Context, _a1 *dynamodb.
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DescribeBackupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DescribeBackupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -799,7 +799,7 @@ func (_m *DynamoDBAPI) DescribeContinuousBackupsRequest(_a0 *dynamodb.DescribeCo
 }
 
 // DescribeContinuousBackupsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DescribeContinuousBackupsWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeContinuousBackupsInput, _a2 ...request.Option) (*dynamodb.DescribeContinuousBackupsOutput, error) {
+func (_m *DynamoDBAPI) DescribeContinuousBackupsWithContext(_a0 context.Context, _a1 *dynamodb.DescribeContinuousBackupsInput, _a2 ...request.Option) (*dynamodb.DescribeContinuousBackupsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -810,7 +810,7 @@ func (_m *DynamoDBAPI) DescribeContinuousBackupsWithContext(_a0 aws.Context, _a1
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DescribeContinuousBackupsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeContinuousBackupsInput, ...request.Option) *dynamodb.DescribeContinuousBackupsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeContinuousBackupsInput, ...request.Option) *dynamodb.DescribeContinuousBackupsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -819,7 +819,7 @@ func (_m *DynamoDBAPI) DescribeContinuousBackupsWithContext(_a0 aws.Context, _a1
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DescribeContinuousBackupsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DescribeContinuousBackupsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -877,7 +877,7 @@ func (_m *DynamoDBAPI) DescribeEndpointsRequest(_a0 *dynamodb.DescribeEndpointsI
 }
 
 // DescribeEndpointsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DescribeEndpointsWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeEndpointsInput, _a2 ...request.Option) (*dynamodb.DescribeEndpointsOutput, error) {
+func (_m *DynamoDBAPI) DescribeEndpointsWithContext(_a0 context.Context, _a1 *dynamodb.DescribeEndpointsInput, _a2 ...request.Option) (*dynamodb.DescribeEndpointsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -888,7 +888,7 @@ func (_m *DynamoDBAPI) DescribeEndpointsWithContext(_a0 aws.Context, _a1 *dynamo
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DescribeEndpointsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeEndpointsInput, ...request.Option) *dynamodb.DescribeEndpointsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeEndpointsInput, ...request.Option) *dynamodb.DescribeEndpointsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -897,7 +897,7 @@ func (_m *DynamoDBAPI) DescribeEndpointsWithContext(_a0 aws.Context, _a1 *dynamo
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DescribeEndpointsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DescribeEndpointsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1003,7 +1003,7 @@ func (_m *DynamoDBAPI) DescribeGlobalTableSettingsRequest(_a0 *dynamodb.Describe
 }
 
 // DescribeGlobalTableSettingsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DescribeGlobalTableSettingsWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeGlobalTableSettingsInput, _a2 ...request.Option) (*dynamodb.DescribeGlobalTableSettingsOutput, error) {
+func (_m *DynamoDBAPI) DescribeGlobalTableSettingsWithContext(_a0 context.Context, _a1 *dynamodb.DescribeGlobalTableSettingsInput, _a2 ...request.Option) (*dynamodb.DescribeGlobalTableSettingsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1014,7 +1014,7 @@ func (_m *DynamoDBAPI) DescribeGlobalTableSettingsWithContext(_a0 aws.Context, _
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DescribeGlobalTableSettingsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeGlobalTableSettingsInput, ...request.Option) *dynamodb.DescribeGlobalTableSettingsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeGlobalTableSettingsInput, ...request.Option) *dynamodb.DescribeGlobalTableSettingsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1023,7 +1023,7 @@ func (_m *DynamoDBAPI) DescribeGlobalTableSettingsWithContext(_a0 aws.Context, _
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DescribeGlobalTableSettingsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DescribeGlobalTableSettingsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1033,7 +1033,7 @@ func (_m *DynamoDBAPI) DescribeGlobalTableSettingsWithContext(_a0 aws.Context, _
 }
 
 // DescribeGlobalTableWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DescribeGlobalTableWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeGlobalTableInput, _a2 ...request.Option) (*dynamodb.DescribeGlobalTableOutput, error) {
+func (_m *DynamoDBAPI) DescribeGlobalTableWithContext(_a0 context.Context, _a1 *dynamodb.DescribeGlobalTableInput, _a2 ...request.Option) (*dynamodb.DescribeGlobalTableOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1044,7 +1044,7 @@ func (_m *DynamoDBAPI) DescribeGlobalTableWithContext(_a0 aws.Context, _a1 *dyna
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DescribeGlobalTableOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeGlobalTableInput, ...request.Option) *dynamodb.DescribeGlobalTableOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeGlobalTableInput, ...request.Option) *dynamodb.DescribeGlobalTableOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1053,7 +1053,7 @@ func (_m *DynamoDBAPI) DescribeGlobalTableWithContext(_a0 aws.Context, _a1 *dyna
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DescribeGlobalTableInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DescribeGlobalTableInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1111,7 +1111,7 @@ func (_m *DynamoDBAPI) DescribeLimitsRequest(_a0 *dynamodb.DescribeLimitsInput) 
 }
 
 // DescribeLimitsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DescribeLimitsWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeLimitsInput, _a2 ...request.Option) (*dynamodb.DescribeLimitsOutput, error) {
+func (_m *DynamoDBAPI) DescribeLimitsWithContext(_a0 context.Context, _a1 *dynamodb.DescribeLimitsInput, _a2 ...request.Option) (*dynamodb.DescribeLimitsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1122,7 +1122,7 @@ func (_m *DynamoDBAPI) DescribeLimitsWithContext(_a0 aws.Context, _a1 *dynamodb.
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DescribeLimitsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeLimitsInput, ...request.Option) *dynamodb.DescribeLimitsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeLimitsInput, ...request.Option) *dynamodb.DescribeLimitsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1131,7 +1131,7 @@ func (_m *DynamoDBAPI) DescribeLimitsWithContext(_a0 aws.Context, _a1 *dynamodb.
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DescribeLimitsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DescribeLimitsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1189,7 +1189,7 @@ func (_m *DynamoDBAPI) DescribeTableRequest(_a0 *dynamodb.DescribeTableInput) (*
 }
 
 // DescribeTableWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DescribeTableWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeTableInput, _a2 ...request.Option) (*dynamodb.DescribeTableOutput, error) {
+func (_m *DynamoDBAPI) DescribeTableWithContext(_a0 context.Context, _a1 *dynamodb.DescribeTableInput, _a2 ...request.Option) (*dynamodb.DescribeTableOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1200,7 +1200,7 @@ func (_m *DynamoDBAPI) DescribeTableWithContext(_a0 aws.Context, _a1 *dynamodb.D
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DescribeTableOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeTableInput, ...request.Option) *dynamodb.DescribeTableOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeTableInput, ...request.Option) *dynamodb.DescribeTableOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1209,7 +1209,7 @@ func (_m *DynamoDBAPI) DescribeTableWithContext(_a0 aws.Context, _a1 *dynamodb.D
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DescribeTableInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DescribeTableInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1267,7 +1267,7 @@ func (_m *DynamoDBAPI) DescribeTimeToLiveRequest(_a0 *dynamodb.DescribeTimeToLiv
 }
 
 // DescribeTimeToLiveWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) DescribeTimeToLiveWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeTimeToLiveInput, _a2 ...request.Option) (*dynamodb.DescribeTimeToLiveOutput, error) {
+func (_m *DynamoDBAPI) DescribeTimeToLiveWithContext(_a0 context.Context, _a1 *dynamodb.DescribeTimeToLiveInput, _a2 ...request.Option) (*dynamodb.DescribeTimeToLiveOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1278,7 +1278,7 @@ func (_m *DynamoDBAPI) DescribeTimeToLiveWithContext(_a0 aws.Context, _a1 *dynam
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.DescribeTimeToLiveOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeTimeToLiveInput, ...request.Option) *dynamodb.DescribeTimeToLiveOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeTimeToLiveInput, ...request.Option) *dynamodb.DescribeTimeToLiveOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1287,7 +1287,7 @@ func (_m *DynamoDBAPI) DescribeTimeToLiveWithContext(_a0 aws.Context, _a1 *dynam
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.DescribeTimeToLiveInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.DescribeTimeToLiveInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1345,7 +1345,7 @@ func (_m *DynamoDBAPI) GetItemRequest(_a0 *dynamodb.GetItemInput) (*request.Requ
 }
 
 // GetItemWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) GetItemWithContext(_a0 aws.Context, _a1 *dynamodb.GetItemInput, _a2 ...request.Option) (*dynamodb.GetItemOutput, error) {
+func (_m *DynamoDBAPI) GetItemWithContext(_a0 context.Context, _a1 *dynamodb.GetItemInput, _a2 ...request.Option) (*dynamodb.GetItemOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1356,7 +1356,7 @@ func (_m *DynamoDBAPI) GetItemWithContext(_a0 aws.Context, _a1 *dynamodb.GetItem
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.GetItemOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.GetItemInput, ...request.Option) *dynamodb.GetItemOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.GetItemInput, ...request.Option) *dynamodb.GetItemOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1365,7 +1365,7 @@ func (_m *DynamoDBAPI) GetItemWithContext(_a0 aws.Context, _a1 *dynamodb.GetItem
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.GetItemInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.GetItemInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1423,7 +1423,7 @@ func (_m *DynamoDBAPI) ListBackupsRequest(_a0 *dynamodb.ListBackupsInput) (*requ
 }
 
 // ListBackupsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) ListBackupsWithContext(_a0 aws.Context, _a1 *dynamodb.ListBackupsInput, _a2 ...request.Option) (*dynamodb.ListBackupsOutput, error) {
+func (_m *DynamoDBAPI) ListBackupsWithContext(_a0 context.Context, _a1 *dynamodb.ListBackupsInput, _a2 ...request.Option) (*dynamodb.ListBackupsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1434,7 +1434,7 @@ func (_m *DynamoDBAPI) ListBackupsWithContext(_a0 aws.Context, _a1 *dynamodb.Lis
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.ListBackupsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.ListBackupsInput, ...request.Option) *dynamodb.ListBackupsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.ListBackupsInput, ...request.Option) *dynamodb.ListBackupsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1443,7 +1443,7 @@ func (_m *DynamoDBAPI) ListBackupsWithContext(_a0 aws.Context, _a1 *dynamodb.Lis
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.ListBackupsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.ListBackupsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1501,7 +1501,7 @@ func (_m *DynamoDBAPI) ListGlobalTablesRequest(_a0 *dynamodb.ListGlobalTablesInp
 }
 
 // ListGlobalTablesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) ListGlobalTablesWithContext(_a0 aws.Context, _a1 *dynamodb.ListGlobalTablesInput, _a2 ...request.Option) (*dynamodb.ListGlobalTablesOutput, error) {
+func (_m *DynamoDBAPI) ListGlobalTablesWithContext(_a0 context.Context, _a1 *dynamodb.ListGlobalTablesInput, _a2 ...request.Option) (*dynamodb.ListGlobalTablesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1512,7 +1512,7 @@ func (_m *DynamoDBAPI) ListGlobalTablesWithContext(_a0 aws.Context, _a1 *dynamod
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.ListGlobalTablesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.ListGlobalTablesInput, ...request.Option) *dynamodb.ListGlobalTablesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.ListGlobalTablesInput, ...request.Option) *dynamodb.ListGlobalTablesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1521,7 +1521,7 @@ func (_m *DynamoDBAPI) ListGlobalTablesWithContext(_a0 aws.Context, _a1 *dynamod
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.ListGlobalTablesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.ListGlobalTablesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1568,7 +1568,7 @@ func (_m *DynamoDBAPI) ListTablesPages(_a0 *dynamodb.ListTablesInput, _a1 func(*
 }
 
 // ListTablesPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *DynamoDBAPI) ListTablesPagesWithContext(_a0 aws.Context, _a1 *dynamodb.ListTablesInput, _a2 func(*dynamodb.ListTablesOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *DynamoDBAPI) ListTablesPagesWithContext(_a0 context.Context, _a1 *dynamodb.ListTablesInput, _a2 func(*dynamodb.ListTablesOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -1579,7 +1579,7 @@ func (_m *DynamoDBAPI) ListTablesPagesWithContext(_a0 aws.Context, _a1 *dynamodb
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.ListTablesInput, func(*dynamodb.ListTablesOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.ListTablesInput, func(*dynamodb.ListTablesOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -1614,7 +1614,7 @@ func (_m *DynamoDBAPI) ListTablesRequest(_a0 *dynamodb.ListTablesInput) (*reques
 }
 
 // ListTablesWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) ListTablesWithContext(_a0 aws.Context, _a1 *dynamodb.ListTablesInput, _a2 ...request.Option) (*dynamodb.ListTablesOutput, error) {
+func (_m *DynamoDBAPI) ListTablesWithContext(_a0 context.Context, _a1 *dynamodb.ListTablesInput, _a2 ...request.Option) (*dynamodb.ListTablesOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1625,7 +1625,7 @@ func (_m *DynamoDBAPI) ListTablesWithContext(_a0 aws.Context, _a1 *dynamodb.List
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.ListTablesOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.ListTablesInput, ...request.Option) *dynamodb.ListTablesOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.ListTablesInput, ...request.Option) *dynamodb.ListTablesOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1634,7 +1634,7 @@ func (_m *DynamoDBAPI) ListTablesWithContext(_a0 aws.Context, _a1 *dynamodb.List
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.ListTablesInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.ListTablesInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1692,7 +1692,7 @@ func (_m *DynamoDBAPI) ListTagsOfResourceRequest(_a0 *dynamodb.ListTagsOfResourc
 }
 
 // ListTagsOfResourceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) ListTagsOfResourceWithContext(_a0 aws.Context, _a1 *dynamodb.ListTagsOfResourceInput, _a2 ...request.Option) (*dynamodb.ListTagsOfResourceOutput, error) {
+func (_m *DynamoDBAPI) ListTagsOfResourceWithContext(_a0 context.Context, _a1 *dynamodb.ListTagsOfResourceInput, _a2 ...request.Option) (*dynamodb.ListTagsOfResourceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1703,7 +1703,7 @@ func (_m *DynamoDBAPI) ListTagsOfResourceWithContext(_a0 aws.Context, _a1 *dynam
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.ListTagsOfResourceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.ListTagsOfResourceInput, ...request.Option) *dynamodb.ListTagsOfResourceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.ListTagsOfResourceInput, ...request.Option) *dynamodb.ListTagsOfResourceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1712,7 +1712,7 @@ func (_m *DynamoDBAPI) ListTagsOfResourceWithContext(_a0 aws.Context, _a1 *dynam
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.ListTagsOfResourceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.ListTagsOfResourceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1770,7 +1770,7 @@ func (_m *DynamoDBAPI) PutItemRequest(_a0 *dynamodb.PutItemInput) (*request.Requ
 }
 
 // PutItemWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) PutItemWithContext(_a0 aws.Context, _a1 *dynamodb.PutItemInput, _a2 ...request.Option) (*dynamodb.PutItemOutput, error) {
+func (_m *DynamoDBAPI) PutItemWithContext(_a0 context.Context, _a1 *dynamodb.PutItemInput, _a2 ...request.Option) (*dynamodb.PutItemOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1781,7 +1781,7 @@ func (_m *DynamoDBAPI) PutItemWithContext(_a0 aws.Context, _a1 *dynamodb.PutItem
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.PutItemOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.PutItemInput, ...request.Option) *dynamodb.PutItemOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.PutItemInput, ...request.Option) *dynamodb.PutItemOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1790,7 +1790,7 @@ func (_m *DynamoDBAPI) PutItemWithContext(_a0 aws.Context, _a1 *dynamodb.PutItem
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.PutItemInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.PutItemInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1837,7 +1837,7 @@ func (_m *DynamoDBAPI) QueryPages(_a0 *dynamodb.QueryInput, _a1 func(*dynamodb.Q
 }
 
 // QueryPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *DynamoDBAPI) QueryPagesWithContext(_a0 aws.Context, _a1 *dynamodb.QueryInput, _a2 func(*dynamodb.QueryOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *DynamoDBAPI) QueryPagesWithContext(_a0 context.Context, _a1 *dynamodb.QueryInput, _a2 func(*dynamodb.QueryOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -1848,7 +1848,7 @@ func (_m *DynamoDBAPI) QueryPagesWithContext(_a0 aws.Context, _a1 *dynamodb.Quer
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -1883,7 +1883,7 @@ func (_m *DynamoDBAPI) QueryRequest(_a0 *dynamodb.QueryInput) (*request.Request,
 }
 
 // QueryWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) QueryWithContext(_a0 aws.Context, _a1 *dynamodb.QueryInput, _a2 ...request.Option) (*dynamodb.QueryOutput, error) {
+func (_m *DynamoDBAPI) QueryWithContext(_a0 context.Context, _a1 *dynamodb.QueryInput, _a2 ...request.Option) (*dynamodb.QueryOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1894,7 +1894,7 @@ func (_m *DynamoDBAPI) QueryWithContext(_a0 aws.Context, _a1 *dynamodb.QueryInpu
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.QueryOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.QueryInput, ...request.Option) *dynamodb.QueryOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.QueryInput, ...request.Option) *dynamodb.QueryOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1903,7 +1903,7 @@ func (_m *DynamoDBAPI) QueryWithContext(_a0 aws.Context, _a1 *dynamodb.QueryInpu
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.QueryInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.QueryInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -1961,7 +1961,7 @@ func (_m *DynamoDBAPI) RestoreTableFromBackupRequest(_a0 *dynamodb.RestoreTableF
 }
 
 // RestoreTableFromBackupWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) RestoreTableFromBackupWithContext(_a0 aws.Context, _a1 *dynamodb.RestoreTableFromBackupInput, _a2 ...request.Option) (*dynamodb.RestoreTableFromBackupOutput, error) {
+func (_m *DynamoDBAPI) RestoreTableFromBackupWithContext(_a0 context.Context, _a1 *dynamodb.RestoreTableFromBackupInput, _a2 ...request.Option) (*dynamodb.RestoreTableFromBackupOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -1972,7 +1972,7 @@ func (_m *DynamoDBAPI) RestoreTableFromBackupWithContext(_a0 aws.Context, _a1 *d
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.RestoreTableFromBackupOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.RestoreTableFromBackupInput, ...request.Option) *dynamodb.RestoreTableFromBackupOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.RestoreTableFromBackupInput, ...request.Option) *dynamodb.RestoreTableFromBackupOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -1981,7 +1981,7 @@ func (_m *DynamoDBAPI) RestoreTableFromBackupWithContext(_a0 aws.Context, _a1 *d
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.RestoreTableFromBackupInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.RestoreTableFromBackupInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2039,7 +2039,7 @@ func (_m *DynamoDBAPI) RestoreTableToPointInTimeRequest(_a0 *dynamodb.RestoreTab
 }
 
 // RestoreTableToPointInTimeWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) RestoreTableToPointInTimeWithContext(_a0 aws.Context, _a1 *dynamodb.RestoreTableToPointInTimeInput, _a2 ...request.Option) (*dynamodb.RestoreTableToPointInTimeOutput, error) {
+func (_m *DynamoDBAPI) RestoreTableToPointInTimeWithContext(_a0 context.Context, _a1 *dynamodb.RestoreTableToPointInTimeInput, _a2 ...request.Option) (*dynamodb.RestoreTableToPointInTimeOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2050,7 +2050,7 @@ func (_m *DynamoDBAPI) RestoreTableToPointInTimeWithContext(_a0 aws.Context, _a1
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.RestoreTableToPointInTimeOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.RestoreTableToPointInTimeInput, ...request.Option) *dynamodb.RestoreTableToPointInTimeOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.RestoreTableToPointInTimeInput, ...request.Option) *dynamodb.RestoreTableToPointInTimeOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2059,7 +2059,7 @@ func (_m *DynamoDBAPI) RestoreTableToPointInTimeWithContext(_a0 aws.Context, _a1
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.RestoreTableToPointInTimeInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.RestoreTableToPointInTimeInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2106,7 +2106,7 @@ func (_m *DynamoDBAPI) ScanPages(_a0 *dynamodb.ScanInput, _a1 func(*dynamodb.Sca
 }
 
 // ScanPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
-func (_m *DynamoDBAPI) ScanPagesWithContext(_a0 aws.Context, _a1 *dynamodb.ScanInput, _a2 func(*dynamodb.ScanOutput, bool) bool, _a3 ...request.Option) error {
+func (_m *DynamoDBAPI) ScanPagesWithContext(_a0 context.Context, _a1 *dynamodb.ScanInput, _a2 func(*dynamodb.ScanOutput, bool) bool, _a3 ...request.Option) error {
 	_va := make([]interface{}, len(_a3))
 	for _i := range _a3 {
 		_va[_i] = _a3[_i]
@@ -2117,7 +2117,7 @@ func (_m *DynamoDBAPI) ScanPagesWithContext(_a0 aws.Context, _a1 *dynamodb.ScanI
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool, ...request.Option) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool, ...request.Option) error); ok {
 		r0 = rf(_a0, _a1, _a2, _a3...)
 	} else {
 		r0 = ret.Error(0)
@@ -2152,7 +2152,7 @@ func (_m *DynamoDBAPI) ScanRequest(_a0 *dynamodb.ScanInput) (*request.Request, *
 }
 
 // ScanWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) ScanWithContext(_a0 aws.Context, _a1 *dynamodb.ScanInput, _a2 ...request.Option) (*dynamodb.ScanOutput, error) {
+func (_m *DynamoDBAPI) ScanWithContext(_a0 context.Context, _a1 *dynamodb.ScanInput, _a2 ...request.Option) (*dynamodb.ScanOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2163,7 +2163,7 @@ func (_m *DynamoDBAPI) ScanWithContext(_a0 aws.Context, _a1 *dynamodb.ScanInput,
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.ScanOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.ScanInput, ...request.Option) *dynamodb.ScanOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.ScanInput, ...request.Option) *dynamodb.ScanOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2172,7 +2172,7 @@ func (_m *DynamoDBAPI) ScanWithContext(_a0 aws.Context, _a1 *dynamodb.ScanInput,
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.ScanInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.ScanInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2230,7 +2230,7 @@ func (_m *DynamoDBAPI) TagResourceRequest(_a0 *dynamodb.TagResourceInput) (*requ
 }
 
 // TagResourceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) TagResourceWithContext(_a0 aws.Context, _a1 *dynamodb.TagResourceInput, _a2 ...request.Option) (*dynamodb.TagResourceOutput, error) {
+func (_m *DynamoDBAPI) TagResourceWithContext(_a0 context.Context, _a1 *dynamodb.TagResourceInput, _a2 ...request.Option) (*dynamodb.TagResourceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2241,7 +2241,7 @@ func (_m *DynamoDBAPI) TagResourceWithContext(_a0 aws.Context, _a1 *dynamodb.Tag
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.TagResourceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.TagResourceInput, ...request.Option) *dynamodb.TagResourceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.TagResourceInput, ...request.Option) *dynamodb.TagResourceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2250,7 +2250,7 @@ func (_m *DynamoDBAPI) TagResourceWithContext(_a0 aws.Context, _a1 *dynamodb.Tag
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.TagResourceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.TagResourceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2308,7 +2308,7 @@ func (_m *DynamoDBAPI) TransactGetItemsRequest(_a0 *dynamodb.TransactGetItemsInp
 }
 
 // TransactGetItemsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) TransactGetItemsWithContext(_a0 aws.Context, _a1 *dynamodb.TransactGetItemsInput, _a2 ...request.Option) (*dynamodb.TransactGetItemsOutput, error) {
+func (_m *DynamoDBAPI) TransactGetItemsWithContext(_a0 context.Context, _a1 *dynamodb.TransactGetItemsInput, _a2 ...request.Option) (*dynamodb.TransactGetItemsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2319,7 +2319,7 @@ func (_m *DynamoDBAPI) TransactGetItemsWithContext(_a0 aws.Context, _a1 *dynamod
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.TransactGetItemsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.TransactGetItemsInput, ...request.Option) *dynamodb.TransactGetItemsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.TransactGetItemsInput, ...request.Option) *dynamodb.TransactGetItemsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2328,7 +2328,7 @@ func (_m *DynamoDBAPI) TransactGetItemsWithContext(_a0 aws.Context, _a1 *dynamod
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.TransactGetItemsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.TransactGetItemsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2386,7 +2386,7 @@ func (_m *DynamoDBAPI) TransactWriteItemsRequest(_a0 *dynamodb.TransactWriteItem
 }
 
 // TransactWriteItemsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) TransactWriteItemsWithContext(_a0 aws.Context, _a1 *dynamodb.TransactWriteItemsInput, _a2 ...request.Option) (*dynamodb.TransactWriteItemsOutput, error) {
+func (_m *DynamoDBAPI) TransactWriteItemsWithContext(_a0 context.Context, _a1 *dynamodb.TransactWriteItemsInput, _a2 ...request.Option) (*dynamodb.TransactWriteItemsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2397,7 +2397,7 @@ func (_m *DynamoDBAPI) TransactWriteItemsWithContext(_a0 aws.Context, _a1 *dynam
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.TransactWriteItemsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.TransactWriteItemsInput, ...request.Option) *dynamodb.TransactWriteItemsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.TransactWriteItemsInput, ...request.Option) *dynamodb.TransactWriteItemsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2406,7 +2406,7 @@ func (_m *DynamoDBAPI) TransactWriteItemsWithContext(_a0 aws.Context, _a1 *dynam
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.TransactWriteItemsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.TransactWriteItemsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2464,7 +2464,7 @@ func (_m *DynamoDBAPI) UntagResourceRequest(_a0 *dynamodb.UntagResourceInput) (*
 }
 
 // UntagResourceWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) UntagResourceWithContext(_a0 aws.Context, _a1 *dynamodb.UntagResourceInput, _a2 ...request.Option) (*dynamodb.UntagResourceOutput, error) {
+func (_m *DynamoDBAPI) UntagResourceWithContext(_a0 context.Context, _a1 *dynamodb.UntagResourceInput, _a2 ...request.Option) (*dynamodb.UntagResourceOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2475,7 +2475,7 @@ func (_m *DynamoDBAPI) UntagResourceWithContext(_a0 aws.Context, _a1 *dynamodb.U
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.UntagResourceOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.UntagResourceInput, ...request.Option) *dynamodb.UntagResourceOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.UntagResourceInput, ...request.Option) *dynamodb.UntagResourceOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2484,7 +2484,7 @@ func (_m *DynamoDBAPI) UntagResourceWithContext(_a0 aws.Context, _a1 *dynamodb.U
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.UntagResourceInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.UntagResourceInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2542,7 +2542,7 @@ func (_m *DynamoDBAPI) UpdateContinuousBackupsRequest(_a0 *dynamodb.UpdateContin
 }
 
 // UpdateContinuousBackupsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) UpdateContinuousBackupsWithContext(_a0 aws.Context, _a1 *dynamodb.UpdateContinuousBackupsInput, _a2 ...request.Option) (*dynamodb.UpdateContinuousBackupsOutput, error) {
+func (_m *DynamoDBAPI) UpdateContinuousBackupsWithContext(_a0 context.Context, _a1 *dynamodb.UpdateContinuousBackupsInput, _a2 ...request.Option) (*dynamodb.UpdateContinuousBackupsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2553,7 +2553,7 @@ func (_m *DynamoDBAPI) UpdateContinuousBackupsWithContext(_a0 aws.Context, _a1 *
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.UpdateContinuousBackupsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.UpdateContinuousBackupsInput, ...request.Option) *dynamodb.UpdateContinuousBackupsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.UpdateContinuousBackupsInput, ...request.Option) *dynamodb.UpdateContinuousBackupsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2562,7 +2562,7 @@ func (_m *DynamoDBAPI) UpdateContinuousBackupsWithContext(_a0 aws.Context, _a1 *
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.UpdateContinuousBackupsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.UpdateContinuousBackupsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2668,7 +2668,7 @@ func (_m *DynamoDBAPI) UpdateGlobalTableSettingsRequest(_a0 *dynamodb.UpdateGlob
 }
 
 // UpdateGlobalTableSettingsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) UpdateGlobalTableSettingsWithContext(_a0 aws.Context, _a1 *dynamodb.UpdateGlobalTableSettingsInput, _a2 ...request.Option) (*dynamodb.UpdateGlobalTableSettingsOutput, error) {
+func (_m *DynamoDBAPI) UpdateGlobalTableSettingsWithContext(_a0 context.Context, _a1 *dynamodb.UpdateGlobalTableSettingsInput, _a2 ...request.Option) (*dynamodb.UpdateGlobalTableSettingsOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2679,7 +2679,7 @@ func (_m *DynamoDBAPI) UpdateGlobalTableSettingsWithContext(_a0 aws.Context, _a1
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.UpdateGlobalTableSettingsOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.UpdateGlobalTableSettingsInput, ...request.Option) *dynamodb.UpdateGlobalTableSettingsOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.UpdateGlobalTableSettingsInput, ...request.Option) *dynamodb.UpdateGlobalTableSettingsOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2688,7 +2688,7 @@ func (_m *DynamoDBAPI) UpdateGlobalTableSettingsWithContext(_a0 aws.Context, _a1
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.UpdateGlobalTableSettingsInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.UpdateGlobalTableSettingsInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2698,7 +2698,7 @@ func (_m *DynamoDBAPI) UpdateGlobalTableSettingsWithContext(_a0 aws.Context, _a1
 }
 
 // UpdateGlobalTableWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) UpdateGlobalTableWithContext(_a0 aws.Context, _a1 *dynamodb.UpdateGlobalTableInput, _a2 ...request.Option) (*dynamodb.UpdateGlobalTableOutput, error) {
+func (_m *DynamoDBAPI) UpdateGlobalTableWithContext(_a0 context.Context, _a1 *dynamodb.UpdateGlobalTableInput, _a2 ...request.Option) (*dynamodb.UpdateGlobalTableOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2709,7 +2709,7 @@ func (_m *DynamoDBAPI) UpdateGlobalTableWithContext(_a0 aws.Context, _a1 *dynamo
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.UpdateGlobalTableOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.UpdateGlobalTableInput, ...request.Option) *dynamodb.UpdateGlobalTableOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.UpdateGlobalTableInput, ...request.Option) *dynamodb.UpdateGlobalTableOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2718,7 +2718,7 @@ func (_m *DynamoDBAPI) UpdateGlobalTableWithContext(_a0 aws.Context, _a1 *dynamo
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.UpdateGlobalTableInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.UpdateGlobalTableInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2776,7 +2776,7 @@ func (_m *DynamoDBAPI) UpdateItemRequest(_a0 *dynamodb.UpdateItemInput) (*reques
 }
 
 // UpdateItemWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) UpdateItemWithContext(_a0 aws.Context, _a1 *dynamodb.UpdateItemInput, _a2 ...request.Option) (*dynamodb.UpdateItemOutput, error) {
+func (_m *DynamoDBAPI) UpdateItemWithContext(_a0 context.Context, _a1 *dynamodb.UpdateItemInput, _a2 ...request.Option) (*dynamodb.UpdateItemOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2787,7 +2787,7 @@ func (_m *DynamoDBAPI) UpdateItemWithContext(_a0 aws.Context, _a1 *dynamodb.Upda
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.UpdateItemOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.UpdateItemInput, ...request.Option) *dynamodb.UpdateItemOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.UpdateItemInput, ...request.Option) *dynamodb.UpdateItemOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2796,7 +2796,7 @@ func (_m *DynamoDBAPI) UpdateItemWithContext(_a0 aws.Context, _a1 *dynamodb.Upda
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.UpdateItemInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.UpdateItemInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2854,7 +2854,7 @@ func (_m *DynamoDBAPI) UpdateTableRequest(_a0 *dynamodb.UpdateTableInput) (*requ
 }
 
 // UpdateTableWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) UpdateTableWithContext(_a0 aws.Context, _a1 *dynamodb.UpdateTableInput, _a2 ...request.Option) (*dynamodb.UpdateTableOutput, error) {
+func (_m *DynamoDBAPI) UpdateTableWithContext(_a0 context.Context, _a1 *dynamodb.UpdateTableInput, _a2 ...request.Option) (*dynamodb.UpdateTableOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2865,7 +2865,7 @@ func (_m *DynamoDBAPI) UpdateTableWithContext(_a0 aws.Context, _a1 *dynamodb.Upd
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.UpdateTableOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.UpdateTableInput, ...request.Option) *dynamodb.UpdateTableOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.UpdateTableInput, ...request.Option) *dynamodb.UpdateTableOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2874,7 +2874,7 @@ func (_m *DynamoDBAPI) UpdateTableWithContext(_a0 aws.Context, _a1 *dynamodb.Upd
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.UpdateTableInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.UpdateTableInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2932,7 +2932,7 @@ func (_m *DynamoDBAPI) UpdateTimeToLiveRequest(_a0 *dynamodb.UpdateTimeToLiveInp
 }
 
 // UpdateTimeToLiveWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) UpdateTimeToLiveWithContext(_a0 aws.Context, _a1 *dynamodb.UpdateTimeToLiveInput, _a2 ...request.Option) (*dynamodb.UpdateTimeToLiveOutput, error) {
+func (_m *DynamoDBAPI) UpdateTimeToLiveWithContext(_a0 context.Context, _a1 *dynamodb.UpdateTimeToLiveInput, _a2 ...request.Option) (*dynamodb.UpdateTimeToLiveOutput, error) {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2943,7 +2943,7 @@ func (_m *DynamoDBAPI) UpdateTimeToLiveWithContext(_a0 aws.Context, _a1 *dynamod
 	ret := _m.Called(_ca...)
 
 	var r0 *dynamodb.UpdateTimeToLiveOutput
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.UpdateTimeToLiveInput, ...request.Option) *dynamodb.UpdateTimeToLiveOutput); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.UpdateTimeToLiveInput, ...request.Option) *dynamodb.UpdateTimeToLiveOutput); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		if ret.Get(0) != nil {
@@ -2952,7 +2952,7 @@ func (_m *DynamoDBAPI) UpdateTimeToLiveWithContext(_a0 aws.Context, _a1 *dynamod
 	}
 
 	var r1 error
-	if rf, ok := ret.Get(1).(func(aws.Context, *dynamodb.UpdateTimeToLiveInput, ...request.Option) error); ok {
+	if rf, ok := ret.Get(1).(func(context.Context, *dynamodb.UpdateTimeToLiveInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
@@ -2976,7 +2976,7 @@ func (_m *DynamoDBAPI) WaitUntilTableExists(_a0 *dynamodb.DescribeTableInput) er
 }
 
 // WaitUntilTableExistsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) WaitUntilTableExistsWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeTableInput, _a2 ...request.WaiterOption) error {
+func (_m *DynamoDBAPI) WaitUntilTableExistsWithContext(_a0 context.Context, _a1 *dynamodb.DescribeTableInput, _a2 ...request.WaiterOption) error {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -2987,7 +2987,7 @@ func (_m *DynamoDBAPI) WaitUntilTableExistsWithContext(_a0 aws.Context, _a1 *dyn
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeTableInput, ...request.WaiterOption) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeTableInput, ...request.WaiterOption) error); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		r0 = ret.Error(0)
@@ -3011,7 +3011,7 @@ func (_m *DynamoDBAPI) WaitUntilTableNotExists(_a0 *dynamodb.DescribeTableInput)
 }
 
 // WaitUntilTableNotExistsWithContext provides a mock function with given fields: _a0, _a1, _a2
-func (_m *DynamoDBAPI) WaitUntilTableNotExistsWithContext(_a0 aws.Context, _a1 *dynamodb.DescribeTableInput, _a2 ...request.WaiterOption) error {
+func (_m *DynamoDBAPI) WaitUntilTableNotExistsWithContext(_a0 context.Context, _a1 *dynamodb.DescribeTableInput, _a2 ...request.WaiterOption) error {
 	_va := make([]interface{}, len(_a2))
 	for _i := range _a2 {
 		_va[_i] = _a2[_i]
@@ -3022,7 +3022,7 @@ func (_m *DynamoDBAPI) WaitUntilTableNotExistsWithContext(_a0 aws.Context, _a1 *
 	ret := _m.Called(_ca...)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func(aws.Context, *dynamodb.DescribeTableInput, ...request.WaiterOption) error); ok {
+	if rf, ok := ret.Get(0).(func(context.Context, *dynamodb.DescribeTableInput, ...request.WaiterOption) error); ok {
 		r0 = rf(_a0, _a1, _a2...)
 	} else {
 		r0 = ret.Error(0)
