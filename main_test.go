@@ -307,11 +307,9 @@ func TestChangeRDSStateNoClusterFound(t *testing.T) {
 		Branch:     "branch",
 		Repository: "repo",
 	}
-	clusterArn := aws.String("")
-	clusterStauts := aws.String("")
 
 	svcRDSModelAPI := new(mocks.RDSModelAPI)
-	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil, nil, nil)
 
 	base := services{
 		RDSModelAPI: svcRDSModelAPI,
@@ -329,12 +327,11 @@ func TestChangeRDSStateGetClusterError(t *testing.T) {
 		Branch:     "branch",
 		Repository: "repo",
 	}
-	clusterArn := aws.String("")
-	clusterStauts := aws.String("")
+
 	errorMsg := errors.New("Test error")
 
 	svcRDSModelAPI := new(mocks.RDSModelAPI)
-	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, errorMsg)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil, nil, errorMsg)
 
 	base := services{
 		RDSModelAPI: svcRDSModelAPI,
