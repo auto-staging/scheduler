@@ -1,4 +1,4 @@
-package helper
+package model
 
 import (
 	"errors"
@@ -9,20 +9,20 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-func TestNewStatusHelper(t *testing.T) {
+func TestNewStatusModel(t *testing.T) {
 	svc := new(mocks.DynamoDBAPI)
 
-	helper := NewStatusHelper(svc)
+	model := NewStatusModel(svc)
 
-	assert.NotEmpty(t, helper, "Expected not empty")
-	assert.Equal(t, svc, helper.DynamoDBAPI, "DynamoDB service from helper is not matching the one used as parameter")
+	assert.NotEmpty(t, model, "Expected not empty")
+	assert.Equal(t, svc, model.DynamoDBAPI, "DynamoDB service from model is not matching the one used as parameter")
 }
 
 func TestSetStatusForEnvironment(t *testing.T) {
 	svc := new(mocks.DynamoDBAPI)
 	svc.On("UpdateItem", mock.AnythingOfType("*dynamodb.UpdateItemInput")).Return(nil, nil)
 
-	statusHelper := StatusHelper{
+	statusHelper := StatusModel{
 		DynamoDBAPI: svc,
 	}
 
@@ -34,7 +34,7 @@ func TestSetStatusForEnvironmentError(t *testing.T) {
 	svc := new(mocks.DynamoDBAPI)
 	svc.On("UpdateItem", mock.AnythingOfType("*dynamodb.UpdateItemInput")).Return(nil, errors.New("Test error"))
 
-	statusHelper := StatusHelper{
+	statusHelper := StatusModel{
 		DynamoDBAPI: svc,
 	}
 

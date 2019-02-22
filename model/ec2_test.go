@@ -1,4 +1,4 @@
-package helper
+package model
 
 import (
 	"errors"
@@ -12,13 +12,13 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-func TestNewEC2Helper(t *testing.T) {
+func TestNewEC2Model(t *testing.T) {
 	svc := new(mocks.EC2API)
 
-	helper := NewEC2Helper(svc)
+	model := NewEC2Model(svc)
 
-	assert.NotEmpty(t, helper, "Expected not empty")
-	assert.Equal(t, svc, helper.EC2API, "EC2 service from helper is not matching the one used as parameter")
+	assert.NotEmpty(t, model, "Expected not empty")
+	assert.Equal(t, svc, model.EC2API, "EC2 service from model is not matching the one used as parameter")
 }
 
 func TestDescribeInstancesStopAction(t *testing.T) {
@@ -50,11 +50,11 @@ func TestDescribeInstancesStopAction(t *testing.T) {
 		},
 	}, nil)
 
-	ec2Helper := EC2Helper{
+	ec2Model := EC2Model{
 		EC2API: svc,
 	}
 
-	result, err := ec2Helper.DescribeInstancesForTagsAndAction("", "", "stop")
+	result, err := ec2Model.DescribeInstancesForTagsAndAction("", "", "stop")
 	assert.Nil(t, err, "Expected no error")
 	assert.Len(t, result, 1, "Expect one instance")
 	assert.Equal(t, *result[0], "i-1234567890abcdef0", "Expected i-1234567890abcdef0")
@@ -89,11 +89,11 @@ func TestDescribeInstancesStartAction(t *testing.T) {
 		},
 	}, nil)
 
-	ec2Helper := EC2Helper{
+	ec2Model := EC2Model{
 		EC2API: svc,
 	}
 
-	result, err := ec2Helper.DescribeInstancesForTagsAndAction("", "", "start")
+	result, err := ec2Model.DescribeInstancesForTagsAndAction("", "", "start")
 	assert.Nil(t, err, "Expected no error")
 	assert.Len(t, result, 1, "Expect one instance")
 	assert.Equal(t, *result[0], "i-1234567890abcdef1", "Expected i-1234567890abcdef1")
@@ -105,11 +105,11 @@ func TestDescribeInstancesError(t *testing.T) {
 		Reservations: []*ec2.Reservation{},
 	}, errors.New("Test error"))
 
-	ec2Helper := EC2Helper{
+	ec2Model := EC2Model{
 		EC2API: svc,
 	}
 
-	result, err := ec2Helper.DescribeInstancesForTagsAndAction("", "", "start")
+	result, err := ec2Model.DescribeInstancesForTagsAndAction("", "", "start")
 	assert.Error(t, err, "Expected error")
 	assert.Len(t, result, 0, "Expected no instance")
 }
@@ -132,11 +132,11 @@ func TestStartEC2Instances(t *testing.T) {
 		},
 	}, nil)
 
-	ec2Helper := EC2Helper{
+	ec2Model := EC2Model{
 		EC2API: svc,
 	}
 
-	err := ec2Helper.StartEC2Instances([]*string{})
+	err := ec2Model.StartEC2Instances([]*string{})
 	assert.Nil(t, err, "Expected no error")
 }
 
@@ -144,11 +144,11 @@ func TestStartEC2InstancesError(t *testing.T) {
 	svc := new(mocks.EC2API)
 	svc.On("StartInstances", mock.AnythingOfType("*ec2.StartInstancesInput")).Return(&ec2.StartInstancesOutput{}, errors.New("Test error"))
 
-	ec2Helper := EC2Helper{
+	ec2Model := EC2Model{
 		EC2API: svc,
 	}
 
-	err := ec2Helper.StartEC2Instances([]*string{})
+	err := ec2Model.StartEC2Instances([]*string{})
 	assert.Error(t, err, "Expected error")
 }
 
@@ -170,11 +170,11 @@ func TestStopEC2Instances(t *testing.T) {
 		},
 	}, nil)
 
-	ec2Helper := EC2Helper{
+	ec2Model := EC2Model{
 		EC2API: svc,
 	}
 
-	err := ec2Helper.StopEC2Instances([]*string{})
+	err := ec2Model.StopEC2Instances([]*string{})
 	assert.Nil(t, err, "Expected no error")
 }
 
@@ -182,10 +182,10 @@ func TestStopEC2InstancesError(t *testing.T) {
 	svc := new(mocks.EC2API)
 	svc.On("StopInstances", mock.AnythingOfType("*ec2.StopInstancesInput")).Return(&ec2.StopInstancesOutput{}, errors.New("Test error"))
 
-	ec2Helper := EC2Helper{
+	ec2Model := EC2Model{
 		EC2API: svc,
 	}
 
-	err := ec2Helper.StopEC2Instances([]*string{})
+	err := ec2Model.StopEC2Instances([]*string{})
 	assert.Error(t, err, "Expected error")
 }

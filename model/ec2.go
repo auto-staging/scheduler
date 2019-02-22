@@ -1,4 +1,4 @@
-package helper
+package model
 
 import (
 	"fmt"
@@ -9,21 +9,21 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
 )
 
-// EC2HelperAPI is an interface including all EC2 helper functions
-type EC2HelperAPI interface {
+// EC2ModelAPI is an interface including all EC2 helper functions
+type EC2ModelAPI interface {
 	DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error)
 	StartEC2Instances(instanceIDs []*string) error
 	StopEC2Instances(instanceIDs []*string) error
 }
 
-// EC2Helper is a struct including the AWS SDK EC2 interface, all EC2 Helper functions are called on this struct and the included AWS SDK EC2 service
-type EC2Helper struct {
+// EC2Model is a struct including the AWS SDK EC2 interface, all EC2 Helper functions are called on this struct and the included AWS SDK EC2 service
+type EC2Model struct {
 	ec2iface.EC2API
 }
 
-// NewEC2Helper takes the AWS SDK EC2 Interface as parameter and returns the pointer to an EC2Helper struct, on which all EC2 Helper functions can be called
-func NewEC2Helper(svc ec2iface.EC2API) *EC2Helper {
-	return &EC2Helper{
+// NewEC2Model takes the AWS SDK EC2 Interface as parameter and returns the pointer to an EC2Model struct, on which all EC2 Helper functions can be called
+func NewEC2Model(svc ec2iface.EC2API) *EC2Model {
+	return &EC2Model{
 		EC2API: svc,
 	}
 }
@@ -31,8 +31,8 @@ func NewEC2Helper(svc ec2iface.EC2API) *EC2Helper {
 // DescribeInstancesForTagsAndAction takes a repository name, a branch name and an action (which can be "start" or "stop"). The function filters all EC2 Instances by
 // repository and branch_raw tag and then writes all instanceIDs of instances to the *string array, which must get adapted based on the given action.
 // If an error occurs, it gets logged and then returned
-func (ec2Helper *EC2Helper) DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error) {
-	result, err := ec2Helper.EC2API.DescribeInstances(&ec2.DescribeInstancesInput{
+func (ec2Model *EC2Model) DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error) {
+	result, err := ec2Model.EC2API.DescribeInstances(&ec2.DescribeInstancesInput{
 		Filters: []*ec2.Filter{
 			{
 				Name:   aws.String("tag:repository"),
@@ -65,9 +65,9 @@ func (ec2Helper *EC2Helper) DescribeInstancesForTagsAndAction(repository, branch
 
 // StartEC2Instances starts all EC2 instances given in the instanceIDs array by using the AWS SDK.
 // If an error occurs, it gets logged and then returned
-func (ec2Helper *EC2Helper) StartEC2Instances(instanceIDs []*string) error {
+func (ec2Model *EC2Model) StartEC2Instances(instanceIDs []*string) error {
 	log.Println("Starting EC2")
-	startResult, err := ec2Helper.EC2API.StartInstances(&ec2.StartInstancesInput{
+	startResult, err := ec2Model.EC2API.StartInstances(&ec2.StartInstancesInput{
 		InstanceIds: instanceIDs,
 	})
 	if err != nil {
@@ -80,9 +80,9 @@ func (ec2Helper *EC2Helper) StartEC2Instances(instanceIDs []*string) error {
 
 // StopEC2Instances stops all EC2 instances given in the instanceIDs array by using the AWS SDK.
 // If an error occurs, it gets logged and then returned
-func (ec2Helper *EC2Helper) StopEC2Instances(instanceIDs []*string) error {
+func (ec2Model *EC2Model) StopEC2Instances(instanceIDs []*string) error {
 	log.Println("Stopping EC2")
-	stopResult, err := ec2Helper.EC2API.StopInstances(&ec2.StopInstancesInput{
+	stopResult, err := ec2Model.EC2API.StopInstances(&ec2.StopInstancesInput{
 		InstanceIds: instanceIDs,
 	})
 	if err != nil {

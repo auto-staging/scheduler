@@ -28,24 +28,24 @@ func TestChangeEC2StateStart(t *testing.T) {
 		Repository: "repo",
 	}
 
-	svcEC2HelperAPI := new(mocks.EC2HelperAPI)
-	svcEC2HelperAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
+	svcEC2ModelAPI := new(mocks.EC2ModelAPI)
+	svcEC2ModelAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
 
-	svcEC2HelperAPI.On("StartEC2Instances", mock.AnythingOfType("[]*string")).Return(nil)
+	svcEC2ModelAPI.On("StartEC2Instances", mock.AnythingOfType("[]*string")).Return(nil)
 
-	svcStatusHelperAPI := new(mocks.StatusHelperAPI)
-	svcStatusHelperAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
 
 	base := services{
-		EC2HelperAPI:    svcEC2HelperAPI,
-		StatusHelperAPI: svcStatusHelperAPI,
+		EC2ModelAPI:    svcEC2ModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
 	}
 
 	err := base.changeEC2State(cwEvent)
 
 	assert.Nil(t, err, "Expected no error")
-	svcEC2HelperAPI.AssertCalled(t, "StartEC2Instances", instanceIDs)
-	svcStatusHelperAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "running")
+	svcEC2ModelAPI.AssertCalled(t, "StartEC2Instances", instanceIDs)
+	svcStatusModelAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "running")
 }
 
 func TestChangeEC2StateStop(t *testing.T) {
@@ -60,24 +60,24 @@ func TestChangeEC2StateStop(t *testing.T) {
 		Repository: "repo",
 	}
 
-	svcEC2HelperAPI := new(mocks.EC2HelperAPI)
-	svcEC2HelperAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
+	svcEC2ModelAPI := new(mocks.EC2ModelAPI)
+	svcEC2ModelAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
 
-	svcEC2HelperAPI.On("StopEC2Instances", mock.AnythingOfType("[]*string")).Return(nil)
+	svcEC2ModelAPI.On("StopEC2Instances", mock.AnythingOfType("[]*string")).Return(nil)
 
-	svcStatusHelperAPI := new(mocks.StatusHelperAPI)
-	svcStatusHelperAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
 
 	base := services{
-		EC2HelperAPI:    svcEC2HelperAPI,
-		StatusHelperAPI: svcStatusHelperAPI,
+		EC2ModelAPI:    svcEC2ModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
 	}
 
 	err := base.changeEC2State(cwEvent)
 
 	assert.Nil(t, err, "Expected no error")
-	svcEC2HelperAPI.AssertCalled(t, "StopEC2Instances", instanceIDs)
-	svcStatusHelperAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "stopped")
+	svcEC2ModelAPI.AssertCalled(t, "StopEC2Instances", instanceIDs)
+	svcStatusModelAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "stopped")
 }
 
 func TestChangeEC2StateNoInstances(t *testing.T) {
@@ -87,26 +87,26 @@ func TestChangeEC2StateNoInstances(t *testing.T) {
 		Repository: "repo",
 	}
 
-	svcEC2HelperAPI := new(mocks.EC2HelperAPI)
-	svcEC2HelperAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return([]*string{}, nil)
+	svcEC2ModelAPI := new(mocks.EC2ModelAPI)
+	svcEC2ModelAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return([]*string{}, nil)
 
 	base := services{
-		EC2HelperAPI: svcEC2HelperAPI,
+		EC2ModelAPI: svcEC2ModelAPI,
 	}
 
 	err := base.changeEC2State(cwEvent)
 
 	assert.Nil(t, err, "Expected no error")
-	svcEC2HelperAPI.AssertCalled(t, "DescribeInstancesForTagsAndAction", cwEvent.Repository, cwEvent.Branch, cwEvent.Action)
+	svcEC2ModelAPI.AssertCalled(t, "DescribeInstancesForTagsAndAction", cwEvent.Repository, cwEvent.Branch, cwEvent.Action)
 }
 
 func TestChangeEC2StateDescribeError(t *testing.T) {
 	errorMsg := errors.New("Test error")
-	svcEC2HelperAPI := new(mocks.EC2HelperAPI)
-	svcEC2HelperAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return([]*string{}, errorMsg)
+	svcEC2ModelAPI := new(mocks.EC2ModelAPI)
+	svcEC2ModelAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return([]*string{}, errorMsg)
 
 	base := services{
-		EC2HelperAPI: svcEC2HelperAPI,
+		EC2ModelAPI: svcEC2ModelAPI,
 	}
 
 	err := base.changeEC2State(types.Event{})
@@ -129,13 +129,13 @@ func TestChangeEC2StateStopError(t *testing.T) {
 		Repository: "repo",
 	}
 
-	svcEC2HelperAPI := new(mocks.EC2HelperAPI)
-	svcEC2HelperAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
+	svcEC2ModelAPI := new(mocks.EC2ModelAPI)
+	svcEC2ModelAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
 
-	svcEC2HelperAPI.On("StopEC2Instances", mock.AnythingOfType("[]*string")).Return(errorMsg)
+	svcEC2ModelAPI.On("StopEC2Instances", mock.AnythingOfType("[]*string")).Return(errorMsg)
 
 	base := services{
-		EC2HelperAPI: svcEC2HelperAPI,
+		EC2ModelAPI: svcEC2ModelAPI,
 	}
 
 	err := base.changeEC2State(cwEvent)
@@ -158,17 +158,17 @@ func TestChangeEC2StateStopStatusError(t *testing.T) {
 		Repository: "repo",
 	}
 
-	svcEC2HelperAPI := new(mocks.EC2HelperAPI)
-	svcEC2HelperAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
+	svcEC2ModelAPI := new(mocks.EC2ModelAPI)
+	svcEC2ModelAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
 
-	svcEC2HelperAPI.On("StopEC2Instances", mock.AnythingOfType("[]*string")).Return(nil)
+	svcEC2ModelAPI.On("StopEC2Instances", mock.AnythingOfType("[]*string")).Return(nil)
 
-	svcStatusHelperAPI := new(mocks.StatusHelperAPI)
-	svcStatusHelperAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
 
 	base := services{
-		EC2HelperAPI:    svcEC2HelperAPI,
-		StatusHelperAPI: svcStatusHelperAPI,
+		EC2ModelAPI:    svcEC2ModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
 	}
 
 	err := base.changeEC2State(cwEvent)
@@ -191,13 +191,13 @@ func TestChangeEC2StateStartError(t *testing.T) {
 		Repository: "repo",
 	}
 
-	svcEC2HelperAPI := new(mocks.EC2HelperAPI)
-	svcEC2HelperAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
+	svcEC2ModelAPI := new(mocks.EC2ModelAPI)
+	svcEC2ModelAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
 
-	svcEC2HelperAPI.On("StartEC2Instances", mock.AnythingOfType("[]*string")).Return(errorMsg)
+	svcEC2ModelAPI.On("StartEC2Instances", mock.AnythingOfType("[]*string")).Return(errorMsg)
 
 	base := services{
-		EC2HelperAPI: svcEC2HelperAPI,
+		EC2ModelAPI: svcEC2ModelAPI,
 	}
 
 	err := base.changeEC2State(cwEvent)
@@ -220,17 +220,17 @@ func TestChangeEC2StateStartStatusError(t *testing.T) {
 		Repository: "repo",
 	}
 
-	svcEC2HelperAPI := new(mocks.EC2HelperAPI)
-	svcEC2HelperAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
+	svcEC2ModelAPI := new(mocks.EC2ModelAPI)
+	svcEC2ModelAPI.On("DescribeInstancesForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(instanceIDs, nil)
 
-	svcEC2HelperAPI.On("StartEC2Instances", mock.AnythingOfType("[]*string")).Return(nil)
+	svcEC2ModelAPI.On("StartEC2Instances", mock.AnythingOfType("[]*string")).Return(nil)
 
-	svcStatusHelperAPI := new(mocks.StatusHelperAPI)
-	svcStatusHelperAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
 
 	base := services{
-		EC2HelperAPI:    svcEC2HelperAPI,
-		StatusHelperAPI: svcStatusHelperAPI,
+		EC2ModelAPI:    svcEC2ModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
 	}
 
 	err := base.changeEC2State(cwEvent)
@@ -252,24 +252,24 @@ func TestChangeRDSStateStart(t *testing.T) {
 	clusterArn := aws.String("arn:aws:rds:eu-west-1:123456789012:db:mysql-db")
 	clusterStauts := aws.String("available")
 
-	svcRDSHelperAPI := new(mocks.RDSHelperAPI)
-	svcRDSHelperAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
-	svcRDSHelperAPI.On("StartRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(true, nil)
+	svcRDSModelAPI := new(mocks.RDSModelAPI)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
+	svcRDSModelAPI.On("StartRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(true, nil)
 
-	svcStatusHelperAPI := new(mocks.StatusHelperAPI)
-	svcStatusHelperAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
 
 	base := services{
-		RDSHelperAPI:    svcRDSHelperAPI,
-		StatusHelperAPI: svcStatusHelperAPI,
+		RDSModelAPI:    svcRDSModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
 	}
 
 	err := base.changeRDSState(cwEvent)
 
 	assert.Nil(t, err, "Expected no error")
-	svcRDSHelperAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
-	svcRDSHelperAPI.AssertCalled(t, "StartRDSCluster", clusterArn, clusterStauts)
-	svcStatusHelperAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "running")
+	svcRDSModelAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
+	svcRDSModelAPI.AssertCalled(t, "StartRDSCluster", clusterArn, clusterStauts)
+	svcStatusModelAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "running")
 }
 
 func TestChangeRDSStateStop(t *testing.T) {
@@ -281,24 +281,24 @@ func TestChangeRDSStateStop(t *testing.T) {
 	clusterArn := aws.String("arn:aws:rds:eu-west-1:123456789012:db:mysql-db")
 	clusterStauts := aws.String("stopped")
 
-	svcRDSHelperAPI := new(mocks.RDSHelperAPI)
-	svcRDSHelperAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
-	svcRDSHelperAPI.On("StopRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(true, nil)
+	svcRDSModelAPI := new(mocks.RDSModelAPI)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
+	svcRDSModelAPI.On("StopRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(true, nil)
 
-	svcStatusHelperAPI := new(mocks.StatusHelperAPI)
-	svcStatusHelperAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
 
 	base := services{
-		RDSHelperAPI:    svcRDSHelperAPI,
-		StatusHelperAPI: svcStatusHelperAPI,
+		RDSModelAPI:    svcRDSModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
 	}
 
 	err := base.changeRDSState(cwEvent)
 
 	assert.Nil(t, err, "Expected no error")
-	svcRDSHelperAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
-	svcRDSHelperAPI.AssertCalled(t, "StopRDSCluster", clusterArn, clusterStauts)
-	svcStatusHelperAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "stopped")
+	svcRDSModelAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
+	svcRDSModelAPI.AssertCalled(t, "StopRDSCluster", clusterArn, clusterStauts)
+	svcStatusModelAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "stopped")
 }
 
 func TestChangeRDSStateNoClusterFound(t *testing.T) {
@@ -310,17 +310,17 @@ func TestChangeRDSStateNoClusterFound(t *testing.T) {
 	clusterArn := aws.String("")
 	clusterStauts := aws.String("")
 
-	svcRDSHelperAPI := new(mocks.RDSHelperAPI)
-	svcRDSHelperAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
+	svcRDSModelAPI := new(mocks.RDSModelAPI)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
 
 	base := services{
-		RDSHelperAPI: svcRDSHelperAPI,
+		RDSModelAPI: svcRDSModelAPI,
 	}
 
 	err := base.changeRDSState(cwEvent)
 
 	assert.Nil(t, err, "Expected no error")
-	svcRDSHelperAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
+	svcRDSModelAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
 }
 
 func TestChangeRDSStateGetClusterError(t *testing.T) {
@@ -333,17 +333,17 @@ func TestChangeRDSStateGetClusterError(t *testing.T) {
 	clusterStauts := aws.String("")
 	errorMsg := errors.New("Test error")
 
-	svcRDSHelperAPI := new(mocks.RDSHelperAPI)
-	svcRDSHelperAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, errorMsg)
+	svcRDSModelAPI := new(mocks.RDSModelAPI)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, errorMsg)
 
 	base := services{
-		RDSHelperAPI: svcRDSHelperAPI,
+		RDSModelAPI: svcRDSModelAPI,
 	}
 
 	err := base.changeRDSState(cwEvent)
 
 	assert.Error(t, err, "Expected error")
-	svcRDSHelperAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
+	svcRDSModelAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
 	assert.Equal(t, errorMsg, err, "Error didn't match given error")
 }
 
@@ -358,19 +358,19 @@ func TestChangeRDSStateStopClusterError(t *testing.T) {
 	clusterStauts := aws.String("stopped")
 	errorMsg := errors.New("Test error")
 
-	svcRDSHelperAPI := new(mocks.RDSHelperAPI)
-	svcRDSHelperAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
-	svcRDSHelperAPI.On("StopRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(false, errorMsg)
+	svcRDSModelAPI := new(mocks.RDSModelAPI)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
+	svcRDSModelAPI.On("StopRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(false, errorMsg)
 
 	base := services{
-		RDSHelperAPI: svcRDSHelperAPI,
+		RDSModelAPI: svcRDSModelAPI,
 	}
 
 	err := base.changeRDSState(cwEvent)
 
 	assert.Error(t, err, "Expected error")
-	svcRDSHelperAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
-	svcRDSHelperAPI.AssertCalled(t, "StopRDSCluster", clusterArn, clusterStauts)
+	svcRDSModelAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
+	svcRDSModelAPI.AssertCalled(t, "StopRDSCluster", clusterArn, clusterStauts)
 	assert.Equal(t, errorMsg, err, "Error didn't match given error")
 }
 
@@ -385,19 +385,19 @@ func TestChangeRDSStateStartClusterError(t *testing.T) {
 	clusterStauts := aws.String("stopped")
 	errorMsg := errors.New("Test error")
 
-	svcRDSHelperAPI := new(mocks.RDSHelperAPI)
-	svcRDSHelperAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
-	svcRDSHelperAPI.On("StartRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(false, errorMsg)
+	svcRDSModelAPI := new(mocks.RDSModelAPI)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
+	svcRDSModelAPI.On("StartRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(false, errorMsg)
 
 	base := services{
-		RDSHelperAPI: svcRDSHelperAPI,
+		RDSModelAPI: svcRDSModelAPI,
 	}
 
 	err := base.changeRDSState(cwEvent)
 
 	assert.Error(t, err, "Expected error")
-	svcRDSHelperAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
-	svcRDSHelperAPI.AssertCalled(t, "StartRDSCluster", clusterArn, clusterStauts)
+	svcRDSModelAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
+	svcRDSModelAPI.AssertCalled(t, "StartRDSCluster", clusterArn, clusterStauts)
 	assert.Equal(t, errorMsg, err, "Error didn't match given error")
 }
 
@@ -411,24 +411,24 @@ func TestChangeRDSStateSetStatusStartError(t *testing.T) {
 	clusterStauts := aws.String("available")
 	errorMsg := errors.New("Test error")
 
-	svcRDSHelperAPI := new(mocks.RDSHelperAPI)
-	svcRDSHelperAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
-	svcRDSHelperAPI.On("StartRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(true, nil)
+	svcRDSModelAPI := new(mocks.RDSModelAPI)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
+	svcRDSModelAPI.On("StartRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(true, nil)
 
-	svcStatusHelperAPI := new(mocks.StatusHelperAPI)
-	svcStatusHelperAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
 
 	base := services{
-		RDSHelperAPI:    svcRDSHelperAPI,
-		StatusHelperAPI: svcStatusHelperAPI,
+		RDSModelAPI:    svcRDSModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
 	}
 
 	err := base.changeRDSState(cwEvent)
 
 	assert.Error(t, err, "Expected error")
-	svcRDSHelperAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
-	svcRDSHelperAPI.AssertCalled(t, "StartRDSCluster", clusterArn, clusterStauts)
-	svcStatusHelperAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "running")
+	svcRDSModelAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
+	svcRDSModelAPI.AssertCalled(t, "StartRDSCluster", clusterArn, clusterStauts)
+	svcStatusModelAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "running")
 }
 
 func TestChangeRDSStateSetStatusStopError(t *testing.T) {
@@ -441,22 +441,22 @@ func TestChangeRDSStateSetStatusStopError(t *testing.T) {
 	clusterStauts := aws.String("available")
 	errorMsg := errors.New("Test error")
 
-	svcRDSHelperAPI := new(mocks.RDSHelperAPI)
-	svcRDSHelperAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
-	svcRDSHelperAPI.On("StopRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(true, nil)
+	svcRDSModelAPI := new(mocks.RDSModelAPI)
+	svcRDSModelAPI.On("GetRDSClusterForTags", mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(clusterArn, clusterStauts, nil)
+	svcRDSModelAPI.On("StopRDSCluster", mock.AnythingOfType("*string"), mock.AnythingOfType("*string")).Return(true, nil)
 
-	svcStatusHelperAPI := new(mocks.StatusHelperAPI)
-	svcStatusHelperAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
 
 	base := services{
-		RDSHelperAPI:    svcRDSHelperAPI,
-		StatusHelperAPI: svcStatusHelperAPI,
+		RDSModelAPI:    svcRDSModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
 	}
 
 	err := base.changeRDSState(cwEvent)
 
 	assert.Error(t, err, "Expected error")
-	svcRDSHelperAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
-	svcRDSHelperAPI.AssertCalled(t, "StopRDSCluster", clusterArn, clusterStauts)
-	svcStatusHelperAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "stopped")
+	svcRDSModelAPI.AssertCalled(t, "GetRDSClusterForTags", cwEvent.Repository, cwEvent.Branch)
+	svcRDSModelAPI.AssertCalled(t, "StopRDSCluster", clusterArn, clusterStauts)
+	svcStatusModelAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "stopped")
 }
