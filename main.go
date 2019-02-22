@@ -113,7 +113,7 @@ func (base *services) changeRDSState(cwEvent types.Event) error {
 	if err != nil {
 		return err
 	}
-	if *clusterARN == "" {
+	if clusterARN == nil {
 		// No matching cluster found, nothing to do
 		return nil
 	}
