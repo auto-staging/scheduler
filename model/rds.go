@@ -14,18 +14,20 @@ type RDSModelAPI interface {
 	StartRDSCluster(clusterARN, clusterStatus *string) (bool, error)
 }
 
-// RDSModel is a struct including the AWS SDK RDS interface, all RDS helper functions are called on this struct and the included AWS SDK RDS service
+// RDSModel is a struct including the AWS SDK RDS interface, all RDS model functions are called on this struct and the included AWS SDK RDS service
 type RDSModel struct {
 	rdsiface.RDSAPI
 }
 
-// NewRDSModel takes the AWS SDK RDS Interface as parameter and returns the pointer to an RDSModel struct, on which all RDS Helper functions can be called
+// NewRDSModel takes the AWS SDK RDS Interface as parameter and returns the pointer to an RDSModel struct, on which all RDS model functions can be called
 func NewRDSModel(svc rdsiface.RDSAPI) *RDSModel {
 	return &RDSModel{
 		RDSAPI: svc,
 	}
 }
 
+// GetRDSClusterForTags returns the ARN and the status of the Cluster found for the given repository and branch tag values.
+// If an error occurs, the error gets logged and then returned.
 func (rdsmodel *RDSModel) GetRDSClusterForTags(repository, branch string) (*string, *string, error) {
 	result, err := rdsmodel.RDSAPI.DescribeDBClusters(nil)
 	if err != nil {
@@ -58,6 +60,8 @@ func (rdsmodel *RDSModel) GetRDSClusterForTags(repository, branch string) (*stri
 	return nil, nil, nil
 }
 
+// StopRDSCluster stops the RDS Cluster for the given Cluster ARN and status. It returns true, if the state of the Cluster was changed and false if not.
+// If an error occurs, the error gets logged and then returned.
 func (rdsmodel *RDSModel) StopRDSCluster(clusterARN, clusterStatus *string) (bool, error) {
 	if *clusterStatus == "available" {
 		log.Println("Stopping RDS CLUSTER")
@@ -74,6 +78,8 @@ func (rdsmodel *RDSModel) StopRDSCluster(clusterARN, clusterStatus *string) (boo
 	return false, nil
 }
 
+// StartRDSCluster starts the RDS Cluster for the given Cluster ARN and status. It returns true, if the state of the Cluster was changed and false if not.
+// If an error occurs, the error gets logged and then returned.
 func (rdsmodel *RDSModel) StartRDSCluster(clusterARN, clusterStatus *string) (bool, error) {
 	if *clusterStatus == "stopped" {
 		log.Println("Starting RDS CLUSTER")

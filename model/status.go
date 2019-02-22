@@ -10,14 +10,17 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
 )
 
+// StatusModelAPI is an interface including all Status model functions
 type StatusModelAPI interface {
 	SetStatusForEnvironment(repository, branch, status string) error
 }
 
+// StatusModel is a struct including the AWS SDK DynamoDB interface, all status change functions are called on this struct and the included AWS SDK DynamoDB service
 type StatusModel struct {
 	dynamodbiface.DynamoDBAPI
 }
 
+// NewStatusModel takes the AWS SDK DynamoDB Interface as parameter and returns the pointer to an StatusModel struct, on which status change model functions can be called
 func NewStatusModel(svc dynamodbiface.DynamoDBAPI) *StatusModel {
 	return &StatusModel{
 		DynamoDBAPI: svc,
