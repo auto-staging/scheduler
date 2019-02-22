@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/auto-staging/scheduler/compare/1.0.0...1.1.0) (2019-02-22)
+
+
+### Bug Fixes
+
+* fixed invalid clusterARN empty check ([0eb1d57](https://github.com/auto-staging/scheduler/commit/0eb1d57))
+
+
+### Features
+
+* added version info output ([dadd9b9](https://github.com/auto-staging/scheduler/commit/dadd9b9))
+
 # 1.0.0 (2019-01-29)
 
 
