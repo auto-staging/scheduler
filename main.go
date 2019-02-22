@@ -17,6 +17,11 @@ import (
 	"github.com/auto-staging/scheduler/types"
 )
 
+var version string
+var commitHash string
+var branch string
+var buildTime string
+
 type services struct {
 	model.RDSModelAPI
 	model.StatusModelAPI
@@ -62,6 +67,8 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 }
 
 func main() {
+	log.Printf("version - %s | branch - %s | commit hash - %s | build time - %s \n", version, branch, commitHash, buildTime)
+
 	lambda.Start(Handler)
 }
 
@@ -106,7 +113,7 @@ func (base *services) changeRDSState(cwEvent types.Event) error {
 	if err != nil {
 		return err
 	}
-	if *clusterARN == "" {
+	if clusterARN == nil {
 		// No matching cluster found, nothing to do
 		return nil
 	}
