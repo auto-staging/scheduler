@@ -9,19 +9,19 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2/ec2iface"
 )
 
-// EC2ModelAPI is an interface including all EC2 helper functions
+// EC2ModelAPI is an interface including all EC2 model functions
 type EC2ModelAPI interface {
 	DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error)
 	StartEC2Instances(instanceIDs []*string) error
 	StopEC2Instances(instanceIDs []*string) error
 }
 
-// EC2Model is a struct including the AWS SDK EC2 interface, all EC2 Helper functions are called on this struct and the included AWS SDK EC2 service
+// EC2Model is a struct including the AWS SDK EC2 interface, all EC2 model functions are called on this struct and the included AWS SDK EC2 service
 type EC2Model struct {
 	ec2iface.EC2API
 }
 
-// NewEC2Model takes the AWS SDK EC2 Interface as parameter and returns the pointer to an EC2Model struct, on which all EC2 Helper functions can be called
+// NewEC2Model takes the AWS SDK EC2 Interface as parameter and returns the pointer to an EC2Model struct, on which all EC2 model functions can be called
 func NewEC2Model(svc ec2iface.EC2API) *EC2Model {
 	return &EC2Model{
 		EC2API: svc,
