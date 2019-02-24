@@ -31,6 +31,30 @@
 }
 ```
 
+## Usage
+
+### Install dependencies
+
+Go dep must be installed
+
+```bash
+make prepare
+```
+
+### Execute tests
+
+```bash
+make tests
+```
+
+### Build binary
+
+```bash
+make build
+```
+
+compiles to bin/auto-staging-scheduler
+
 ## License and Author
 
 Author: Jan Ritter
