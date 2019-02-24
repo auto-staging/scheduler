@@ -31,6 +31,11 @@
 }
 ```
 
+## Requirements
+
+- Golang
+- Go dep
+
 ## Usage
 
 ### Install dependencies
