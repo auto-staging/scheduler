@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/auto-staging/scheduler/compare/1.1.0...1.1.1) (2019-03-28)
+
+
+### Bug Fixes
+
+* compile binary for linux ([c5ea20f](https://github.com/auto-staging/scheduler/commit/c5ea20f))
+
 # [1.1.0](https://github.com/auto-staging/scheduler/compare/1.0.0...1.1.0) (2019-02-22)
 
 
