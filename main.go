@@ -43,6 +43,10 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 
 	fmt.Println(cwEvent)
 
+	if cwEvent.Operation == "VERSION" {
+		return returnVersionInformation()
+	}
+
 	svcEC2 := ec2.New(sess)
 	svcRDS := rds.New(sess)
 	svcDynamoDB := dynamodb.New(sess)
@@ -70,6 +74,24 @@ func main() {
 	log.Printf("version - %s | branch - %s | commit hash - %s | build time - %s \n", version, branch, commitHash, buildTime)
 
 	lambda.Start(Handler)
+}
+
+func returnVersionInformation() (string, error) {
+	componentVersion := types.SingleComponentVersion{
+		Name:       "scheduler",
+		Version:    version,
+		CommitHash: commitHash,
+		Branch:     branch,
+		BuildTime:  buildTime,
+	}
+
+	body, err := json.Marshal(componentVersion)
+	if err != nil {
+		log.Println("Error marshaling version information, " + err.Error())
+		return fmt.Sprint("{\"message\" : \"Internal server error\"}"), err
+	}
+
+	return string(body), nil
 }
 
 func (base *services) changeEC2State(cwEvent types.Event) error {

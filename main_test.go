@@ -13,6 +13,17 @@ import (
 )
 
 //
+// Version Tests
+//
+
+func TestVersionReturn(t *testing.T) {
+	result, err := returnVersionInformation()
+
+	assert.Nil(t, err, "Expected no error")
+	assert.Equal(t, "{\"name\":\"scheduler\",\"version\":\"\",\"commitHash\":\"\",\"branch\":\"\",\"buildTime\":\"\"}", result)
+}
+
+//
 // EC2 Tests
 //
 
