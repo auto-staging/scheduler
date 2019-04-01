@@ -12742,6 +12742,41 @@ func (_m *EC2API) DescribeInternetGateways(_a0 *ec2.DescribeInternetGatewaysInpu
 	return r0, r1
 }
 
+// DescribeInternetGatewaysPages provides a mock function with given fields: _a0, _a1
+func (_m *EC2API) DescribeInternetGatewaysPages(_a0 *ec2.DescribeInternetGatewaysInput, _a1 func(*ec2.DescribeInternetGatewaysOutput, bool) bool) error {
+	ret := _m.Called(_a0, _a1)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(*ec2.DescribeInternetGatewaysInput, func(*ec2.DescribeInternetGatewaysOutput, bool) bool) error); ok {
+		r0 = rf(_a0, _a1)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// DescribeInternetGatewaysPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
+func (_m *EC2API) DescribeInternetGatewaysPagesWithContext(_a0 context.Context, _a1 *ec2.DescribeInternetGatewaysInput, _a2 func(*ec2.DescribeInternetGatewaysOutput, bool) bool, _a3 ...request.Option) error {
+	_va := make([]interface{}, len(_a3))
+	for _i := range _a3 {
+		_va[_i] = _a3[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1, _a2)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, *ec2.DescribeInternetGatewaysInput, func(*ec2.DescribeInternetGatewaysOutput, bool) bool, ...request.Option) error); ok {
+		r0 = rf(_a0, _a1, _a2, _a3...)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // DescribeInternetGatewaysRequest provides a mock function with given fields: _a0
 func (_m *EC2API) DescribeInternetGatewaysRequest(_a0 *ec2.DescribeInternetGatewaysInput) (*request.Request, *ec2.DescribeInternetGatewaysOutput) {
 	ret := _m.Called(_a0)
@@ -13243,6 +13278,41 @@ func (_m *EC2API) DescribeNetworkAcls(_a0 *ec2.DescribeNetworkAclsInput) (*ec2.D
 	}
 
 	return r0, r1
+}
+
+// DescribeNetworkAclsPages provides a mock function with given fields: _a0, _a1
+func (_m *EC2API) DescribeNetworkAclsPages(_a0 *ec2.DescribeNetworkAclsInput, _a1 func(*ec2.DescribeNetworkAclsOutput, bool) bool) error {
+	ret := _m.Called(_a0, _a1)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(*ec2.DescribeNetworkAclsInput, func(*ec2.DescribeNetworkAclsOutput, bool) bool) error); ok {
+		r0 = rf(_a0, _a1)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// DescribeNetworkAclsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
+func (_m *EC2API) DescribeNetworkAclsPagesWithContext(_a0 context.Context, _a1 *ec2.DescribeNetworkAclsInput, _a2 func(*ec2.DescribeNetworkAclsOutput, bool) bool, _a3 ...request.Option) error {
+	_va := make([]interface{}, len(_a3))
+	for _i := range _a3 {
+		_va[_i] = _a3[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1, _a2)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, *ec2.DescribeNetworkAclsInput, func(*ec2.DescribeNetworkAclsOutput, bool) bool, ...request.Option) error); ok {
+		r0 = rf(_a0, _a1, _a2, _a3...)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
 }
 
 // DescribeNetworkAclsRequest provides a mock function with given fields: _a0
@@ -17218,6 +17288,41 @@ func (_m *EC2API) DescribeVpcPeeringConnections(_a0 *ec2.DescribeVpcPeeringConne
 	return r0, r1
 }
 
+// DescribeVpcPeeringConnectionsPages provides a mock function with given fields: _a0, _a1
+func (_m *EC2API) DescribeVpcPeeringConnectionsPages(_a0 *ec2.DescribeVpcPeeringConnectionsInput, _a1 func(*ec2.DescribeVpcPeeringConnectionsOutput, bool) bool) error {
+	ret := _m.Called(_a0, _a1)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(*ec2.DescribeVpcPeeringConnectionsInput, func(*ec2.DescribeVpcPeeringConnectionsOutput, bool) bool) error); ok {
+		r0 = rf(_a0, _a1)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// DescribeVpcPeeringConnectionsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
+func (_m *EC2API) DescribeVpcPeeringConnectionsPagesWithContext(_a0 context.Context, _a1 *ec2.DescribeVpcPeeringConnectionsInput, _a2 func(*ec2.DescribeVpcPeeringConnectionsOutput, bool) bool, _a3 ...request.Option) error {
+	_va := make([]interface{}, len(_a3))
+	for _i := range _a3 {
+		_va[_i] = _a3[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1, _a2)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, *ec2.DescribeVpcPeeringConnectionsInput, func(*ec2.DescribeVpcPeeringConnectionsOutput, bool) bool, ...request.Option) error); ok {
+		r0 = rf(_a0, _a1, _a2, _a3...)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
 // DescribeVpcPeeringConnectionsRequest provides a mock function with given fields: _a0
 func (_m *EC2API) DescribeVpcPeeringConnectionsRequest(_a0 *ec2.DescribeVpcPeeringConnectionsInput) (*request.Request, *ec2.DescribeVpcPeeringConnectionsOutput) {
 	ret := _m.Called(_a0)
@@ -17294,6 +17399,41 @@ func (_m *EC2API) DescribeVpcs(_a0 *ec2.DescribeVpcsInput) (*ec2.DescribeVpcsOut
 	}
 
 	return r0, r1
+}
+
+// DescribeVpcsPages provides a mock function with given fields: _a0, _a1
+func (_m *EC2API) DescribeVpcsPages(_a0 *ec2.DescribeVpcsInput, _a1 func(*ec2.DescribeVpcsOutput, bool) bool) error {
+	ret := _m.Called(_a0, _a1)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(*ec2.DescribeVpcsInput, func(*ec2.DescribeVpcsOutput, bool) bool) error); ok {
+		r0 = rf(_a0, _a1)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// DescribeVpcsPagesWithContext provides a mock function with given fields: _a0, _a1, _a2, _a3
+func (_m *EC2API) DescribeVpcsPagesWithContext(_a0 context.Context, _a1 *ec2.DescribeVpcsInput, _a2 func(*ec2.DescribeVpcsOutput, bool) bool, _a3 ...request.Option) error {
+	_va := make([]interface{}, len(_a3))
+	for _i := range _a3 {
+		_va[_i] = _a3[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1, _a2)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, *ec2.DescribeVpcsInput, func(*ec2.DescribeVpcsOutput, bool) bool, ...request.Option) error); ok {
+		r0 = rf(_a0, _a1, _a2, _a3...)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
 }
 
 // DescribeVpcsRequest provides a mock function with given fields: _a0
@@ -21399,6 +21539,84 @@ func (_m *EC2API) ModifyInstanceCreditSpecificationWithContext(_a0 context.Conte
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(context.Context, *ec2.ModifyInstanceCreditSpecificationInput, ...request.Option) error); ok {
+		r1 = rf(_a0, _a1, _a2...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ModifyInstanceEventStartTime provides a mock function with given fields: _a0
+func (_m *EC2API) ModifyInstanceEventStartTime(_a0 *ec2.ModifyInstanceEventStartTimeInput) (*ec2.ModifyInstanceEventStartTimeOutput, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *ec2.ModifyInstanceEventStartTimeOutput
+	if rf, ok := ret.Get(0).(func(*ec2.ModifyInstanceEventStartTimeInput) *ec2.ModifyInstanceEventStartTimeOutput); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*ec2.ModifyInstanceEventStartTimeOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*ec2.ModifyInstanceEventStartTimeInput) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// ModifyInstanceEventStartTimeRequest provides a mock function with given fields: _a0
+func (_m *EC2API) ModifyInstanceEventStartTimeRequest(_a0 *ec2.ModifyInstanceEventStartTimeInput) (*request.Request, *ec2.ModifyInstanceEventStartTimeOutput) {
+	ret := _m.Called(_a0)
+
+	var r0 *request.Request
+	if rf, ok := ret.Get(0).(func(*ec2.ModifyInstanceEventStartTimeInput) *request.Request); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*request.Request)
+		}
+	}
+
+	var r1 *ec2.ModifyInstanceEventStartTimeOutput
+	if rf, ok := ret.Get(1).(func(*ec2.ModifyInstanceEventStartTimeInput) *ec2.ModifyInstanceEventStartTimeOutput); ok {
+		r1 = rf(_a0)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*ec2.ModifyInstanceEventStartTimeOutput)
+		}
+	}
+
+	return r0, r1
+}
+
+// ModifyInstanceEventStartTimeWithContext provides a mock function with given fields: _a0, _a1, _a2
+func (_m *EC2API) ModifyInstanceEventStartTimeWithContext(_a0 context.Context, _a1 *ec2.ModifyInstanceEventStartTimeInput, _a2 ...request.Option) (*ec2.ModifyInstanceEventStartTimeOutput, error) {
+	_va := make([]interface{}, len(_a2))
+	for _i := range _a2 {
+		_va[_i] = _a2[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *ec2.ModifyInstanceEventStartTimeOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *ec2.ModifyInstanceEventStartTimeInput, ...request.Option) *ec2.ModifyInstanceEventStartTimeOutput); ok {
+		r0 = rf(_a0, _a1, _a2...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*ec2.ModifyInstanceEventStartTimeOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, *ec2.ModifyInstanceEventStartTimeInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
