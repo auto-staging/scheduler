@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/auto-staging/scheduler/compare/1.1.1...1.2.0) (2019-04-01)
+
+
+### Features
+
+* added endpoint for the tower to get the scheduler version information ([1212d44](https://github.com/auto-staging/scheduler/commit/1212d44))
+
 ## [1.1.1](https://github.com/auto-staging/scheduler/compare/1.1.0...1.1.1) (2019-03-28)
 
 
