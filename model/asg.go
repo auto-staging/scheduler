@@ -31,8 +31,15 @@ func NewASGModel(svc autoscalingiface.AutoScalingAPI) *ASGModel {
 	}
 }
 
+// DescribeAutoScalingGroupsForTagsAndAction gets the name of the autoscaling group matching the repository and branch name (the autoscaling group gets found by tags).
+// Additionally the function checks if an action is required based on the current min size and only then returns the name.
+// If an error occurs, it gets logged and then returned.
 func (asgModel *ASGModel) DescribeAutoScalingGroupsForTagsAndAction(repository, branch, action string) (*string, error) {
-	asgs, _ := asgModel.AutoScalingAPI.DescribeAutoScalingGroups(nil)
+	asgs, err := asgModel.AutoScalingAPI.DescribeAutoScalingGroups(nil)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
 
 	for _, asg := range asgs.AutoScalingGroups {
 		foundBranch := false
@@ -60,6 +67,8 @@ func (asgModel *ASGModel) DescribeAutoScalingGroupsForTagsAndAction(repository, 
 	return nil, nil
 }
 
+// SetASGMinToPreviousValue sets the min size for the autoscaling group matching the given name to its previous value received from the GetPreviousMinValueOfASG function.
+// If an error occurs, it gets logged and then returned.
 func (asgModel *ASGModel) SetASGMinToPreviousValue(asgName *string) error {
 	log.Println("Starting ASG")
 	minSize, err := asgModel.GetPreviousMinValueOfASG(asgName)
@@ -78,6 +87,8 @@ func (asgModel *ASGModel) SetASGMinToPreviousValue(asgName *string) error {
 	return nil
 }
 
+// SetASGMinToZero sets the min size for the autoscaling group matching the given name to 0.
+// If an error occurs, it gets logged and then returned.
 func (asgModel *ASGModel) SetASGMinToZero(asgName *string) error {
 	log.Println("Stopping ASG")
 	_, err := asgModel.AutoScalingAPI.UpdateAutoScalingGroup(&autoscaling.UpdateAutoScalingGroupInput{
@@ -91,6 +102,9 @@ func (asgModel *ASGModel) SetASGMinToZero(asgName *string) error {
 	return nil
 }
 
+// GetPreviousMinValueOfASG returns the previous min value for the autoscaling group matching the given name. The previous min value is determined by a tag attached to the autoscaling group, the tag has the key "minSize"
+// and the previous min size as value (example = 2).
+// If an error occurs, it gets logged and then 0 plus the error will be returned.
 func (asgModel *ASGModel) GetPreviousMinValueOfASG(asgName *string) (int, error) {
 	asgs, err := asgModel.DescribeAutoScalingGroups(&autoscaling.DescribeAutoScalingGroupsInput{
 		AutoScalingGroupNames: []*string{
