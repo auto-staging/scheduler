@@ -1,7 +1,9 @@
 package model
 
 import (
+	"errors"
 	"log"
+	"strconv"
 
 	"github.com/aws/aws-sdk-go/aws"
 
@@ -14,6 +16,7 @@ type ASGModelAPI interface {
 	DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error)
 	StartASGInstances(instanceIDs []*string) error
 	StopASGInstances(instanceIDs []*string) error
+	GetPreviousMinValueOfASG(asgName *string) (int, error)
 }
 
 // ASGModel is a struct including the AWS SDK ASG interface, all ASG model functions are called on this struct and the included AWS SDK ASG service
@@ -59,9 +62,14 @@ func (asgModel *ASGModel) DescribeAutoScalingGroupsForTagsAndAction(repository, 
 
 func (asgModel *ASGModel) SetASGMinToPreviousValue(asgName *string) error {
 	log.Println("Starting ASG")
-	_, err := asgModel.AutoScalingAPI.UpdateAutoScalingGroup(&autoscaling.UpdateAutoScalingGroupInput{
+	minSize, err := asgModel.GetPreviousMinValueOfASG(asgName)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	_, err = asgModel.AutoScalingAPI.UpdateAutoScalingGroup(&autoscaling.UpdateAutoScalingGroupInput{
 		AutoScalingGroupName: asgName,
-		MinSize:              aws.Int64(1),
+		MinSize:              aws.Int64(int64(minSize)),
 	})
 	if err != nil {
 		log.Println(err)
@@ -81,4 +89,35 @@ func (asgModel *ASGModel) SetASGMinToZero(asgName *string) error {
 		return err
 	}
 	return nil
+}
+
+func (asgModel *ASGModel) GetPreviousMinValueOfASG(asgName *string) (int, error) {
+	asgs, err := asgModel.DescribeAutoScalingGroups(&autoscaling.DescribeAutoScalingGroupsInput{
+		AutoScalingGroupNames: []*string{
+			asgName,
+		},
+		MaxRecords: aws.Int64(1),
+	})
+	if err != nil {
+		log.Println(err)
+		return 0, err
+	}
+	if len(asgs.AutoScalingGroups) == 0 {
+		err = errors.New("found no autoscaling group for " + *asgName)
+		log.Println(err)
+		return 0, err
+	}
+	asg := asgs.AutoScalingGroups[0]
+	minSize := 0
+	for _, tag := range asg.Tags {
+		if *tag.Key == "minSize" {
+			minSize, err = strconv.Atoi(*tag.Value)
+			if err != nil {
+				log.Println(err)
+				return 0, err
+			}
+		}
+	}
+
+	return minSize, nil
 }
