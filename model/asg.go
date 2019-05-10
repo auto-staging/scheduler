@@ -13,9 +13,9 @@ import (
 
 // ASGModelAPI is an interface including all ASG model functions
 type ASGModelAPI interface {
-	DescribeInstancesForTagsAndAction(repository, branch, action string) ([]*string, error)
-	StartASGInstances(instanceIDs []*string) error
-	StopASGInstances(instanceIDs []*string) error
+	DescribeAutoScalingGroupForTagsAndAction(repository, branch, action string) (*string, error)
+	SetASGMinToPreviousValue(asgName *string) error
+	SetASGMinToZero(asgName *string) error
 	GetPreviousMinValueOfASG(asgName *string) (int, error)
 }
 
@@ -31,10 +31,10 @@ func NewASGModel(svc autoscalingiface.AutoScalingAPI) *ASGModel {
 	}
 }
 
-// DescribeAutoScalingGroupsForTagsAndAction gets the name of the autoscaling group matching the repository and branch name (the autoscaling group gets found by tags).
+// DescribeAutoScalingGroupForTagsAndAction gets the name of the autoscaling group matching the repository and branch name (the autoscaling group gets found by tags).
 // Additionally the function checks if an action is required based on the current min size and only then returns the name.
 // If an error occurs, it gets logged and then returned.
-func (asgModel *ASGModel) DescribeAutoScalingGroupsForTagsAndAction(repository, branch, action string) (*string, error) {
+func (asgModel *ASGModel) DescribeAutoScalingGroupForTagsAndAction(repository, branch, action string) (*string, error) {
 	asgs, err := asgModel.AutoScalingAPI.DescribeAutoScalingGroups(nil)
 	if err != nil {
 		log.Println(err)
