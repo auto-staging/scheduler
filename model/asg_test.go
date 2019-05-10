@@ -130,3 +130,17 @@ func TestSetASGMinToZeroAwsError(t *testing.T) {
 	assert.Error(t, err)
 	assert.Equal(t, errors.New("aws-error"), err)
 }
+
+// DescribeAutoScalingGroupForTagsAndAction
+
+func TestDescribeAutoScalingGroupForTagsAndActionAwsError(t *testing.T) {
+	svc := new(mocks.AutoScalingAPI)
+	svc.On("DescribeAutoScalingGroups", mock.AnythingOfType("*autoscaling.DescribeAutoScalingGroupsInput")).Return(nil, errors.New("aws-error"))
+
+	model := NewASGModel(svc)
+	asgName, err := model.DescribeAutoScalingGroupForTagsAndAction("repo", "branch", "action")
+
+	assert.Error(t, err)
+	assert.Nil(t, asgName)
+	assert.Equal(t, errors.New("aws-error"), err)
+}
