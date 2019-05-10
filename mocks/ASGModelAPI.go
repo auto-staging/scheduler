@@ -9,16 +9,16 @@ type ASGModelAPI struct {
 	mock.Mock
 }
 
-// DescribeInstancesForTagsAndAction provides a mock function with given fields: repository, branch, action
-func (_m *ASGModelAPI) DescribeInstancesForTagsAndAction(repository string, branch string, action string) ([]*string, error) {
+// DescribeAutoScalingGroupForTagsAndAction provides a mock function with given fields: repository, branch, action
+func (_m *ASGModelAPI) DescribeAutoScalingGroupForTagsAndAction(repository string, branch string, action string) (*string, error) {
 	ret := _m.Called(repository, branch, action)
 
-	var r0 []*string
-	if rf, ok := ret.Get(0).(func(string, string, string) []*string); ok {
+	var r0 *string
+	if rf, ok := ret.Get(0).(func(string, string, string) *string); ok {
 		r0 = rf(repository, branch, action)
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).([]*string)
+			r0 = ret.Get(0).(*string)
 		}
 	}
 
@@ -32,13 +32,34 @@ func (_m *ASGModelAPI) DescribeInstancesForTagsAndAction(repository string, bran
 	return r0, r1
 }
 
-// StartASGInstances provides a mock function with given fields: instanceIDs
-func (_m *ASGModelAPI) StartASGInstances(instanceIDs []*string) error {
-	ret := _m.Called(instanceIDs)
+// GetPreviousMinValueOfASG provides a mock function with given fields: asgName
+func (_m *ASGModelAPI) GetPreviousMinValueOfASG(asgName *string) (int, error) {
+	ret := _m.Called(asgName)
+
+	var r0 int
+	if rf, ok := ret.Get(0).(func(*string) int); ok {
+		r0 = rf(asgName)
+	} else {
+		r0 = ret.Get(0).(int)
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*string) error); ok {
+		r1 = rf(asgName)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SetASGMinToPreviousValue provides a mock function with given fields: asgName
+func (_m *ASGModelAPI) SetASGMinToPreviousValue(asgName *string) error {
+	ret := _m.Called(asgName)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func([]*string) error); ok {
-		r0 = rf(instanceIDs)
+	if rf, ok := ret.Get(0).(func(*string) error); ok {
+		r0 = rf(asgName)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -46,13 +67,13 @@ func (_m *ASGModelAPI) StartASGInstances(instanceIDs []*string) error {
 	return r0
 }
 
-// StopASGInstances provides a mock function with given fields: instanceIDs
-func (_m *ASGModelAPI) StopASGInstances(instanceIDs []*string) error {
-	ret := _m.Called(instanceIDs)
+// SetASGMinToZero provides a mock function with given fields: asgName
+func (_m *ASGModelAPI) SetASGMinToZero(asgName *string) error {
+	ret := _m.Called(asgName)
 
 	var r0 error
-	if rf, ok := ret.Get(0).(func([]*string) error); ok {
-		r0 = rf(instanceIDs)
+	if rf, ok := ret.Get(0).(func(*string) error); ok {
+		r0 = rf(asgName)
 	} else {
 		r0 = ret.Error(0)
 	}
