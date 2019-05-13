@@ -94,6 +94,7 @@ func (asgModel *ASGModel) SetASGMinToZero(asgName *string) error {
 	_, err := asgModel.AutoScalingAPI.UpdateAutoScalingGroup(&autoscaling.UpdateAutoScalingGroupInput{
 		AutoScalingGroupName: asgName,
 		MinSize:              aws.Int64(0),
+		DesiredCapacity:      aws.Int64(0),
 	})
 	if err != nil {
 		log.Println(err)
