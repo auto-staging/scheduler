@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/auto-staging/scheduler/compare/1.3.0...1.4.0) (2019-07-22)
+
+
+### Features
+
+* updated dependencies ([eda3c1a](https://github.com/auto-staging/scheduler/commit/eda3c1a))
+
 # [1.3.0](https://github.com/auto-staging/scheduler/compare/1.2.0...1.3.0) (2019-07-22)
 
 
