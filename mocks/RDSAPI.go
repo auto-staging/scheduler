@@ -8903,6 +8903,84 @@ func (_m *RDSAPI) RevokeDBSecurityGroupIngressWithContext(_a0 context.Context, _
 	return r0, r1
 }
 
+// StartActivityStream provides a mock function with given fields: _a0
+func (_m *RDSAPI) StartActivityStream(_a0 *rds.StartActivityStreamInput) (*rds.StartActivityStreamOutput, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *rds.StartActivityStreamOutput
+	if rf, ok := ret.Get(0).(func(*rds.StartActivityStreamInput) *rds.StartActivityStreamOutput); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*rds.StartActivityStreamOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*rds.StartActivityStreamInput) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// StartActivityStreamRequest provides a mock function with given fields: _a0
+func (_m *RDSAPI) StartActivityStreamRequest(_a0 *rds.StartActivityStreamInput) (*request.Request, *rds.StartActivityStreamOutput) {
+	ret := _m.Called(_a0)
+
+	var r0 *request.Request
+	if rf, ok := ret.Get(0).(func(*rds.StartActivityStreamInput) *request.Request); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*request.Request)
+		}
+	}
+
+	var r1 *rds.StartActivityStreamOutput
+	if rf, ok := ret.Get(1).(func(*rds.StartActivityStreamInput) *rds.StartActivityStreamOutput); ok {
+		r1 = rf(_a0)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*rds.StartActivityStreamOutput)
+		}
+	}
+
+	return r0, r1
+}
+
+// StartActivityStreamWithContext provides a mock function with given fields: _a0, _a1, _a2
+func (_m *RDSAPI) StartActivityStreamWithContext(_a0 context.Context, _a1 *rds.StartActivityStreamInput, _a2 ...request.Option) (*rds.StartActivityStreamOutput, error) {
+	_va := make([]interface{}, len(_a2))
+	for _i := range _a2 {
+		_va[_i] = _a2[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *rds.StartActivityStreamOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.StartActivityStreamInput, ...request.Option) *rds.StartActivityStreamOutput); ok {
+		r0 = rf(_a0, _a1, _a2...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*rds.StartActivityStreamOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.StartActivityStreamInput, ...request.Option) error); ok {
+		r1 = rf(_a0, _a1, _a2...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // StartDBCluster provides a mock function with given fields: _a0
 func (_m *RDSAPI) StartDBCluster(_a0 *rds.StartDBClusterInput) (*rds.StartDBClusterOutput, error) {
 	ret := _m.Called(_a0)
@@ -9051,6 +9129,84 @@ func (_m *RDSAPI) StartDBInstanceWithContext(_a0 context.Context, _a1 *rds.Start
 
 	var r1 error
 	if rf, ok := ret.Get(1).(func(context.Context, *rds.StartDBInstanceInput, ...request.Option) error); ok {
+		r1 = rf(_a0, _a1, _a2...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// StopActivityStream provides a mock function with given fields: _a0
+func (_m *RDSAPI) StopActivityStream(_a0 *rds.StopActivityStreamInput) (*rds.StopActivityStreamOutput, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *rds.StopActivityStreamOutput
+	if rf, ok := ret.Get(0).(func(*rds.StopActivityStreamInput) *rds.StopActivityStreamOutput); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*rds.StopActivityStreamOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(*rds.StopActivityStreamInput) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// StopActivityStreamRequest provides a mock function with given fields: _a0
+func (_m *RDSAPI) StopActivityStreamRequest(_a0 *rds.StopActivityStreamInput) (*request.Request, *rds.StopActivityStreamOutput) {
+	ret := _m.Called(_a0)
+
+	var r0 *request.Request
+	if rf, ok := ret.Get(0).(func(*rds.StopActivityStreamInput) *request.Request); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*request.Request)
+		}
+	}
+
+	var r1 *rds.StopActivityStreamOutput
+	if rf, ok := ret.Get(1).(func(*rds.StopActivityStreamInput) *rds.StopActivityStreamOutput); ok {
+		r1 = rf(_a0)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*rds.StopActivityStreamOutput)
+		}
+	}
+
+	return r0, r1
+}
+
+// StopActivityStreamWithContext provides a mock function with given fields: _a0, _a1, _a2
+func (_m *RDSAPI) StopActivityStreamWithContext(_a0 context.Context, _a1 *rds.StopActivityStreamInput, _a2 ...request.Option) (*rds.StopActivityStreamOutput, error) {
+	_va := make([]interface{}, len(_a2))
+	for _i := range _a2 {
+		_va[_i] = _a2[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, _a0, _a1)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	var r0 *rds.StopActivityStreamOutput
+	if rf, ok := ret.Get(0).(func(context.Context, *rds.StopActivityStreamInput, ...request.Option) *rds.StopActivityStreamOutput); ok {
+		r0 = rf(_a0, _a1, _a2...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*rds.StopActivityStreamOutput)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(context.Context, *rds.StopActivityStreamInput, ...request.Option) error); ok {
 		r1 = rf(_a0, _a1, _a2...)
 	} else {
 		r1 = ret.Error(1)
