@@ -468,3 +468,212 @@ func TestChangeRDSStateSetStatusStopError(t *testing.T) {
 	svcRDSModelAPI.AssertCalled(t, "StopRDSCluster", clusterArn, clusterStauts)
 	svcStatusModelAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "stopped")
 }
+
+//
+// ASG Tests
+//
+
+func TestChangeASGStateStart(t *testing.T) {
+	autoscalingGroupName := aws.String("test-asg")
+
+	cwEvent := types.Event{
+		Action:     "start",
+		Branch:     "branch",
+		Repository: "repo",
+	}
+
+	svcASGModelAPI := new(mocks.ASGModelAPI)
+	svcASGModelAPI.On("DescribeAutoScalingGroupForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(autoscalingGroupName, nil)
+
+	svcASGModelAPI.On("SetASGMinToPreviousValue", mock.AnythingOfType("*string")).Return(nil)
+
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
+
+	base := services{
+		ASGModelAPI:    svcASGModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
+	}
+
+	err := base.changeASGState(cwEvent)
+
+	assert.Nil(t, err, "Expected no error")
+	svcASGModelAPI.AssertCalled(t, "SetASGMinToPreviousValue", autoscalingGroupName)
+	svcStatusModelAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "running")
+}
+
+func TestChangeASGStateStop(t *testing.T) {
+	autoscalingGroupName := aws.String("test-asg")
+
+	cwEvent := types.Event{
+		Action:     "stop",
+		Branch:     "branch",
+		Repository: "repo",
+	}
+
+	svcASGModelAPI := new(mocks.ASGModelAPI)
+	svcASGModelAPI.On("DescribeAutoScalingGroupForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(autoscalingGroupName, nil)
+
+	svcASGModelAPI.On("SetASGMinToZero", mock.AnythingOfType("*string")).Return(nil)
+
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil)
+
+	base := services{
+		ASGModelAPI:    svcASGModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
+	}
+
+	err := base.changeASGState(cwEvent)
+
+	assert.Nil(t, err, "Expected no error")
+	svcASGModelAPI.AssertCalled(t, "SetASGMinToZero", autoscalingGroupName)
+	svcStatusModelAPI.AssertCalled(t, "SetStatusForEnvironment", cwEvent.Repository, cwEvent.Branch, "stopped")
+}
+
+func TestChangeASGStateNoGroupFound(t *testing.T) {
+	cwEvent := types.Event{
+		Action:     "stop",
+		Branch:     "branch",
+		Repository: "repo",
+	}
+
+	svcASGModelAPI := new(mocks.ASGModelAPI)
+	svcASGModelAPI.On("DescribeAutoScalingGroupForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil, nil)
+
+	base := services{
+		ASGModelAPI: svcASGModelAPI,
+	}
+
+	err := base.changeASGState(cwEvent)
+
+	assert.Nil(t, err, "Expected no error")
+	svcASGModelAPI.AssertCalled(t, "DescribeAutoScalingGroupForTagsAndAction", cwEvent.Repository, cwEvent.Branch, cwEvent.Action)
+}
+
+func TestChangeASGStateDescribeError(t *testing.T) {
+	errorMsg := errors.New("Test error")
+	svcASGModelAPI := new(mocks.ASGModelAPI)
+	svcASGModelAPI.On("DescribeAutoScalingGroupForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(nil, errorMsg)
+
+	base := services{
+		ASGModelAPI: svcASGModelAPI,
+	}
+
+	err := base.changeASGState(types.Event{})
+
+	assert.Error(t, err, "Expected error")
+	assert.Equal(t, errorMsg, err, "Error didn't match given error")
+}
+
+func TestChangeASGStateStopError(t *testing.T) {
+	errorMsg := errors.New("Test error")
+
+	autoscalingGroupName := aws.String("test-asg")
+
+	cwEvent := types.Event{
+		Action:     "stop",
+		Branch:     "branch",
+		Repository: "repo",
+	}
+
+	svcASGModelAPI := new(mocks.ASGModelAPI)
+	svcASGModelAPI.On("DescribeAutoScalingGroupForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(autoscalingGroupName, nil)
+
+	svcASGModelAPI.On("SetASGMinToZero", mock.AnythingOfType("*string")).Return(errorMsg)
+
+	base := services{
+		ASGModelAPI: svcASGModelAPI,
+	}
+
+	err := base.changeASGState(cwEvent)
+
+	assert.Error(t, err, "Expected error")
+	assert.Equal(t, errorMsg, err, "Error didn't match given error")
+}
+
+func TestChangeASGStateStopStatusError(t *testing.T) {
+	errorMsg := errors.New("Test error")
+
+	autoscalingGroupName := aws.String("test-asg")
+
+	cwEvent := types.Event{
+		Action:     "stop",
+		Branch:     "branch",
+		Repository: "repo",
+	}
+
+	svcASGModelAPI := new(mocks.ASGModelAPI)
+	svcASGModelAPI.On("DescribeAutoScalingGroupForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(autoscalingGroupName, nil)
+
+	svcASGModelAPI.On("SetASGMinToZero", mock.AnythingOfType("*string")).Return(nil)
+
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
+
+	base := services{
+		ASGModelAPI:    svcASGModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
+	}
+
+	err := base.changeASGState(cwEvent)
+
+	assert.Error(t, err, "Expected error")
+	assert.Equal(t, errorMsg, err, "Error didn't match given error")
+}
+
+func TestChangeASGStateStartError(t *testing.T) {
+	errorMsg := errors.New("Test error")
+
+	autoscalingGroupName := aws.String("test-asg")
+
+	cwEvent := types.Event{
+		Action:     "start",
+		Branch:     "branch",
+		Repository: "repo",
+	}
+
+	svcASGModelAPI := new(mocks.ASGModelAPI)
+	svcASGModelAPI.On("DescribeAutoScalingGroupForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(autoscalingGroupName, nil)
+
+	svcASGModelAPI.On("SetASGMinToPreviousValue", mock.AnythingOfType("*string")).Return(errorMsg)
+
+	base := services{
+		ASGModelAPI: svcASGModelAPI,
+	}
+
+	err := base.changeASGState(cwEvent)
+
+	assert.Error(t, err, "Expected error")
+	assert.Equal(t, errorMsg, err, "Error didn't match given error")
+}
+
+func TestChangeASGStateStartStatusError(t *testing.T) {
+	errorMsg := errors.New("Test error")
+
+	autoscalingGroupName := aws.String("test-asg")
+
+	cwEvent := types.Event{
+		Action:     "start",
+		Branch:     "branch",
+		Repository: "repo",
+	}
+
+	svcASGModelAPI := new(mocks.ASGModelAPI)
+	svcASGModelAPI.On("DescribeAutoScalingGroupForTagsAndAction", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(autoscalingGroupName, nil)
+
+	svcASGModelAPI.On("SetASGMinToPreviousValue", mock.AnythingOfType("*string")).Return(nil)
+
+	svcStatusModelAPI := new(mocks.StatusModelAPI)
+	svcStatusModelAPI.On("SetStatusForEnvironment", mock.AnythingOfType("string"), mock.AnythingOfType("string"), mock.AnythingOfType("string")).Return(errorMsg)
+
+	base := services{
+		ASGModelAPI:    svcASGModelAPI,
+		StatusModelAPI: svcStatusModelAPI,
+	}
+
+	err := base.changeASGState(cwEvent)
+
+	assert.Error(t, err, "Expected error")
+	assert.Equal(t, errorMsg, err, "Error didn't match given error")
+}

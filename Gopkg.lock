@@ -15,7 +15,7 @@
   version = "v1.10.0"
 
 [[projects]]
-  digest = "1:3734c366f13ff61eb8066815f1ee36e6247d7543b02fa40cef034a0cb1d97682"
+  digest = "1:cac7fae619d8fd194d35e1ffefceef96521589d9e62d3551e5b147b9f470a32e"
   name = "github.com/aws/aws-sdk-go"
   packages = [
     "aws",
@@ -50,6 +50,8 @@
     "private/protocol/query/queryutil",
     "private/protocol/rest",
     "private/protocol/xml/xmlutil",
+    "service/autoscaling",
+    "service/autoscaling/autoscalingiface",
     "service/dynamodb",
     "service/dynamodb/dynamodbattribute",
     "service/dynamodb/dynamodbiface",
@@ -60,8 +62,8 @@
     "service/sts",
   ]
   pruneopts = "UT"
-  revision = "faec342d9a8d588e9d06be4516fe1bbefbae195d"
-  version = "v1.19.7"
+  revision = "bdd9cf7816bd404510114e712564cf76683b8355"
+  version = "v1.19.26"
 
 [[projects]]
   digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
@@ -113,6 +115,8 @@
     "github.com/aws/aws-sdk-go/aws",
     "github.com/aws/aws-sdk-go/aws/request",
     "github.com/aws/aws-sdk-go/aws/session",
+    "github.com/aws/aws-sdk-go/service/autoscaling",
+    "github.com/aws/aws-sdk-go/service/autoscaling/autoscalingiface",
     "github.com/aws/aws-sdk-go/service/dynamodb",
     "github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute",
     "github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface",

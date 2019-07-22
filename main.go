@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/autoscaling"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/ec2"
 
@@ -26,6 +27,7 @@ type services struct {
 	model.RDSModelAPI
 	model.StatusModelAPI
 	model.EC2ModelAPI
+	model.ASGModelAPI
 }
 
 // Handler is the main function called by lambda.Start, it starts / stops EC2 Instances and RDS Clusters based on the information in the eventJSON.
@@ -49,12 +51,19 @@ func Handler(eventJSON json.RawMessage) (string, error) {
 
 	svcEC2 := ec2.New(sess)
 	svcRDS := rds.New(sess)
+	svcASG := autoscaling.New(sess)
 	svcDynamoDB := dynamodb.New(sess)
 
 	svcBase := services{
 		RDSModelAPI:    model.NewRDSModel(svcRDS),
 		EC2ModelAPI:    model.NewEC2Model(svcEC2),
 		StatusModelAPI: model.NewStatusModel(svcDynamoDB),
+		ASGModelAPI:    model.NewASGModel(svcASG),
+	}
+
+	err = svcBase.changeASGState(cwEvent)
+	if err != nil {
+		return "", err
 	}
 
 	err = svcBase.changeEC2State(cwEvent)
@@ -92,6 +101,42 @@ func returnVersionInformation() (string, error) {
 	}
 
 	return string(body), nil
+}
+
+func (base *services) changeASGState(cwEvent types.Event) error {
+	autoscalingGroup, err := base.ASGModelAPI.DescribeAutoScalingGroupForTagsAndAction(cwEvent.Repository, cwEvent.Branch, cwEvent.Action)
+	if err != nil {
+		return err
+	}
+
+	if autoscalingGroup != nil {
+		switch cwEvent.Action {
+		case "stop":
+			err = base.ASGModelAPI.SetASGMinToZero(autoscalingGroup)
+			if err != nil {
+				return err
+			}
+			err = base.StatusModelAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "stopped")
+			if err != nil {
+				return err
+			}
+
+		case "start":
+			err = base.ASGModelAPI.SetASGMinToPreviousValue(autoscalingGroup)
+			if err != nil {
+				return err
+			}
+			err = base.StatusModelAPI.SetStatusForEnvironment(cwEvent.Repository, cwEvent.Branch, "running")
+			if err != nil {
+				return err
+			}
+
+		}
+	} else {
+		log.Println("ASG - No action required")
+	}
+
+	return nil
 }
 
 func (base *services) changeEC2State(cwEvent types.Event) error {
