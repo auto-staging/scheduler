@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/auto-staging/scheduler/compare/1.2.0...1.3.0) (2019-07-22)
+
+
+### Features
+
+* added autoscaling group start and stop calls to main handler function ([b0cbcca](https://github.com/auto-staging/scheduler/commit/b0cbcca))
+* added option to "start" and "stop" autoscaling groups by adapting the min instance number ([e2695ca](https://github.com/auto-staging/scheduler/commit/e2695ca))
+* added option to start and stop autoscaling groups by lowering the min number to zero and setting it back to the previous min value on start ([14333a4](https://github.com/auto-staging/scheduler/commit/14333a4))
+
 # [1.2.0](https://github.com/auto-staging/scheduler/compare/1.1.1...1.2.0) (2019-04-01)
 
 
