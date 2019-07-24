@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/auto-staging/scheduler/compare/1.4.0...1.4.1) (2019-07-24)
+
+
+### Bug Fixes
+
+* fixed compile command for AWS lambda ([1a3f3df](https://github.com/auto-staging/scheduler/commit/1a3f3df))
+
 # [1.4.0](https://github.com/auto-staging/scheduler/compare/1.3.0...1.4.0) (2019-07-22)
 
 
